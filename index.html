@@ -69,7 +69,7 @@
         // ==========================================
         // COURSE DATA 
         // ==========================================
-        const COURSES_DATA = [
+        const INITIAL_COURSES_DATA = [
           {
             id: "gcse-maths",
             level: "GCSE",
@@ -386,6 +386,7 @@
 
           const [users, setUsers] = useState(loadUsers);
           const [currentUsername, setCurrentUsername] = useState(loadActiveUser);
+          const [coursesList, setCoursesList] = useState(INITIAL_COURSES_DATA);
           
           const currentUser = users.find(u => u.username === currentUsername);
 
@@ -412,7 +413,39 @@
           const [activePopup, setActivePopup] = useState(null); // 'streak', 'xp', or null
           
           // Derived State
-          const activeCourse = COURSES_DATA.find(c => c.id === activeCourseId);
+          const activeCourse = coursesList.find(c => c.id === activeCourseId);
+
+          // --- FETCH EXTERNAL COURSES ---
+          useEffect(() => {
+              fetch('courses.json')
+                  .then(response => {
+                      if (!response.ok) throw new Error('courses.json not found or could not be loaded');
+                      return response.json();
+                  })
+                  .then(externalCourses => {
+                      const iconMap = {
+                          Calculator: <Calculator size={32} className="text-white" />,
+                          Code: <Code size={32} className="text-white" />,
+                          Atom: <Atom size={32} className="text-white" />,
+                          BookOpen: <BookOpen size={32} className="text-white" />,
+                          Trophy: <Trophy size={32} className="text-white" />
+                      };
+                      
+                      const mappedCourses = externalCourses.map(course => ({
+                          ...course,
+                          icon: iconMap[course.iconName] || <BookOpen size={32} className="text-white" />
+                      }));
+
+                      setCoursesList(prevList => {
+                          // Merge while avoiding duplicate IDs
+                          const newCourses = mappedCourses.filter(ext => !prevList.some(p => p.id === ext.id));
+                          return [...prevList, ...newCourses];
+                      });
+                  })
+                  .catch(error => {
+                      console.log("Using only hardcoded courses. (" + error.message + ")");
+                  });
+          }, []);
 
           // Safely save theme preference (avoiding file:// crashes)
           useEffect(() => {
@@ -505,7 +538,7 @@
             if (!currentUser) return;
             
             // Find the course this lesson belongs to
-            const courseOfLesson = COURSES_DATA.find(c => c.modules.some(m => m.lessons.some(l => l.id === lessonId)));
+            const courseOfLesson = coursesList.find(c => c.modules.some(m => m.lessons.some(l => l.id === lessonId)));
             const allLessonIds = courseOfLesson.modules.flatMap(m => m.lessons).map(l => l.id);
             
             // Calculate progress before applying this completion
@@ -749,7 +782,7 @@
             const [pwSuccess, setPwSuccess] = useState('');
 
             // Filter out courses where progress is zero
-            const activeCourses = COURSES_DATA.map(course => {
+            const activeCourses = coursesList.map(course => {
                 const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
                 const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => isLessonCompleted(l.id)).length;
                 const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
@@ -868,7 +901,7 @@
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {COURSES_DATA.map((course) => {
+                {coursesList.map((course) => {
                   const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
                   const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => isLessonCompleted(l.id)).length;
                   const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
@@ -917,7 +950,7 @@
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {COURSES_DATA.map((course) => (
+                {coursesList.map((course) => (
                     <div 
                       key={course.id}
                       onClick={() => handleOpenPracticeCourse(course.id)}
