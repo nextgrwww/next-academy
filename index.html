@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Academy GCSE & A-Level</title>
+    
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for in-browser JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    
+    <style>
+        body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Removed data-presets to match the reference file so Babel uses default env+react presets -->
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ==========================================
+        // ICON COMPONENTS (Replaces lucide-react for standalone usage)
+        // ==========================================
+        const Icon = ({ children, size = 24, className = "", fill = "none", strokeWidth = "2", ...props }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
+                {children}
+            </svg>
+        );
+
+        const Home = (p) => <Icon {...p}><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></Icon>;
+        const BookOpen = (p) => <Icon {...p}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></Icon>;
+        const Trophy = (p) => <Icon {...p}><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></Icon>;
+        const User = (p) => <Icon {...p}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></Icon>;
+        const Flame = (p) => <Icon {...p}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></Icon>;
+        const Star = (p) => <Icon {...p}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></Icon>;
+        const ChevronLeft = (p) => <Icon {...p}><path d="m15 18-6-6 6-6"/></Icon>;
+        const Check = (p) => <Icon {...p}><path d="M20 6 9 17l-5-5"/></Icon>;
+        const Lock = (p) => <Icon {...p}><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></Icon>;
+        const Play = (p) => <Icon {...p}><polygon points="5 3 19 12 5 21 5 3"/></Icon>;
+        const Code = (p) => <Icon {...p}><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></Icon>;
+        const Calculator = (p) => <Icon {...p}><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></Icon>;
+        const Atom = (p) => <Icon {...p}><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 3.8c-2.04-2.03-7.36-.02-11.9 4.5-4.54 4.52-6.54 9.87-4.5 11.9 2.04 2.03 7.36.02 11.9-4.5 4.54-4.52 6.54-9.87 4.5-11.9Z"/></Icon>;
+        const GripVertical = (p) => <Icon {...p}><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></Icon>;
+        const Moon = (p) => <Icon {...p}><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></Icon>;
+        const Sun = (p) => <Icon {...p}><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></Icon>;
+        const ChevronDown = (p) => <Icon {...p}><path d="m6 9 6 6 6-6"/></Icon>;
+        const ChevronUp = (p) => <Icon {...p}><path d="m18 15-6-6-6 6"/></Icon>;
+        const FileText = (p) => <Icon {...p}><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></Icon>;
+
+        // ==========================================
+        // COURSE DATA 
+        // ==========================================
+        const COURSES_DATA = [
+          {
+            id: "gcse-maths",
+            level: "GCSE",
+            title: "Mathematics (Higher)",
+            description: "Master algebra, geometry, and advanced statistics.",
+            color: "bg-blue-500",
+            textColor: "text-blue-500",
+            lightBg: "bg-blue-50",
+            icon: <Calculator size={32} className="text-white" />,
+            modules: [
+              {
+                id: "m1",
+                title: "Algebraic Manipulation",
+                lessons: [
+                  { 
+                    id: "l1_1", 
+                    title: "Single Brackets",
+                    steps: [
+                      { 
+                        type: "theory", 
+                        content: "To expand single brackets, you must multiply the term on the outside by every term inside the bracket.\n\nExample:\n3(x + 4) = (3 × x) + (3 × 4) = 3x + 12." 
+                      },
+                      { 
+                        type: "quiz", 
+                        question: "Expand the following: 5(y + 2)", 
+                        options: ["5y + 2", "5y + 10", "y + 10", "10y"], 
+                        correctOption: 1 
+                      },
+                      { 
+                        type: "theory", 
+                        content: "Be careful with negative numbers! A negative outside the bracket changes the signs inside.\n\nExample:\n-2(a - 3) = -2a + 6" 
+                      },
+                      { 
+                        type: "fill_blank", 
+                        question: "Complete the expansion: -4(2x - 5)", 
+                        textBefore: "-8x +",
+                        textAfter: "",
+                        correctAnswer: "20" 
+                      }
+                    ]
+                  },
+                  { 
+                    id: "l1_2", 
+                    title: "Double Brackets",
+                    steps: [
+                      { 
+                        type: "theory", 
+                        content: "To expand double brackets, use the FOIL method to ensure every term in the first bracket multiplies every term in the second.\n\nF - First\nO - Outer\nI - Inner\nL - Last" 
+                      },
+                      { 
+                        type: "rearrange", 
+                        question: "Arrange the FOIL steps in the correct order for (x+2)(x+3):", 
+                        items: ["Multiply 2 by x (Inner)", "Multiply x by 3 (Outer)", "Multiply 2 by 3 (Last)", "Multiply x by x (First)"], 
+                        correctOrder: ["Multiply x by x (First)", "Multiply x by 3 (Outer)", "Multiply 2 by x (Inner)", "Multiply 2 by 3 (Last)"] 
+                      },
+                      { 
+                        type: "theory", 
+                        content: "Let's finish (x + 2)(x + 3):\n\nF: x × x = x²\nO: x × 3 = 3x\nI: 2 × x = 2x\nL: 2 × 3 = 6\n\nCombine the middle terms: x² + 5x + 6." 
+                      },
+                      { 
+                        type: "quiz", 
+                        question: "Fully expand and simplify: (y + 4)(y + 5)", 
+                        options: ["y² + 9y + 20", "y² + 20y + 9", "2y + 9", "y² + 9"], 
+                        correctOption: 0 
+                      }
+                    ]
+                  },
+                  {
+                    id: "m1_quiz",
+                    title: "Module 1 Quiz",
+                    isModuleQuiz: true,
+                    steps: [
+                      { type: "quiz", question: "Expand: x(x + 7)", options: ["x² + 7x", "2x + 7", "x + 7x", "x² + 7"], correctOption: 0 },
+                      { type: "quiz", question: "Expand and simplify: (x - 3)(x + 3)", options: ["x² - 9", "x² + 9", "x² - 6x - 9", "x² + 6x - 9"], correctOption: 0 },
+                      { type: "quiz", question: "Expand: -3(4y - 2)", options: ["-12y - 6", "-12y + 6", "12y - 6", "-7y + 6"], correctOption: 1 }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: "m2",
+                title: "Geometry Fundamentals",
+                lessons: [
+                  { 
+                    id: "l2_1", 
+                    title: "Pythagoras' Theorem",
+                    steps: [
+                      { type: "theory", content: "For any right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.\n\nFormula: a² + b² = c²" },
+                      { type: "quiz", question: "Which side is the hypotenuse?", options: ["The shortest side", "The side opposite the right angle", "The adjacent side", "The vertical side"], correctOption: 1 },
+                      { type: "quiz", question: "If a=3 and b=4, calculate c.", options: ["5", "6", "7", "25"], correctOption: 0 }
+                    ]
+                  },
+                  {
+                    id: "m2_quiz",
+                    title: "Module 2 Quiz",
+                    isModuleQuiz: true,
+                    steps: [
+                      { type: "quiz", question: "If the hypotenuse is 13 and one side is 5, what is the other side?", options: ["8", "12", "144", "18"], correctOption: 1 },
+                      { type: "quiz", question: "Can Pythagoras' Theorem be used on a non-right-angled triangle?", options: ["Yes, always", "Only if it is isosceles", "No, never directly", "Yes, if you know all angles"], correctOption: 2 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: "alevel-cs",
+            level: "A-Level",
+            title: "Computer Science",
+            description: "Data structures, algorithms, and theory of computation.",
+            color: "bg-emerald-500",
+            textColor: "text-emerald-500",
+            lightBg: "bg-emerald-50",
+            icon: <Code size={32} className="text-white" />,
+            modules: [
+              {
+                id: "cs_m1",
+                title: "Data Structures",
+                lessons: [
+                  { 
+                    id: "cs_l1", 
+                    title: "Arrays vs Lists",
+                    steps: [
+                      { type: "theory", content: "Arrays are static data structures (fixed size) stored contiguously in memory. They allow O(1) random access." },
+                      { 
+                        type: "fill_blank", 
+                        question: "Fill in the correct time complexity for accessing an array element by index:", 
+                        textBefore: "O(",
+                        textAfter: ")",
+                        correctAnswer: "1" 
+                      },
+                      { type: "theory", content: "Linked lists are dynamic. Nodes are scattered in memory and connected via pointers. You cannot access elements instantly; you must traverse the list (O(n))." },
+                      { type: "quiz", question: "Which structure is better if you don't know the number of elements in advance?", options: ["Static Array", "Linked List", "They are identical", "Stack"], correctOption: 1 }
+                    ]
+                  },
+                  {
+                    id: "cs_m1_quiz",
+                    title: "Module 1 Quiz",
+                    isModuleQuiz: true,
+                    steps: [
+                      { type: "quiz", question: "Which of these is a LIFO structure?", options: ["Queue", "Stack", "Tree", "Array"], correctOption: 1 },
+                      { type: "quiz", question: "In a singly linked list, what does the last node point to?", options: ["The first node", "Null", "The middle node", "Itself"], correctOption: 1 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: "gcse-science",
+            level: "GCSE",
+            title: "Combined Science",
+            description: "Core concepts across Biology, Chemistry, and Physics.",
+            color: "bg-purple-500",
+            textColor: "text-purple-500",
+            lightBg: "bg-purple-50",
+            icon: <Atom size={32} className="text-white" />,
+            modules: [
+              {
+                id: "sci_m1",
+                title: "Atomic Structure",
+                lessons: [
+                  { 
+                    id: "sci_l1", 
+                    title: "Subatomic Particles",
+                    steps: [
+                      { type: "theory", content: "Atoms consist of a central nucleus containing protons and neutrons, surrounded by electrons in shells." },
+                      { type: "quiz", question: "What is the charge of a proton?", options: ["-1", "0", "+1", "+2"], correctOption: 2 },
+                      { type: "theory", content: "Protons and neutrons have a relative mass of 1. Electrons have a mass so small it is often considered ~0 (1/1836)." },
+                      { type: "quiz", question: "Which particle is found in the shells outside the nucleus?", options: ["Proton", "Neutron", "Electron", "Molecule"], correctOption: 2 }
+                    ]
+                  },
+                  {
+                    id: "sci_m1_quiz",
+                    title: "Module 1 Quiz",
+                    isModuleQuiz: true,
+                    steps: [
+                      { type: "quiz", question: "What particles make up the nucleus?", options: ["Electrons only", "Protons & Electrons", "Protons & Neutrons", "Neutrons & Electrons"], correctOption: 2 },
+                      { type: "quiz", question: "If an atom has 6 protons and 6 electrons, what is its overall charge?", options: ["+6", "-6", "0", "12"], correctOption: 2 }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ];
+
+        // ==========================================
+        // MAIN APPLICATION COMPONENT
+        // ==========================================
+        function App() {
+          // Application State
+          const [currentView, setCurrentView] = useState('home'); // 'home', 'course', 'lesson'
+          const [activeCourseId, setActiveCourseId] = useState(null);
+          const [activeLesson, setActiveLesson] = useState(null); // { moduleIdx, lessonIdx, data }
+          const [isDarkMode, setIsDarkMode] = useState(false);
+          
+          // User Progress State (Simulated)
+          const [userStats, setUserStats] = useState({
+            xp: 0,
+            streak: 1,
+            completedLessons: [] // Start fresh to show unlocking mechanics
+          });
+
+          // Derived State
+          const activeCourse = COURSES_DATA.find(c => c.id === activeCourseId);
+
+          // Safely load theme preference on mount (avoiding file:// crashes)
+          useEffect(() => {
+            try {
+              const savedTheme = localStorage.getItem('theme');
+              if (savedTheme === 'dark') setIsDarkMode(true);
+            } catch (e) {
+              console.warn("localStorage is not accessible in this environment.");
+            }
+          }, []);
+
+          // Safely save theme preference (avoiding file:// crashes)
+          useEffect(() => {
+            try {
+              localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            } catch (e) {
+              // Fail silently if localStorage is blocked
+            }
+          }, [isDarkMode]);
+
+          // --- Handlers ---
+          const handleOpenCourse = (courseId) => {
+            setActiveCourseId(courseId);
+            setCurrentView('course');
+          };
+
+          const handleOpenLesson = (moduleIdx, lessonIdx, lessonData) => {
+            setActiveLesson({ moduleIdx, lessonIdx, data: lessonData });
+            setCurrentView('lesson');
+          };
+
+          const handleCompleteLesson = (lessonId, xpEarned) => {
+            setUserStats(prev => ({
+              ...prev,
+              xp: prev.xp + xpEarned,
+              completedLessons: prev.completedLessons.includes(lessonId) 
+                ? prev.completedLessons 
+                : [...prev.completedLessons, lessonId]
+            }));
+            setCurrentView('course');
+            setActiveLesson(null);
+          };
+
+          // Progression Checks
+          const isLessonCompleted = (lessonId) => userStats.completedLessons.includes(lessonId);
+          const isModuleCompleted = (module) => module.lessons.every(l => isLessonCompleted(l.id));
+          const isModuleUnlocked = (mIdx) => {
+            if (mIdx === 0) return true;
+            return isModuleCompleted(activeCourse.modules[mIdx - 1]);
+          };
+          const isLessonUnlocked = (mIdx, lIdx) => {
+            if (lIdx === 0) return isModuleUnlocked(mIdx);
+            return isLessonCompleted(activeCourse.modules[mIdx].lessons[lIdx - 1].id);
+          };
+
+          // ==========================================
+          // SUB-COMPONENTS
+          // ==========================================
+
+          const TopBar = ({ showBack, title }) => (
+            <div className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between transition-colors duration-300">
+              <div className="flex items-center gap-3">
+                {showBack && (
+                  <button onClick={() => setCurrentView('home')} className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                    <ChevronLeft size={24} className="text-gray-700 dark:text-gray-300" />
+                  </button>
+                )}
+                <h1 className="font-bold text-xl text-gray-800 dark:text-gray-100 tracking-tight">
+                  {title || "Next Academy"}
+                </h1>
+              </div>
+              <div className="flex items-center gap-4 text-sm font-bold">
+                {/* Dark Mode Toggle */}
+                <button 
+                  onClick={() => setIsDarkMode(!isDarkMode)} 
+                  className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition"
+                >
+                  {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                </button>
+
+                <div className="flex items-center gap-1 text-orange-500">
+                  <Flame size={20} fill="currentColor" />
+                  <span>{userStats.streak}</span>
+                </div>
+                <div className="flex items-center gap-1 text-blue-500">
+                  <Star size={20} fill="currentColor" />
+                  <span>{userStats.xp}</span>
+                </div>
+              </div>
+            </div>
+          );
+
+          const Navigation = () => (
+            <>
+              {/* Mobile Bottom Navigation */}
+              <div className="md:hidden fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex justify-around py-3 pb-safe z-40 transition-colors duration-300">
+                <NavButton icon={<Home size={24} />} label="Learn" active={true} />
+                <NavButton icon={<BookOpen size={24} />} label="Practice" active={false} />
+                <NavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} />
+                <NavButton icon={<User size={24} />} label="Profile" active={false} />
+              </div>
+
+              {/* Desktop Side Navigation */}
+              <div className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 px-4 z-40 transition-colors duration-300">
+                <div className="flex items-center gap-2 mb-10 px-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl">
+                    N
+                  </div>
+                  <h1 className="font-bold text-2xl tracking-tight text-gray-800 dark:text-gray-100">Next Academy</h1>
+                </div>
+                <nav className="flex flex-col gap-2 flex-1">
+                  <SideNavButton icon={<Home size={24} />} label="Learn" active={true} />
+                  <SideNavButton icon={<BookOpen size={24} />} label="Practice" active={false} />
+                  <SideNavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} />
+                  <SideNavButton icon={<User size={24} />} label="Profile" active={false} />
+                </nav>
+              </div>
+            </>
+          );
+
+          const NavButton = ({ icon, label, active }) => (
+            <button className={`flex flex-col items-center gap-1 ${active ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}>
+              {icon}
+              <span className="text-[10px] font-semibold">{label}</span>
+            </button>
+          );
+
+          const SideNavButton = ({ icon, label, active }) => (
+            <button className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition ${active ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 font-semibold'}`}>
+              {icon}
+              <span className="text-base">{label}</span>
+            </button>
+          );
+
+          // --- VIEWS ---
+
+          const HomeView = () => (
+            <div className="pb-24 pt-4 px-4 md:px-8 max-w-5xl mx-auto">
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1">Your Courses</h2>
+                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Continue your curriculum journey</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {COURSES_DATA.map((course) => {
+                  const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
+                  const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => userStats.completedLessons.includes(l.id)).length;
+                  const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
+
+                  return (
+                    <div 
+                      key={course.id}
+                      onClick={() => handleOpenCourse(course.id)}
+                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-5 cursor-pointer hover:shadow-lg transition-all transform hover:-translate-y-1"
+                    >
+                      <div className="flex justify-between items-start mb-4">
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${course.color}`}>
+                          {course.icon}
+                        </div>
+                        <span className={`text-xs font-bold px-3 py-1 rounded-full ${course.lightBg} ${course.textColor} dark:bg-opacity-20`}>
+                          {course.level}
+                        </span>
+                      </div>
+                      <h3 className="font-bold text-xl text-gray-800 dark:text-gray-100 mb-2">{course.title}</h3>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium line-clamp-2">{course.description}</p>
+                      
+                      <div className="mt-6">
+                        <div className="flex justify-between text-xs font-bold text-gray-400 mb-2">
+                          <span>Progress</span>
+                          <span>{progressPercent}%</span>
+                        </div>
+                        <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
+                          <div 
+                            className={`h-2.5 rounded-full ${course.color}`} 
+                            style={{ width: `${progressPercent}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+
+          const CoursePathView = () => {
+            if (!activeCourse) return null;
+
+            // Track which module is expanded in the accordion
+            const [expandedModule, setExpandedModule] = useState(() => {
+              // Auto-expand the first incomplete module
+              const firstIncompleteIdx = activeCourse.modules.findIndex(m => !isModuleCompleted(m));
+              return firstIncompleteIdx >= 0 ? firstIncompleteIdx : 0;
+            });
+
+            const toggleModule = (mIdx) => {
+              setExpandedModule(prev => prev === mIdx ? null : mIdx);
+            };
+
+            return (
+              <div className="pb-24 pt-6 px-0 md:px-8 max-w-3xl mx-auto flex flex-col items-center w-full animate-fade-in">
+                <div className="text-center mb-8 px-4">
+                  <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">{activeCourse.title}</h2>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">{activeCourse.level} Curriculum</p>
+                </div>
+
+                {/* Accordion List Container */}
+                <div className="w-full flex flex-col md:gap-4 border-t border-gray-200 dark:border-gray-800 md:border-t-0">
+                  {activeCourse.modules.map((module, mIdx) => {
+                    const moduleCompleted = isModuleCompleted(module);
+                    const moduleUnlocked = isModuleUnlocked(mIdx);
+                    const isExpanded = expandedModule === mIdx;
+
+                    // Determine Module Icon and Colors
+                    let ModuleIcon = Lock;
+                    let iconColorClass = "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400";
+                    
+                    if (moduleCompleted) {
+                      ModuleIcon = Check;
+                      iconColorClass = "bg-green-500 text-white";
+                    } else if (moduleUnlocked) {
+                      ModuleIcon = Play;
+                      iconColorClass = "bg-blue-500 text-white";
+                    }
+
+                    return (
+                      <div key={module.id} className="w-full border-b border-gray-200 dark:border-gray-800 md:border md:rounded-2xl md:shadow-sm md:bg-white md:dark:bg-gray-800 overflow-hidden">
+                        {/* Accordion Header */}
+                        <button 
+                          onClick={() => toggleModule(mIdx)} 
+                          className="w-full flex items-center justify-between p-4 md:p-5 bg-white dark:bg-gray-900 md:dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className={`w-10 h-10 md:w-8 md:h-8 rounded-lg flex items-center justify-center shrink-0 ${iconColorClass}`}>
+                              <ModuleIcon size={20} className="fill-current" strokeWidth={3} />
+                            </div>
+                            <span className="font-bold text-lg md:text-xl text-gray-800 dark:text-gray-100 text-left leading-tight">
+                              {module.title}
+                            </span>
+                          </div>
+                          {isExpanded ? (
+                            <ChevronUp className="text-gray-400 shrink-0 ml-2" size={24} />
+                          ) : (
+                            <ChevronDown className="text-gray-400 shrink-0 ml-2" size={24} />
+                          )}
+                        </button>
+
+                        {/* Accordion Body (Lessons) */}
+                        {isExpanded && (
+                          <div className="bg-gray-50 dark:bg-[#121212] md:dark:bg-gray-900/50 p-3 md:p-5 flex flex-col gap-3 md:gap-4 border-t border-gray-100 dark:border-gray-800">
+                            {module.lessons.map((lesson, lIdx) => {
+                              const completed = isLessonCompleted(lesson.id);
+                              const unlocked = isLessonUnlocked(mIdx, lIdx);
+
+                              return (
+                                <button
+                                  key={lesson.id}
+                                  disabled={!unlocked}
+                                  onClick={() => handleOpenLesson(mIdx, lIdx, lesson)}
+                                  className={`w-full flex items-center justify-between p-4 rounded-xl border bg-white dark:bg-gray-800 text-left transition-all 
+                                    ${unlocked 
+                                      ? 'border-gray-200 dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 cursor-pointer' 
+                                      : 'border-gray-100 dark:border-gray-800/50 opacity-60 cursor-not-allowed'
+                                    }
+                                  `}
+                                >
+                                  <div className="flex items-center gap-4">
+                                    <div className="text-blue-500 shrink-0">
+                                      {lesson.isModuleQuiz ? <Trophy size={28} /> : <FileText size={28} />}
+                                    </div>
+                                    <div>
+                                      <p className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-0.5">
+                                        {lesson.isModuleQuiz ? 'Quiz' : 'Lesson'}
+                                      </p>
+                                      <p className="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">
+                                        {lesson.title}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="shrink-0 ml-4 flex items-center justify-center">
+                                    {completed ? (
+                                      <Check className="text-green-500" size={28} strokeWidth={3} />
+                                    ) : !unlocked ? (
+                                      <Lock className="text-gray-300 dark:text-gray-600" size={20} />
+                                    ) : null}
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          };
+
+          const LessonInteractiveView = () => {
+            if (!activeLesson) return null;
+            const { data: lesson } = activeLesson;
+            
+            const [stepIdx, setStepIdx] = useState(0);
+            const [currentAnswer, setCurrentAnswer] = useState(null);
+            const [isSubmitted, setIsSubmitted] = useState(false);
+            const [draggedIdx, setDraggedIdx] = useState(null);
+            
+            const currentStep = lesson.steps[stepIdx];
+            const isLastStep = stepIdx === lesson.steps.length - 1;
+
+            // Initialize answer state when navigating to a new slide
+            useEffect(() => {
+              if (currentStep.type === 'rearrange') {
+                setCurrentAnswer([...currentStep.items]);
+              } else if (currentStep.type === 'fill_blank') {
+                setCurrentAnswer("");
+              } else {
+                setCurrentAnswer(null);
+              }
+              setIsSubmitted(false);
+            }, [stepIdx, currentStep]);
+
+            // Evaluation Logic
+            let isCorrect = false;
+            if (currentStep.type === 'quiz') {
+              isCorrect = currentAnswer === currentStep.correctOption;
+            } else if (currentStep.type === 'fill_blank') {
+              isCorrect = currentAnswer?.trim().toLowerCase() === currentStep.correctAnswer.toLowerCase();
+            } else if (currentStep.type === 'rearrange') {
+              isCorrect = JSON.stringify(currentAnswer) === JSON.stringify(currentStep.correctOrder);
+            }
+
+            const isActionDisabled = () => {
+              if (currentStep.type === 'theory' || isSubmitted) return false;
+              if (currentStep.type === 'quiz' && currentAnswer === null) return true;
+              if (currentStep.type === 'fill_blank' && (!currentAnswer || currentAnswer.trim() === '')) return true;
+              return false;
+            };
+
+            // Calculate progress up to current slide
+            const progressPercent = (stepIdx / lesson.steps.length) * 100;
+
+            const handleNext = () => {
+              if (isLastStep) {
+                const xpReward = lesson.steps.length * 10;
+                handleCompleteLesson(lesson.id, xpReward);
+              } else {
+                setStepIdx(prev => prev + 1);
+              }
+            };
+
+            const handleAction = () => {
+              if (currentStep.type === 'theory') {
+                handleNext();
+              } else {
+                if (!isSubmitted) {
+                  setIsSubmitted(true);
+                } else {
+                  if (isCorrect) handleNext();
+                  else {
+                    // Reset for try again
+                    setIsSubmitted(false);
+                    if (currentStep.type === 'fill_blank') setCurrentAnswer("");
+                    else if (currentStep.type === 'rearrange') setCurrentAnswer([...currentStep.items]);
+                    else setCurrentAnswer(null);
+                  }
+                }
+              }
+            };
+
+            // Keyboard support: Pressing 'Enter'
+            const actionRef = useRef(handleAction);
+            const disabledRef = useRef(isActionDisabled());
+
+            useEffect(() => {
+              actionRef.current = handleAction;
+              disabledRef.current = isActionDisabled();
+            });
+
+            useEffect(() => {
+              const handleKeyDown = (e) => {
+                if (e.key === 'Enter') {
+                  if (e.target.tagName === 'BUTTON') return; // Prevent double firing if focused on button
+                  if (!disabledRef.current) {
+                    e.preventDefault();
+                    actionRef.current();
+                  }
+                }
+              };
+              window.addEventListener('keydown', handleKeyDown);
+              return () => window.removeEventListener('keydown', handleKeyDown);
+            }, []);
+
+            // Render Helpers
+            const renderQuiz = () => (
+              <div className="flex flex-col gap-6 w-full animate-fade-in">
+                <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200">{currentStep.question}</h3>
+                <div className="grid gap-3">
+                  {currentStep.options.map((opt, idx) => {
+                    let btnStateClass = "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700";
+                    if (currentAnswer === idx) {
+                      btnStateClass = `border-2 ${activeCourse.color.replace('bg-', 'border-')} ${activeCourse.lightBg} ${activeCourse.textColor} dark:bg-opacity-20`;
+                    }
+                    if (isSubmitted) {
+                      if (idx === currentStep.correctOption) {
+                         btnStateClass = "bg-green-100 dark:bg-green-900/40 border-2 border-green-500 text-green-700 dark:text-green-400";
+                      } else if (idx === currentAnswer && !isCorrect) {
+                         btnStateClass = "bg-red-100 dark:bg-red-900/40 border-2 border-red-500 text-red-700 dark:text-red-400";
+                      } else {
+                         btnStateClass = "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-600 opacity-50";
+                      }
+                    }
+                    return (
+                      <button 
+                        key={idx} disabled={isSubmitted} onClick={() => setCurrentAnswer(idx)}
+                        className={`text-left font-bold text-lg p-4 rounded-2xl transition-all ${btnStateClass}`}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+
+            const renderFillBlank = () => (
+              <div className="flex flex-col gap-6 w-full animate-fade-in">
+                <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200">{currentStep.question}</h3>
+                <div className="flex flex-wrap items-center gap-3 text-xl font-bold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 p-6 rounded-2xl border-2 border-gray-200 dark:border-gray-700">
+                  {currentStep.textBefore && <span>{currentStep.textBefore}</span>}
+                  <input
+                    type="text"
+                    disabled={isSubmitted}
+                    value={currentAnswer || ''}
+                    onChange={(e) => setCurrentAnswer(e.target.value)}
+                    className={`w-32 border-b-4 outline-none text-center bg-transparent transition-colors pb-1 text-gray-800 dark:text-white
+                      ${isSubmitted && isCorrect ? 'border-green-500 text-green-600 dark:text-green-400' :
+                        isSubmitted && !isCorrect ? 'border-red-500 text-red-600 dark:text-red-400' :
+                        'border-gray-400 dark:border-gray-500 focus:border-blue-500 text-blue-600 dark:focus:border-blue-400'}`}
+                    autoFocus
+                  />
+                  {currentStep.textAfter && <span>{currentStep.textAfter}</span>}
+                </div>
+              </div>
+            );
+
+            const renderRearrange = () => (
+              <div className="flex flex-col gap-5 w-full animate-fade-in">
+                <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200">{currentStep.question}</h3>
+                <div className="flex flex-col gap-2">
+                  {currentAnswer?.map((item, idx) => {
+                    let itemClass = "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300";
+                    if (isSubmitted) {
+                      if (item === currentStep.correctOrder[idx]) itemClass = "bg-green-50 dark:bg-green-900/30 border-green-500 text-green-800 dark:text-green-400";
+                      else itemClass = "bg-red-50 dark:bg-red-900/30 border-red-500 text-red-800 dark:text-red-400";
+                    }
+                    return (
+                      <div
+                        key={item}
+                        draggable={!isSubmitted}
+                        onDragStart={(e) => {
+                          setDraggedIdx(idx);
+                          e.dataTransfer.effectAllowed = "move";
+                          e.dataTransfer.setData("text/plain", idx);
+                        }}
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => {
+                          e.preventDefault();
+                          if (draggedIdx === null) return;
+                          const newItems = [...currentAnswer];
+                          const draggedItem = newItems[draggedIdx];
+                          newItems.splice(draggedIdx, 1);
+                          newItems.splice(idx, 0, draggedItem);
+                          setCurrentAnswer(newItems);
+                          setDraggedIdx(null);
+                        }}
+                        className={`flex items-center gap-4 p-4 rounded-xl transition-all font-bold 
+                          ${itemClass} ${draggedIdx === idx ? 'opacity-50 border-dashed' : 'cursor-move'} 
+                          ${!isSubmitted && 'hover:bg-gray-50 dark:hover:bg-gray-700'}`}
+                      >
+                        <GripVertical size={20} className={isSubmitted ? "opacity-0" : "text-gray-400 dark:text-gray-500"} />
+                        <span>{item}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+
+            return (
+              <div className="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex flex-col md:pl-0 transition-colors duration-300">
+                {/* Progress header */}
+                <div className="px-4 py-4 flex items-center gap-4 border-b border-gray-100 dark:border-gray-800">
+                  <button onClick={() => setCurrentView('course')} className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
+                    <ChevronLeft size={32} />
+                  </button>
+                  <div className="flex-1 bg-gray-200 dark:bg-gray-700 h-3 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full ${activeCourse.color} transition-all duration-500`}
+                      style={{ width: `${progressPercent}%` }}
+                    ></div>
+                  </div>
+                </div>
+
+                {/* Content Area */}
+                <div className="flex-1 overflow-y-auto px-6 md:px-20 lg:px-40 py-8 max-w-4xl mx-auto w-full flex flex-col justify-center">
+                  <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-8">
+                    {lesson.isModuleQuiz ? "Module Quiz" : lesson.title}
+                  </h2>
+                  
+                  {currentStep.type === 'theory' && (
+                    <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-10 shadow-sm text-lg text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                      {currentStep.content}
+                    </div>
+                  )}
+                  {currentStep.type === 'quiz' && renderQuiz()}
+                  {currentStep.type === 'fill_blank' && renderFillBlank()}
+                  {currentStep.type === 'rearrange' && renderRearrange()}
+                  
+                </div>
+
+                {/* Footer Action Area */}
+                <div className={`border-t p-4 md:p-6 md:px-20 flex justify-center w-full transition-colors duration-300
+                  ${isSubmitted && isCorrect ? 'bg-green-100 dark:bg-green-900/40 border-green-200 dark:border-green-800' : 
+                    isSubmitted && !isCorrect ? 'bg-red-100 dark:bg-red-900/40 border-red-200 dark:border-red-800' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800'}`}>
+                  <div className="max-w-4xl w-full flex flex-col md:flex-row items-center justify-between gap-4">
+                    
+                    <div className="hidden md:block">
+                      {isSubmitted && isCorrect && <span className="text-xl font-extrabold text-green-600 dark:text-green-400 flex items-center gap-2"><Check size={32}/> Excellent!</span>}
+                      {isSubmitted && !isCorrect && <span className="text-xl font-extrabold text-red-600 dark:text-red-400">Not quite right. Try again!</span>}
+                    </div>
+
+                    <button 
+                      onClick={handleAction}
+                      disabled={isActionDisabled()}
+                      className={`w-full md:w-auto py-4 px-12 rounded-2xl font-extrabold text-lg text-white border-b-4 active:border-b-0 active:translate-y-1 transition-all
+                        ${currentStep.type === 'theory' ? activeCourse.color + ' border-black/20 dark:border-black/40' : 
+                          isSubmitted && isCorrect ? 'bg-green-500 border-green-600 dark:border-green-700' :
+                          isSubmitted && !isCorrect ? 'bg-red-500 border-red-600 dark:border-red-700' :
+                          !isActionDisabled() ? activeCourse.color + ' border-black/20 dark:border-black/40' :
+                          'bg-gray-300 dark:bg-gray-700 border-gray-400 dark:border-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                        }
+                      `}
+                    >
+                      {currentStep.type === 'theory' ? 'CONTINUE' : 
+                       isSubmitted && isCorrect ? 'CONTINUE' :
+                       isSubmitted && !isCorrect ? 'TRY AGAIN' : 'CHECK'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          };
+
+          // ==========================================
+          // RENDER
+          // ==========================================
+          return (
+            <div className={`${isDarkMode ? 'dark' : ''}`}>
+              <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex font-sans text-gray-800 dark:text-gray-100 transition-colors duration-300">
+                <Navigation />
+                
+                {/* Main Content Area */}
+                <main className="flex-1 md:ml-64 flex flex-col min-h-screen relative">
+                  {currentView === 'home' && (
+                    <>
+                      <TopBar />
+                      <HomeView />
+                    </>
+                  )}
+                  
+                  {currentView === 'course' && (
+                    <>
+                      <TopBar showBack={true} title={activeCourse?.title} />
+                      <CoursePathView />
+                    </>
+                  )}
+
+                  {currentView === 'lesson' && <LessonInteractiveView />}
+                </main>
+              </div>
+            </div>
+          );
+        }
+
+        // Initialize App
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
