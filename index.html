@@ -266,6 +266,7 @@
           const [activeCourseId, setActiveCourseId] = useState(null);
           const [activeLesson, setActiveLesson] = useState(null); // { moduleIdx, lessonIdx, data }
           const [isDarkMode, setIsDarkMode] = useState(false);
+          const [activePopup, setActivePopup] = useState(null); // 'streak', 'xp', or null
           
           // User Progress State (Simulated)
           const [userStats, setUserStats] = useState({
@@ -347,22 +348,60 @@
                   {title || "Next Academy"}
                 </h1>
               </div>
-              <div className="flex items-center gap-4 text-sm font-bold">
+              <div className="flex items-center gap-2 md:gap-4 text-sm font-bold">
                 {/* Dark Mode Toggle */}
                 <button 
                   onClick={() => setIsDarkMode(!isDarkMode)} 
                   className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition"
+                  title="Toggle Dark Mode"
                 >
                   {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
 
-                <div className="flex items-center gap-1 text-orange-500">
-                  <Flame size={20} fill="currentColor" />
-                  <span>{userStats.streak}</span>
+                {/* Streak Counter with hover title and click popup */}
+                <div className="relative">
+                  <button 
+                    onClick={() => setActivePopup(activePopup === 'streak' ? null : 'streak')}
+                    className="flex items-center gap-1 text-orange-500 p-1.5 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-lg transition-colors cursor-pointer"
+                    title="Streak"
+                  >
+                    <Flame size={20} fill="currentColor" />
+                    <span>{userStats.streak}</span>
+                  </button>
+                  
+                  {activePopup === 'streak' && (
+                    <>
+                      {/* Invisible backdrop to dismiss popup when clicking outside */}
+                      <div className="fixed inset-0 z-40 cursor-default" onClick={() => setActivePopup(null)}></div>
+                      <div className="absolute top-full right-0 mt-1 w-56 p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg text-xs text-gray-600 dark:text-gray-300 z-50 animate-fade-in font-normal">
+                        <strong className="text-orange-500 block mb-1">Streak</strong>
+                        Your streak increases for every consecutive day you learn. Keep it up to build a habit!
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="flex items-center gap-1 text-blue-500">
-                  <Star size={20} fill="currentColor" />
-                  <span>{userStats.xp}</span>
+
+                {/* XP Counter with hover title and click popup */}
+                <div className="relative">
+                  <button 
+                    onClick={() => setActivePopup(activePopup === 'xp' ? null : 'xp')}
+                    className="flex items-center gap-1 text-blue-500 p-1.5 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors cursor-pointer"
+                    title="Experience Points (XP)"
+                  >
+                    <Star size={20} fill="currentColor" />
+                    <span>{userStats.xp}</span>
+                  </button>
+                  
+                  {activePopup === 'xp' && (
+                    <>
+                      {/* Invisible backdrop to dismiss popup when clicking outside */}
+                      <div className="fixed inset-0 z-40 cursor-default" onClick={() => setActivePopup(null)}></div>
+                      <div className="absolute top-full right-0 mt-1 w-56 p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg text-xs text-gray-600 dark:text-gray-300 z-50 animate-fade-in font-normal">
+                        <strong className="text-blue-500 block mb-1">Experience Points (XP)</strong>
+                        Earn XP by completing lessons and answering questions correctly. Accumulate XP to track your progress!
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
