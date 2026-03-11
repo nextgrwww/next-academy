@@ -1,5 +1,59 @@
 [
   {
+    "id": "gcse-geography",
+    "level": "GCSE",
+    "title": "Geography",
+    "description": "Explore physical landscapes and human environmental challenges.",
+    "color": "bg-orange-500",
+    "textColor": "text-orange-500",
+    "lightBg": "bg-orange-50",
+    "iconName": "BookOpen",
+    "modules": [
+      {
+        "id": "geo_m1",
+        "title": "The Living World",
+        "lessons": [
+          {
+            "id": "geo_l1",
+            "title": "Ecosystems",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "An ecosystem is a community of living organisms in conjunction with the nonliving components of their environment."
+              },
+              {
+                "type": "quiz",
+                "question": "Which of these is a 'biotic' component of an ecosystem?",
+                "options": ["Rocks", "Bacteria", "Sunlight", "Water"],
+                "correctOption": 1
+              }
+            ]
+          },
+          {
+            "id": "geo_m1_quiz",
+            "title": "Module 1 Quiz",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "fill_blank",
+                "question": "What is the primary source of energy for most ecosystems?",
+                "textBefore": "The",
+                "textAfter": "",
+                "correctAnswer": "Sun"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the food chain in the correct order (Bottom to Top):",
+                "items": ["Secondary Consumer", "Primary Consumer", "Producer", "Apex Predator"],
+                "correctOrder": ["Producer", "Primary Consumer", "Secondary Consumer", "Apex Predator"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }, 
+  {
     "id": "alevel-physics-mechanics",
     "level": "A-Level",
     "title": "Physics: Mechanics",
@@ -129,60 +183,6 @@
                 "question": "Work done is defined as Force multiplied by:",
                 "options": ["Time", "Velocity", "Distance moved in direction of force", "Acceleration"],
                 "correctOption": 2
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "gcse-geography",
-    "level": "GCSE",
-    "title": "Geography",
-    "description": "Explore physical landscapes and human environmental challenges.",
-    "color": "bg-orange-500",
-    "textColor": "text-orange-500",
-    "lightBg": "bg-orange-50",
-    "iconName": "BookOpen",
-    "modules": [
-      {
-        "id": "geo_m1",
-        "title": "The Living World",
-        "lessons": [
-          {
-            "id": "geo_l1",
-            "title": "Ecosystems",
-            "steps": [
-              {
-                "type": "theory",
-                "content": "An ecosystem is a community of living organisms in conjunction with the nonliving components of their environment."
-              },
-              {
-                "type": "quiz",
-                "question": "Which of these is a 'biotic' component of an ecosystem?",
-                "options": ["Rocks", "Bacteria", "Sunlight", "Water"],
-                "correctOption": 1
-              }
-            ]
-          },
-          {
-            "id": "geo_m1_quiz",
-            "title": "Module 1 Quiz",
-            "isModuleQuiz": true,
-            "steps": [
-              {
-                "type": "fill_blank",
-                "question": "What is the primary source of energy for most ecosystems?",
-                "textBefore": "The",
-                "textAfter": "",
-                "correctAnswer": "Sun"
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange the food chain in the correct order (Bottom to Top):",
-                "items": ["Secondary Consumer", "Primary Consumer", "Producer", "Apex Predator"],
-                "correctOrder": ["Producer", "Primary Consumer", "Secondary Consumer", "Apex Predator"]
               }
             ]
           }
