@@ -259,6 +259,104 @@
         ];
 
         // ==========================================
+        // AUTHENTICATION VIEW
+        // Extracted from App to prevent complete remounting 
+        // on every keystroke (which causes input focus loss).
+        // ==========================================
+        const AuthView = ({ onLogin, onRegister }) => {
+            const [authTab, setAuthTab] = useState('login');
+            const [authForm, setAuthForm] = useState({ username: '', password: '', name: '' });
+            const [authError, setAuthError] = useState('');
+
+            const handleAuthSubmit = (e) => {
+                e.preventDefault();
+                setAuthError('');
+                
+                if (authTab === 'register') {
+                    const err = onRegister(authForm);
+                    if (err) setAuthError(err);
+                } else {
+                    const err = onLogin(authForm.username, authForm.password);
+                    if (err) setAuthError(err);
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 transition-colors duration-300">
+                  <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 animate-fade-in">
+                    
+                    {/* Hero / Motivational Section */}
+                    <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-center text-white relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')]"></div>
+                      <div className="relative z-10">
+                        <div className="w-16 h-16 rounded-2xl bg-white text-blue-600 flex items-center justify-center font-black text-4xl mx-auto mb-4 shadow-lg shadow-black/20">N</div>
+                        <h1 className="text-3xl font-extrabold mb-2 tracking-tight">Next Academy</h1>
+                        <p className="opacity-90 font-medium text-sm leading-relaxed">
+                          Unlock your potential. Master your GCSE and A-Level curriculum with interactive, bite-sized lessons designed for rapid learning.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Auth Form Section */}
+                    <div className="p-6 md:p-8">
+                      <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-xl mb-6">
+                        <button onClick={() => { setAuthTab('login'); setAuthError(''); }} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${authTab === 'login' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>Sign In</button>
+                        <button onClick={() => { setAuthTab('register'); setAuthError(''); }} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${authTab === 'register' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>Create Account</button>
+                      </div>
+                      
+                      <form onSubmit={handleAuthSubmit} className="flex flex-col gap-4">
+                        {authTab === 'register' && (
+                          <div className="relative">
+                            <Icon name="User" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                            <input 
+                              required 
+                              type="text" 
+                              placeholder="Display Name" 
+                              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
+                              value={authForm.name} 
+                              onChange={(e) => setAuthForm({...authForm, name: e.target.value})} 
+                            />
+                          </div>
+                        )}
+                        
+                        <div className="relative">
+                          <Icon name="User" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                          <input 
+                            required 
+                            type="text" 
+                            placeholder="Username" 
+                            className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
+                            value={authForm.username} 
+                            onChange={(e) => setAuthForm({...authForm, username: e.target.value})} 
+                          />
+                        </div>
+                        
+                        <div className="relative">
+                          <Icon name="Lock" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                          <input 
+                            required 
+                            type="password" 
+                            placeholder="Password" 
+                            className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
+                            value={authForm.password} 
+                            onChange={(e) => setAuthForm({...authForm, password: e.target.value})} 
+                          />
+                        </div>
+                        
+                        {authError && <p className="text-red-500 dark:text-red-400 text-sm font-bold text-center mt-1">{authError}</p>}
+                        
+                        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition-colors mt-2 shadow-md shadow-blue-500/20 active:translate-y-0.5">
+                          {authTab === 'login' ? 'Start Learning' : 'Join Next Academy'}
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            );
+        };
+
+
+        // ==========================================
         // MAIN APPLICATION COMPONENT
         // ==========================================
         function App() {
@@ -291,11 +389,6 @@
           const [isDarkMode, setIsDarkMode] = useState(false);
           const [activePopup, setActivePopup] = useState(null); // 'streak', 'xp', or null
           
-          // Auth State
-          const [authTab, setAuthTab] = useState('login');
-          const [authForm, setAuthForm] = useState({ username: '', password: '', name: '' });
-          const [authError, setAuthError] = useState('');
-
           // Derived State
           const activeCourse = COURSES_DATA.find(c => c.id === activeCourseId);
 
@@ -319,44 +412,40 @@
           }, [isDarkMode]);
 
           // --- Authentication Handlers ---
-          const handleAuthSubmit = (e) => {
-            e.preventDefault();
-            setAuthError('');
+          const handleRegister = (form) => {
+            if (users.some(u => u.username.toLowerCase() === form.username.toLowerCase())) {
+                return "Username already exists. Please choose another.";
+            }
+            const newUser = {
+                username: form.username,
+                password: form.password,
+                name: form.name || form.username,
+                stats: { xp: 0, streak: 1, completedLessons: [] }
+            };
+            const updatedUsers = [...users, newUser];
+            setUsers(updatedUsers);
             
-            if (authTab === 'register') {
-                if (users.some(u => u.username.toLowerCase() === authForm.username.toLowerCase())) {
-                    setAuthError("Username already exists. Please choose another.");
-                    return;
-                }
-                const newUser = {
-                    username: authForm.username,
-                    password: authForm.password,
-                    name: authForm.name || authForm.username,
-                    stats: { xp: 0, streak: 1, completedLessons: [] }
-                };
-                const updatedUsers = [...users, newUser];
-                setUsers(updatedUsers);
-                
+            try {
+              localStorage.setItem('next_academy_users', JSON.stringify(updatedUsers));
+              localStorage.setItem('next_academy_active_user', newUser.username);
+            } catch(e) { console.warn("Local storage blocked."); }
+            
+            setCurrentUsername(newUser.username);
+            setCurrentView('home');
+            return null; // null means no error
+          };
+
+          const handleLogin = (username, password) => {
+            const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+            if (user) {
+                setCurrentUsername(user.username);
                 try {
-                  localStorage.setItem('next_academy_users', JSON.stringify(updatedUsers));
-                  localStorage.setItem('next_academy_active_user', newUser.username);
+                  localStorage.setItem('next_academy_active_user', user.username);
                 } catch(e) { console.warn("Local storage blocked."); }
-                
-                setCurrentUsername(newUser.username);
                 setCurrentView('home');
-                setAuthForm({ username: '', password: '', name: '' });
+                return null; // null means no error
             } else {
-                const user = users.find(u => u.username.toLowerCase() === authForm.username.toLowerCase() && u.password === authForm.password);
-                if (user) {
-                    setCurrentUsername(user.username);
-                    try {
-                      localStorage.setItem('next_academy_active_user', user.username);
-                    } catch(e) { console.warn("Local storage blocked."); }
-                    setCurrentView('home');
-                    setAuthForm({ username: '', password: '', name: '' });
-                } else {
-                    setAuthError("Invalid username or password.");
-                }
+                return "Invalid username or password.";
             }
           };
 
@@ -420,79 +509,6 @@
           // ==========================================
           // SUB-COMPONENTS & VIEWS
           // ==========================================
-
-          const AuthView = () => (
-            <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 transition-colors duration-300">
-              <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 animate-fade-in">
-                
-                {/* Hero / Motivational Section */}
-                <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-center text-white relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')]"></div>
-                  <div className="relative z-10">
-                    <div className="w-16 h-16 rounded-2xl bg-white text-blue-600 flex items-center justify-center font-black text-4xl mx-auto mb-4 shadow-lg shadow-black/20">N</div>
-                    <h1 className="text-3xl font-extrabold mb-2 tracking-tight">Next Academy</h1>
-                    <p className="opacity-90 font-medium text-sm leading-relaxed">
-                      Unlock your potential. Master your GCSE and A-Level curriculum with interactive, bite-sized lessons designed for rapid learning.
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Auth Form Section */}
-                <div className="p-6 md:p-8">
-                  <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-xl mb-6">
-                    <button onClick={() => { setAuthTab('login'); setAuthError(''); }} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${authTab === 'login' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>Sign In</button>
-                    <button onClick={() => { setAuthTab('register'); setAuthError(''); }} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${authTab === 'register' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>Create Account</button>
-                  </div>
-                  
-                  <form onSubmit={handleAuthSubmit} className="flex flex-col gap-4">
-                    {authTab === 'register' && (
-                      <div className="relative">
-                        <Icon name="User" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                        <input 
-                          required 
-                          type="text" 
-                          placeholder="Display Name" 
-                          className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
-                          value={authForm.name} 
-                          onChange={(e) => setAuthForm({...authForm, name: e.target.value})} 
-                        />
-                      </div>
-                    )}
-                    
-                    <div className="relative">
-                      <Icon name="User" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                      <input 
-                        required 
-                        type="text" 
-                        placeholder="Username" 
-                        className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
-                        value={authForm.username} 
-                        onChange={(e) => setAuthForm({...authForm, username: e.target.value})} 
-                      />
-                    </div>
-                    
-                    <div className="relative">
-                      <Icon name="Lock" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                      <input 
-                        required 
-                        type="password" 
-                        placeholder="Password" 
-                        className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
-                        value={authForm.password} 
-                        onChange={(e) => setAuthForm({...authForm, password: e.target.value})} 
-                      />
-                    </div>
-                    
-                    {authError && <p className="text-red-500 dark:text-red-400 text-sm font-bold text-center mt-1">{authError}</p>}
-                    
-                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition-colors mt-2 shadow-md shadow-blue-500/20 active:translate-y-0.5">
-                      {authTab === 'login' ? 'Start Learning' : 'Join Next Academy'}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          );
 
           const TopBar = ({ showBack, title }) => (
             <div className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between transition-colors duration-300">
@@ -1046,7 +1062,7 @@
           return (
             <div className={`${isDarkMode ? 'dark' : ''}`}>
               {currentView === 'auth' ? (
-                <AuthView />
+                <AuthView onLogin={handleLogin} onRegister={handleRegister} />
               ) : (
                 <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex font-sans text-gray-800 dark:text-gray-100 transition-colors duration-300">
                   <Navigation />
