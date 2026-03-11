@@ -1,0 +1,139 @@
+[
+  {
+    "id": "alevel-physics-mechanics",
+    "level": "A-Level",
+    "title": "Physics: Mechanics",
+    "description": "An in-depth study of motion, forces, energy, and material properties.",
+    "color": "bg-red-600",
+    "textColor": "text-red-600",
+    "lightBg": "bg-red-50",
+    "iconName": "Atom",
+    "modules": [
+      {
+        "id": "phys_m1",
+        "title": "Motion and Forces",
+        "lessons": [
+          {
+            "id": "phys_l1_1",
+            "title": "Newton's First Law",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "Newton's First Law states that an object will remain at rest or move with constant velocity unless acted upon by a resultant force."
+              },
+              {
+                "type": "quiz",
+                "question": "If the resultant force on a moving car is zero, what happens?",
+                "options": [
+                  "The car stops immediately",
+                  "The car accelerates",
+                  "The car continues at a constant velocity",
+                  "The car slows down gradually"
+                ],
+                "correctOption": 2
+              },
+              {
+                "type": "fill_blank",
+                "question": "The tendency of an object to resist changes in its state of motion is called:",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Inertia"
+              }
+            ]
+          },
+          {
+            "id": "phys_l1_2",
+            "title": "Newton's Second Law",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.\n\nFormula: F = ma"
+              },
+              {
+                "type": "fill_blank",
+                "question": "Calculate the force required to accelerate a 5kg mass at 2m/s².",
+                "textBefore": "Force =",
+                "textAfter": "Newtons",
+                "correctAnswer": "10"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the units to show the derivation of a Newton (N):",
+                "items": ["kg", "m", "s⁻²"],
+                "correctOrder": ["kg", "m", "s⁻²"]
+              }
+            ]
+          },
+          {
+            "id": "phys_m1_quiz",
+            "title": "Module 1 Review Quiz",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "What is the unit of Force?",
+                "options": ["Joule", "Watt", "Newton", "Pascal"],
+                "correctOption": 2
+              },
+              {
+                "type": "fill_blank",
+                "question": "Weight is the force exerted on an object due to ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "gravity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "phys_m2",
+        "title": "Work, Energy, and Power",
+        "lessons": [
+          {
+            "id": "phys_l2_1",
+            "title": "Kinetic Energy",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "Kinetic energy (Ek) is the energy an object possesses due to its motion.\n\nFormula: Ek = ½mv²"
+              },
+              {
+                "type": "quiz",
+                "question": "If the velocity of an object doubles, its kinetic energy increases by a factor of:",
+                "options": ["2", "4", "8", "Stay the same"],
+                "correctOption": 1
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the steps to calculate Ek for a 2kg object moving at 3m/s:",
+                "items": ["Square the velocity (3² = 9)", "Multiply by mass (9 * 2 = 18)", "Multiply by ½ (18 * 0.5 = 9)", "Identify m=2, v=3"],
+                "correctOrder": ["Identify m=2, v=3", "Square the velocity (3² = 9)", "Multiply by mass (9 * 2 = 18)", "Multiply by ½ (18 * 0.5 = 9)"]
+              }
+            ]
+          },
+          {
+            "id": "phys_m2_quiz",
+            "title": "Module 2 Review Quiz",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "fill_blank",
+                "question": "The principle of conservation of energy states that energy cannot be created or ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "destroyed"
+              },
+              {
+                "type": "quiz",
+                "question": "Work done is defined as Force multiplied by:",
+                "options": ["Time", "Velocity", "Distance moved in direction of force", "Acceleration"],
+                "correctOption": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
