@@ -390,9 +390,11 @@
           const currentUser = users.find(u => u.username === currentUsername);
 
           // Application State
-          const [currentView, setCurrentView] = useState(currentUser ? 'home' : 'auth'); // 'auth', 'home', 'course', 'lesson', 'profile'
+          // Possibilities: 'auth', 'home', 'course', 'lesson', 'profile', 'practice_home', 'practice_course', 'leaderboard'
+          const [currentView, setCurrentView] = useState(currentUser ? 'home' : 'auth'); 
           const [activeCourseId, setActiveCourseId] = useState(null);
           const [activeLesson, setActiveLesson] = useState(null); // { moduleIdx, lessonIdx, data }
+          const [lessonReturnView, setLessonReturnView] = useState('course'); // Where to go back when leaving a lesson
           
           // Theme state (Defaults to true/dark)
           const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -485,8 +487,14 @@
             setCurrentView('course');
           };
 
-          const handleOpenLesson = (moduleIdx, lessonIdx, lessonData) => {
+          const handleOpenPracticeCourse = (courseId) => {
+            setActiveCourseId(courseId);
+            setCurrentView('practice_course');
+          };
+
+          const handleOpenLesson = (moduleIdx, lessonIdx, lessonData, returnTo = 'course') => {
             setActiveLesson({ moduleIdx, lessonIdx, data: lessonData });
+            setLessonReturnView(returnTo);
             setCurrentView('lesson');
           };
 
@@ -511,7 +519,7 @@
                localStorage.setItem('next_academy_users', JSON.stringify(updatedUsers));
             } catch(e) { console.warn("Local storage blocked"); }
 
-            setCurrentView('course');
+            setCurrentView(lessonReturnView);
             setActiveLesson(null);
           };
 
@@ -532,11 +540,11 @@
           // SUB-COMPONENTS & VIEWS
           // ==========================================
 
-          const TopBar = ({ showBack, title }) => (
+          const TopBar = ({ onBack, title }) => (
             <div className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between transition-colors duration-300">
               <div className="flex items-center gap-3">
-                {showBack && (
-                  <button onClick={() => setCurrentView('home')} className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                {onBack && (
+                  <button onClick={onBack} className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition">
                     <ChevronLeft size={24} className="text-gray-700 dark:text-gray-300" />
                   </button>
                 )}
@@ -612,36 +620,41 @@
             </div>
           );
 
-          const Navigation = () => (
-            <>
-              {/* Mobile Bottom Navigation */}
-              <div className="md:hidden fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex justify-around py-3 pb-safe z-40 transition-colors duration-300">
-                <NavButton icon={<Home size={24} />} label="Learn" active={currentView === 'home' || currentView === 'course' || currentView === 'lesson'} onClick={() => setCurrentView('home')} />
-                <NavButton icon={<BookOpen size={24} />} label="Practice" active={false} onClick={() => {}} />
-                <NavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} onClick={() => {}} />
-                <NavButton icon={<User size={24} />} label={currentUser?.name || "Profile"} active={currentView === 'profile'} onClick={() => setCurrentView('profile')} />
-              </div>
-
-              {/* Desktop Side Navigation */}
-              <div className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 px-4 z-40 transition-colors duration-300">
-                <div className="flex items-center gap-2 mb-10 px-2 cursor-pointer" onClick={() => setCurrentView('home')}>
-                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0">
-                    N
-                  </div>
-                  <div className="overflow-hidden">
-                    <h1 className="font-bold text-xl tracking-tight text-gray-800 dark:text-gray-100 truncate">Next Academy</h1>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Hi, {currentUser?.name}</p>
-                  </div>
+          const Navigation = () => {
+            const isLearnActive = currentView === 'home' || currentView === 'course' || (currentView === 'lesson' && lessonReturnView === 'course');
+            const isPracticeActive = currentView === 'practice_home' || currentView === 'practice_course' || (currentView === 'lesson' && lessonReturnView === 'practice_course');
+            
+            return (
+              <>
+                {/* Mobile Bottom Navigation */}
+                <div className="md:hidden fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex justify-around py-3 pb-safe z-40 transition-colors duration-300">
+                  <NavButton icon={<Home size={24} />} label="Learn" active={isLearnActive} onClick={() => setCurrentView('home')} />
+                  <NavButton icon={<BookOpen size={24} />} label="Practice" active={isPracticeActive} onClick={() => setCurrentView('practice_home')} />
+                  <NavButton icon={<Trophy size={24} />} label="Leaderboard" active={currentView === 'leaderboard'} onClick={() => setCurrentView('leaderboard')} />
+                  <NavButton icon={<User size={24} />} label={currentUser?.name || "Profile"} active={currentView === 'profile'} onClick={() => setCurrentView('profile')} />
                 </div>
-                <nav className="flex flex-col gap-2 flex-1">
-                  <SideNavButton icon={<Home size={24} />} label="Learn" active={currentView === 'home' || currentView === 'course' || currentView === 'lesson'} onClick={() => setCurrentView('home')} />
-                  <SideNavButton icon={<BookOpen size={24} />} label="Practice" active={false} onClick={() => {}} />
-                  <SideNavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} onClick={() => {}} />
-                  <SideNavButton icon={<User size={24} />} label="Profile" active={currentView === 'profile'} onClick={() => setCurrentView('profile')} />
-                </nav>
-              </div>
-            </>
-          );
+
+                {/* Desktop Side Navigation */}
+                <div className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 px-4 z-40 transition-colors duration-300">
+                  <div className="flex items-center gap-2 mb-10 px-2 cursor-pointer" onClick={() => setCurrentView('home')}>
+                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0">
+                      N
+                    </div>
+                    <div className="overflow-hidden">
+                      <h1 className="font-bold text-xl tracking-tight text-gray-800 dark:text-gray-100 truncate">Next Academy</h1>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Hi, {currentUser?.name}</p>
+                    </div>
+                  </div>
+                  <nav className="flex flex-col gap-2 flex-1">
+                    <SideNavButton icon={<Home size={24} />} label="Learn" active={isLearnActive} onClick={() => setCurrentView('home')} />
+                    <SideNavButton icon={<BookOpen size={24} />} label="Practice" active={isPracticeActive} onClick={() => setCurrentView('practice_home')} />
+                    <SideNavButton icon={<Trophy size={24} />} label="Leaderboard" active={currentView === 'leaderboard'} onClick={() => setCurrentView('leaderboard')} />
+                    <SideNavButton icon={<User size={24} />} label="Profile" active={currentView === 'profile'} onClick={() => setCurrentView('profile')} />
+                  </nav>
+                </div>
+              </>
+            );
+          };
 
           const NavButton = ({ icon, label, active, onClick }) => (
             <button onClick={onClick} className={`flex flex-col items-center gap-1 ${active ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}>
@@ -659,11 +672,64 @@
 
           // --- VIEWS ---
 
+          const LeaderboardView = () => {
+            const sortedUsers = [...users].sort((a, b) => b.stats.xp - a.stats.xp);
+            
+            return (
+                <div className="pb-24 pt-6 px-4 md:px-8 max-w-3xl mx-auto w-full animate-fade-in">
+                    <div className="text-center mb-8 px-4">
+                        <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">Leaderboard</h2>
+                        <p className="text-gray-500 dark:text-gray-400 font-medium">Top learners ranked by Experience Points (XP)</p>
+                    </div>
+                    
+                    <div className="bg-white dark:bg-gray-800 rounded-3xl p-2 md:p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+                        {sortedUsers.map((user, index) => {
+                            const isCurrentUser = user.username === currentUser.username;
+                            let rankColor = "text-gray-500 dark:text-gray-400";
+                            if (index === 0) rankColor = "text-yellow-500";
+                            else if (index === 1) rankColor = "text-gray-400";
+                            else if (index === 2) rankColor = "text-orange-500";
+
+                            return (
+                                <div key={user.username} className={`flex items-center justify-between p-4 border-b last:border-0 border-gray-100 dark:border-gray-700 ${isCurrentUser ? 'bg-blue-50 dark:bg-blue-900/20 rounded-2xl border-transparent' : ''}`}>
+                                    <div className="flex items-center gap-4">
+                                        <div className={`w-6 text-center font-black ${rankColor}`}>
+                                            #{index + 1}
+                                        </div>
+                                        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center font-bold shrink-0">
+                                            {user.name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <div>
+                                            <p className="font-bold text-gray-800 dark:text-gray-100">
+                                              {user.name} {isCurrentUser && <span className="text-blue-500 ml-1">(You)</span>}
+                                            </p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400">@{user.username}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-1 font-bold text-blue-600 dark:text-blue-400">
+                                        {user.stats.xp} <span className="text-xs uppercase text-gray-400">XP</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+          };
+
           const ProfileView = () => {
             const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
             const [pwForm, setPwForm] = useState({ current: '', new: '', confirm: '' });
             const [pwError, setPwError] = useState('');
             const [pwSuccess, setPwSuccess] = useState('');
+
+            // Filter out courses where progress is zero
+            const activeCourses = COURSES_DATA.map(course => {
+                const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
+                const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => isLessonCompleted(l.id)).length;
+                const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
+                return { ...course, totalLessons, completedInCourse, progressPercent };
+            }).filter(c => c.progressPercent > 0);
 
             const handlePasswordSubmit = (e) => {
               e.preventDefault();
@@ -720,30 +786,28 @@
 
                 <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Course Progress</h3>
                 
-                {/* Course Progress List */}
+                {/* Course Progress List (Filtered > 0) */}
                 <div className="grid gap-4">
-                  {COURSES_DATA.map(course => {
-                    const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
-                    const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => isLessonCompleted(l.id)).length;
-                    const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
-
-                    return (
-                      <div key={course.id} className="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row items-center gap-4">
+                  {activeCourses.length > 0 ? activeCourses.map(course => (
+                      <div key={course.id} className="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row items-center gap-4 hover:shadow-md transition-shadow cursor-pointer" onClick={() => handleOpenCourse(course.id)}>
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${course.color} text-white`}>
                           {course.icon}
                         </div>
                         <div className="flex-1 w-full">
                           <div className="flex justify-between items-end mb-2">
                             <span className="font-bold text-gray-800 dark:text-gray-100">{course.title}</span>
-                            <span className="text-sm font-bold text-gray-500 dark:text-gray-400">{completedInCourse} / {totalLessons} Lessons</span>
+                            <span className="text-sm font-bold text-gray-500 dark:text-gray-400">{course.completedInCourse} / {course.totalLessons} Lessons</span>
                           </div>
                           <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
-                            <div className={`h-2 rounded-full ${course.color}`} style={{ width: `${progressPercent}%` }}></div>
+                            <div className={`h-2 rounded-full ${course.color}`} style={{ width: `${course.progressPercent}%` }}></div>
                           </div>
                         </div>
                       </div>
-                    );
-                  })}
+                  )) : (
+                      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 text-center">
+                          <p className="text-gray-500 dark:text-gray-400 font-medium">You haven't started any courses yet. Head to the Learn tab to begin!</p>
+                      </div>
+                  )}
                 </div>
 
                 {/* Password Change Modal Popup */}
@@ -816,6 +880,34 @@
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          );
+
+          const PracticeHomeView = () => (
+            <div className="pb-24 pt-4 px-4 md:px-8 max-w-5xl mx-auto w-full">
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1">Practice & Revision</h2>
+                <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Test your knowledge with chapter quizzes</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {COURSES_DATA.map((course) => (
+                    <div 
+                      key={course.id}
+                      onClick={() => handleOpenPracticeCourse(course.id)}
+                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-5 cursor-pointer hover:shadow-lg transition-all transform hover:-translate-y-1 flex flex-col items-center text-center"
+                    >
+                      <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-inner ${course.color} mb-4`}>
+                        {course.icon}
+                      </div>
+                      <span className={`text-xs font-bold px-3 py-1 rounded-full ${course.lightBg} ${course.textColor} dark:bg-opacity-20 mb-2`}>
+                        {course.level}
+                      </span>
+                      <h3 className="font-bold text-xl text-gray-800 dark:text-gray-100 mb-2">{course.title}</h3>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium flex-1">Access module quizzes and targeted exercises.</p>
+                    </div>
+                ))}
               </div>
             </div>
           );
@@ -893,7 +985,7 @@
                                 <button
                                   key={lesson.id}
                                   disabled={!unlocked}
-                                  onClick={() => handleOpenLesson(mIdx, lIdx, lesson)}
+                                  onClick={() => handleOpenLesson(mIdx, lIdx, lesson, 'course')}
                                   className={`w-full flex items-center justify-between p-4 rounded-xl border bg-white dark:bg-gray-800 text-left transition-all 
                                     ${unlocked 
                                       ? 'border-gray-200 dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 cursor-pointer' 
@@ -924,6 +1016,101 @@
                                 </button>
                               );
                             })}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          };
+
+          const PracticeCoursePathView = () => {
+            if (!activeCourse) return null;
+
+            const [expandedModule, setExpandedModule] = useState(0); // Auto-expand first
+
+            const toggleModule = (mIdx) => {
+              setExpandedModule(prev => prev === mIdx ? null : mIdx);
+            };
+
+            return (
+              <div className="pb-24 pt-6 px-0 md:px-8 max-w-3xl mx-auto flex flex-col items-center w-full animate-fade-in">
+                <div className="text-center mb-8 px-4">
+                  <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-2">{activeCourse.title} Practice</h2>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">Direct access to chapter module quizzes</p>
+                </div>
+
+                <div className="w-full flex flex-col md:gap-4 border-t border-gray-200 dark:border-gray-800 md:border-t-0">
+                  {activeCourse.modules.map((module, mIdx) => {
+                    const isExpanded = expandedModule === mIdx;
+                    
+                    // Filter only Module Quizzes
+                    const practiceLessons = module.lessons.filter(l => l.isModuleQuiz);
+
+                    return (
+                      <div key={module.id} className="w-full border-b border-gray-200 dark:border-gray-800 md:border md:rounded-2xl md:shadow-sm md:bg-white md:dark:bg-gray-800 overflow-hidden">
+                        <button 
+                          onClick={() => toggleModule(mIdx)} 
+                          className="w-full flex items-center justify-between p-4 md:p-5 bg-white dark:bg-gray-900 md:dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className={`w-10 h-10 md:w-8 md:h-8 rounded-lg flex items-center justify-center shrink-0 bg-orange-100 text-orange-500 dark:bg-orange-900/40 dark:text-orange-400`}>
+                              <Trophy size={20} className="fill-current" strokeWidth={2} />
+                            </div>
+                            <span className="font-bold text-lg md:text-xl text-gray-800 dark:text-gray-100 text-left leading-tight">
+                              {module.title}
+                            </span>
+                          </div>
+                          {isExpanded ? <ChevronUp className="text-gray-400 shrink-0 ml-2" size={24} /> : <ChevronDown className="text-gray-400 shrink-0 ml-2" size={24} />}
+                        </button>
+
+                        {isExpanded && (
+                          <div className="bg-gray-50 dark:bg-[#121212] md:dark:bg-gray-900/50 p-3 md:p-5 flex flex-col gap-3 md:gap-4 border-t border-gray-100 dark:border-gray-800">
+                            {practiceLessons.length > 0 ? practiceLessons.map(lesson => {
+                              // We need the original index to calculate unlocked state correctly
+                              const originalLIdx = module.lessons.findIndex(l => l.id === lesson.id);
+                              const completed = isLessonCompleted(lesson.id);
+                              const unlocked = isLessonUnlocked(mIdx, originalLIdx);
+
+                              return (
+                                <button
+                                  key={lesson.id}
+                                  disabled={!unlocked}
+                                  onClick={() => handleOpenLesson(mIdx, originalLIdx, lesson, 'practice_course')}
+                                  className={`w-full flex items-center justify-between p-4 rounded-xl border bg-white dark:bg-gray-800 text-left transition-all 
+                                    ${unlocked 
+                                      ? 'border-gray-200 dark:border-gray-700 hover:shadow-md hover:-translate-y-0.5 cursor-pointer' 
+                                      : 'border-gray-100 dark:border-gray-800/50 opacity-60 cursor-not-allowed'
+                                    }
+                                  `}
+                                >
+                                  <div className="flex items-center gap-4">
+                                    <div className="text-orange-500 shrink-0">
+                                      <Trophy size={28} />
+                                    </div>
+                                    <div>
+                                      <p className="text-xs text-orange-400 dark:text-orange-500 uppercase font-bold tracking-wider mb-0.5">
+                                        Practice Quiz
+                                      </p>
+                                      <p className="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">
+                                        {lesson.title}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="shrink-0 ml-4 flex items-center justify-center">
+                                    {completed ? (
+                                      <Check className="text-green-500" size={28} strokeWidth={3} />
+                                    ) : !unlocked ? (
+                                      <Lock className="text-gray-300 dark:text-gray-600" size={20} />
+                                    ) : null}
+                                  </div>
+                                </button>
+                              );
+                            }) : (
+                              <p className="text-gray-500 p-2 text-center text-sm font-medium">No practice quizzes available for this module.</p>
+                            )}
                           </div>
                         )}
                       </div>
@@ -1129,7 +1316,7 @@
               <div className="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex flex-col md:pl-0 transition-colors duration-300">
                 {/* Progress header */}
                 <div className="px-4 py-4 flex items-center gap-4 border-b border-gray-100 dark:border-gray-800">
-                  <button onClick={() => setCurrentView('course')} className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
+                  <button onClick={() => setCurrentView(lessonReturnView)} className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
                     <ChevronLeft size={32} />
                   </button>
                   <div className="flex-1 bg-gray-200 dark:bg-gray-700 h-3 rounded-full overflow-hidden">
@@ -1191,6 +1378,13 @@
           };
 
           // ==========================================
+          // DYNAMIC ROUTING (TopBar Back Actions)
+          // ==========================================
+          let backAction = null;
+          if (currentView === 'course') backAction = () => setCurrentView('home');
+          if (currentView === 'practice_course') backAction = () => setCurrentView('practice_home');
+
+          // ==========================================
           // RENDER
           // ==========================================
           return (
@@ -1212,8 +1406,29 @@
                     
                     {currentView === 'course' && (
                       <>
-                        <TopBar showBack={true} title={activeCourse?.title} />
+                        <TopBar onBack={backAction} title={activeCourse?.title} />
                         <CoursePathView />
+                      </>
+                    )}
+
+                    {currentView === 'practice_home' && (
+                      <>
+                        <TopBar title="Practice" />
+                        <PracticeHomeView />
+                      </>
+                    )}
+
+                    {currentView === 'practice_course' && (
+                      <>
+                        <TopBar onBack={backAction} title={`${activeCourse?.title} Practice`} />
+                        <PracticeCoursePathView />
+                      </>
+                    )}
+
+                    {currentView === 'leaderboard' && (
+                      <>
+                        <TopBar title="Leaderboard" />
+                        <LeaderboardView />
                       </>
                     )}
                     
