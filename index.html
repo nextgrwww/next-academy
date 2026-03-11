@@ -1129,6 +1129,7 @@
             const [currentAnswer, setCurrentAnswer] = useState(null);
             const [isSubmitted, setIsSubmitted] = useState(false);
             const [draggedIdx, setDraggedIdx] = useState(null);
+            const [dragOverIdx, setDragOverIdx] = useState(null);
             
             const currentStep = lesson.steps[stepIdx];
             const isLastStep = stepIdx === lesson.steps.length - 1;
@@ -1143,6 +1144,8 @@
                 setCurrentAnswer(null);
               }
               setIsSubmitted(false);
+              setDraggedIdx(null);
+              setDragOverIdx(null);
             }, [stepIdx, currentStep]);
 
             // Evaluation Logic
@@ -1270,25 +1273,49 @@
             );
 
             const renderRearrange = () => (
-              <div className="flex flex-col gap-5 w-full animate-fade-in">
+              <div className="flex flex-col gap-5 w-full animate-fade-in relative">
                 <h3 className="text-xl font-bold text-gray-700 dark:text-gray-200">{currentStep.question}</h3>
-                <div className="flex flex-col gap-2">
+                <div 
+                  className="flex flex-col gap-2 relative"
+                  style={{ touchAction: draggedIdx !== null ? 'none' : 'auto' }} // Prevent scrolling while dragging on mobile
+                  onMouseLeave={() => setDragOverIdx(null)}
+                  onTouchCancel={() => { setDraggedIdx(null); setDragOverIdx(null); }}
+                >
                   {currentAnswer?.map((item, idx) => {
                     let itemClass = "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300";
+                    
                     if (isSubmitted) {
                       if (item === currentStep.correctOrder[idx]) itemClass = "bg-green-50 dark:bg-green-900/30 border-green-500 text-green-800 dark:text-green-400";
                       else itemClass = "bg-red-50 dark:bg-red-900/30 border-red-500 text-red-800 dark:text-red-400";
+                    } else if (dragOverIdx === idx && draggedIdx !== idx) {
+                      itemClass = "bg-blue-50 dark:bg-blue-900/30 border-blue-400 border-dashed text-blue-800 dark:text-blue-400";
                     }
+
                     return (
                       <div
                         key={item}
+                        data-index={idx}
                         draggable={!isSubmitted}
+                        
+                        /* Desktop Mouse Drag Events */
                         onDragStart={(e) => {
                           setDraggedIdx(idx);
                           e.dataTransfer.effectAllowed = "move";
                           e.dataTransfer.setData("text/plain", idx);
                         }}
-                        onDragOver={(e) => e.preventDefault()}
+                        onDragOver={(e) => {
+                          e.preventDefault();
+                          if (draggedIdx !== null && dragOverIdx !== idx && draggedIdx !== idx) {
+                            setDragOverIdx(idx);
+                          }
+                        }}
+                        onDragLeave={() => {
+                          if (dragOverIdx === idx) setDragOverIdx(null);
+                        }}
+                        onDragEnd={() => {
+                          setDraggedIdx(null);
+                          setDragOverIdx(null);
+                        }}
                         onDrop={(e) => {
                           e.preventDefault();
                           if (draggedIdx === null) return;
@@ -1298,9 +1325,44 @@
                           newItems.splice(idx, 0, draggedItem);
                           setCurrentAnswer(newItems);
                           setDraggedIdx(null);
+                          setDragOverIdx(null);
                         }}
-                        className={`flex items-center gap-4 p-4 rounded-xl transition-all font-bold 
-                          ${itemClass} ${draggedIdx === idx ? 'opacity-50 border-dashed' : 'cursor-move'} 
+
+                        /* Mobile Touch Drag Events */
+                        onTouchStart={(e) => {
+                          if (isSubmitted) return;
+                          setDraggedIdx(idx);
+                        }}
+                        onTouchMove={(e) => {
+                          if (isSubmitted || draggedIdx === null) return;
+                          
+                          // Find element under finger
+                          const touch = e.touches[0];
+                          const elem = document.elementFromPoint(touch.clientX, touch.clientY);
+                          const target = elem?.closest('[data-index]');
+                          
+                          if (target) {
+                            const targetIdx = parseInt(target.getAttribute('data-index'), 10);
+                            if (!isNaN(targetIdx) && targetIdx !== dragOverIdx && targetIdx !== draggedIdx) {
+                              setDragOverIdx(targetIdx);
+                            }
+                          }
+                        }}
+                        onTouchEnd={(e) => {
+                          if (isSubmitted || draggedIdx === null) return;
+                          if (dragOverIdx !== null && dragOverIdx !== draggedIdx) {
+                            const newItems = [...currentAnswer];
+                            const draggedItem = newItems[draggedIdx];
+                            newItems.splice(draggedIdx, 1);
+                            newItems.splice(dragOverIdx, 0, draggedItem);
+                            setCurrentAnswer(newItems);
+                          }
+                          setDraggedIdx(null);
+                          setDragOverIdx(null);
+                        }}
+                        className={`flex items-center gap-4 p-4 rounded-xl transition-all font-bold select-none
+                          ${itemClass} 
+                          ${draggedIdx === idx ? 'opacity-50 border-dashed' : 'cursor-move'} 
                           ${!isSubmitted && 'hover:bg-gray-50 dark:hover:bg-gray-700'}`}
                       >
                         <GripVertical size={20} className={isSubmitted ? "opacity-0" : "text-gray-400 dark:text-gray-500"} />
