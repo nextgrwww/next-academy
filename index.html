@@ -33,7 +33,6 @@
 <body>
     <div id="root"></div>
 
-    <!-- Removed data-presets to match the reference file so Babel uses default env+react presets -->
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
@@ -260,10 +259,8 @@
 
         // ==========================================
         // AUTHENTICATION VIEW
-        // Extracted from App to prevent complete remounting 
-        // on every keystroke (which causes input focus loss).
         // ==========================================
-        const AuthView = ({ onLogin, onRegister }) => {
+        const AuthView = ({ onLogin, onRegister, isDarkMode, toggleDarkMode }) => {
             const [authTab, setAuthTab] = useState('login');
             const [authForm, setAuthForm] = useState({ username: '', password: '', name: '' });
             const [authError, setAuthError] = useState('');
@@ -282,7 +279,17 @@
             };
 
             return (
-                <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 transition-colors duration-300">
+                <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 transition-colors duration-300 relative">
+                  
+                  {/* Theme Toggle for Welcome Screen */}
+                  <button 
+                      onClick={toggleDarkMode} 
+                      className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full bg-white dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition-colors z-10"
+                      title="Toggle Dark Mode"
+                  >
+                      {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+                  </button>
+
                   <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 animate-fade-in">
                     
                     {/* Hero / Motivational Section */}
@@ -383,24 +390,24 @@
           const currentUser = users.find(u => u.username === currentUsername);
 
           // Application State
-          const [currentView, setCurrentView] = useState(currentUser ? 'home' : 'auth'); // 'auth', 'home', 'course', 'lesson'
+          const [currentView, setCurrentView] = useState(currentUser ? 'home' : 'auth'); // 'auth', 'home', 'course', 'lesson', 'profile'
           const [activeCourseId, setActiveCourseId] = useState(null);
           const [activeLesson, setActiveLesson] = useState(null); // { moduleIdx, lessonIdx, data }
-          const [isDarkMode, setIsDarkMode] = useState(false);
+          
+          // Theme state (Defaults to true/dark)
+          const [isDarkMode, setIsDarkMode] = useState(() => {
+            try {
+              const savedTheme = localStorage.getItem('theme');
+              return savedTheme === null ? true : savedTheme === 'dark';
+            } catch (e) {
+              return true;
+            }
+          });
+
           const [activePopup, setActivePopup] = useState(null); // 'streak', 'xp', or null
           
           // Derived State
           const activeCourse = COURSES_DATA.find(c => c.id === activeCourseId);
-
-          // Safely load theme preference on mount (avoiding file:// crashes)
-          useEffect(() => {
-            try {
-              const savedTheme = localStorage.getItem('theme');
-              if (savedTheme === 'dark') setIsDarkMode(true);
-            } catch (e) {
-              console.warn("localStorage is not accessible in this environment.");
-            }
-          }, []);
 
           // Safely save theme preference (avoiding file:// crashes)
           useEffect(() => {
@@ -410,6 +417,8 @@
               // Fail silently if localStorage is blocked
             }
           }, [isDarkMode]);
+
+          const toggleDarkMode = () => setIsDarkMode(prev => !prev);
 
           // --- Authentication Handlers ---
           const handleRegister = (form) => {
@@ -455,6 +464,19 @@
               localStorage.removeItem('next_academy_active_user');
             } catch(e) { console.warn("Local storage blocked."); }
             setCurrentView('auth');
+          };
+
+          const handleChangePassword = (currentPw, newPw) => {
+            if (currentUser.password !== currentPw) {
+                return "Incorrect current password.";
+            }
+            const updatedUser = { ...currentUser, password: newPw };
+            const updatedUsers = users.map(u => u.username === currentUser.username ? updatedUser : u);
+            setUsers(updatedUsers);
+            try {
+               localStorage.setItem('next_academy_users', JSON.stringify(updatedUsers));
+            } catch(e) { console.warn("Local storage blocked."); }
+            return null;
           };
 
           // --- Course Handlers ---
@@ -525,7 +547,7 @@
               <div className="flex items-center gap-2 md:gap-4 text-sm font-bold">
                 {/* Dark Mode Toggle */}
                 <button 
-                  onClick={() => setIsDarkMode(!isDarkMode)} 
+                  onClick={toggleDarkMode} 
                   className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition"
                   title="Toggle Dark Mode"
                 >
@@ -594,15 +616,15 @@
             <>
               {/* Mobile Bottom Navigation */}
               <div className="md:hidden fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex justify-around py-3 pb-safe z-40 transition-colors duration-300">
-                <NavButton icon={<Home size={24} />} label="Learn" active={true} />
-                <NavButton icon={<BookOpen size={24} />} label="Practice" active={false} />
-                <NavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} />
-                <NavButton icon={<User size={24} />} label={currentUser?.name || "Profile"} active={false} />
+                <NavButton icon={<Home size={24} />} label="Learn" active={currentView === 'home' || currentView === 'course' || currentView === 'lesson'} onClick={() => setCurrentView('home')} />
+                <NavButton icon={<BookOpen size={24} />} label="Practice" active={false} onClick={() => {}} />
+                <NavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} onClick={() => {}} />
+                <NavButton icon={<User size={24} />} label={currentUser?.name || "Profile"} active={currentView === 'profile'} onClick={() => setCurrentView('profile')} />
               </div>
 
               {/* Desktop Side Navigation */}
               <div className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 px-4 z-40 transition-colors duration-300">
-                <div className="flex items-center gap-2 mb-10 px-2">
+                <div className="flex items-center gap-2 mb-10 px-2 cursor-pointer" onClick={() => setCurrentView('home')}>
                   <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0">
                     N
                   </div>
@@ -612,24 +634,24 @@
                   </div>
                 </div>
                 <nav className="flex flex-col gap-2 flex-1">
-                  <SideNavButton icon={<Home size={24} />} label="Learn" active={true} />
-                  <SideNavButton icon={<BookOpen size={24} />} label="Practice" active={false} />
-                  <SideNavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} />
-                  <SideNavButton icon={<User size={24} />} label="Profile" active={false} />
+                  <SideNavButton icon={<Home size={24} />} label="Learn" active={currentView === 'home' || currentView === 'course' || currentView === 'lesson'} onClick={() => setCurrentView('home')} />
+                  <SideNavButton icon={<BookOpen size={24} />} label="Practice" active={false} onClick={() => {}} />
+                  <SideNavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} onClick={() => {}} />
+                  <SideNavButton icon={<User size={24} />} label="Profile" active={currentView === 'profile'} onClick={() => setCurrentView('profile')} />
                 </nav>
               </div>
             </>
           );
 
-          const NavButton = ({ icon, label, active }) => (
-            <button className={`flex flex-col items-center gap-1 ${active ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}>
+          const NavButton = ({ icon, label, active, onClick }) => (
+            <button onClick={onClick} className={`flex flex-col items-center gap-1 ${active ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}>
               {icon}
               <span className="text-[10px] font-semibold truncate w-16 text-center">{label}</span>
             </button>
           );
 
-          const SideNavButton = ({ icon, label, active }) => (
-            <button className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition ${active ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 font-semibold'}`}>
+          const SideNavButton = ({ icon, label, active, onClick }) => (
+            <button onClick={onClick} className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition ${active ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 font-semibold'}`}>
               {icon}
               <span className="text-base truncate">{label}</span>
             </button>
@@ -637,8 +659,120 @@
 
           // --- VIEWS ---
 
+          const ProfileView = () => {
+            const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+            const [pwForm, setPwForm] = useState({ current: '', new: '', confirm: '' });
+            const [pwError, setPwError] = useState('');
+            const [pwSuccess, setPwSuccess] = useState('');
+
+            const handlePasswordSubmit = (e) => {
+              e.preventDefault();
+              setPwError('');
+              setPwSuccess('');
+
+              if (pwForm.new !== pwForm.confirm) {
+                return setPwError("New passwords don't match.");
+              }
+
+              const err = handleChangePassword(pwForm.current, pwForm.new);
+              if (err) {
+                setPwError(err);
+              } else {
+                setPwSuccess("Password changed successfully!");
+                setTimeout(() => {
+                  setIsPasswordModalOpen(false);
+                  setPwForm({ current: '', new: '', confirm: '' });
+                  setPwSuccess('');
+                }, 1500);
+              }
+            };
+
+            return (
+              <div className="pb-24 pt-6 px-4 md:px-8 max-w-4xl mx-auto animate-fade-in w-full">
+                <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-6">Your Profile</h2>
+                
+                {/* User Stats Card */}
+                <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-8 shadow-sm border border-gray-200 dark:border-gray-700 mb-8 flex flex-col md:flex-row items-center md:items-start gap-6">
+                  <div className="w-24 h-24 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center text-4xl font-black shrink-0">
+                    {currentUser.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{currentUser.name}</h3>
+                    <p className="text-gray-500 dark:text-gray-400 font-medium mb-4">@{currentUser.username}</p>
+                    <div className="flex flex-wrap justify-center md:justify-start gap-4">
+                      <div className="flex items-center gap-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 px-4 py-2 rounded-xl font-bold">
+                        <Flame size={20} /> {currentUser.stats.streak} Day Streak
+                      </div>
+                      <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-xl font-bold">
+                        <Star size={20} /> {currentUser.stats.xp} XP Earned
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <button 
+                      onClick={() => setIsPasswordModalOpen(true)}
+                      className="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold rounded-xl transition-colors text-sm w-full md:w-auto"
+                    >
+                      Change Password
+                    </button>
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">Course Progress</h3>
+                
+                {/* Course Progress List */}
+                <div className="grid gap-4">
+                  {COURSES_DATA.map(course => {
+                    const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
+                    const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => isLessonCompleted(l.id)).length;
+                    const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
+
+                    return (
+                      <div key={course.id} className="bg-white dark:bg-gray-800 p-5 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row items-center gap-4">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${course.color} text-white`}>
+                          {course.icon}
+                        </div>
+                        <div className="flex-1 w-full">
+                          <div className="flex justify-between items-end mb-2">
+                            <span className="font-bold text-gray-800 dark:text-gray-100">{course.title}</span>
+                            <span className="text-sm font-bold text-gray-500 dark:text-gray-400">{completedInCourse} / {totalLessons} Lessons</span>
+                          </div>
+                          <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                            <div className={`h-2 rounded-full ${course.color}`} style={{ width: `${progressPercent}%` }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Password Change Modal Popup */}
+                {isPasswordModalOpen && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white dark:bg-gray-900 rounded-3xl max-w-md w-full p-6 md:p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
+                      <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Change Password</h3>
+                      <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-4">
+                        <input required type="password" placeholder="Current Password" value={pwForm.current} onChange={e => setPwForm({...pwForm, current: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" />
+                        <input required type="password" placeholder="New Password" value={pwForm.new} onChange={e => setPwForm({...pwForm, new: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" />
+                        <input required type="password" placeholder="Confirm New Password" value={pwForm.confirm} onChange={e => setPwForm({...pwForm, confirm: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" />
+                        
+                        {pwError && <p className="text-red-500 text-sm font-bold text-center mt-1">{pwError}</p>}
+                        {pwSuccess && <p className="text-green-500 text-sm font-bold text-center mt-1">{pwSuccess}</p>}
+                        
+                        <div className="flex gap-3 mt-4">
+                          <button type="button" onClick={() => setIsPasswordModalOpen(false)} className="flex-1 py-3 rounded-xl font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Cancel</button>
+                          <button type="submit" className="flex-1 py-3 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors">Update</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          };
+
           const HomeView = () => (
-            <div className="pb-24 pt-4 px-4 md:px-8 max-w-5xl mx-auto">
+            <div className="pb-24 pt-4 px-4 md:px-8 max-w-5xl mx-auto w-full">
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1">Your Courses</h2>
                 <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">Continue your curriculum journey</p>
@@ -654,7 +788,7 @@
                     <div 
                       key={course.id}
                       onClick={() => handleOpenCourse(course.id)}
-                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-5 cursor-pointer hover:shadow-lg transition-all transform hover:-translate-y-1"
+                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-5 cursor-pointer hover:shadow-lg transition-all transform hover:-translate-y-1 flex flex-col"
                     >
                       <div className="flex justify-between items-start mb-4">
                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${course.color}`}>
@@ -665,7 +799,7 @@
                         </span>
                       </div>
                       <h3 className="font-bold text-xl text-gray-800 dark:text-gray-100 mb-2">{course.title}</h3>
-                      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium line-clamp-2">{course.description}</p>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium line-clamp-2 flex-1">{course.description}</p>
                       
                       <div className="mt-6">
                         <div className="flex justify-between text-xs font-bold text-gray-400 mb-2">
@@ -1062,7 +1196,7 @@
           return (
             <div className={`${isDarkMode ? 'dark' : ''}`}>
               {currentView === 'auth' ? (
-                <AuthView onLogin={handleLogin} onRegister={handleRegister} />
+                <AuthView onLogin={handleLogin} onRegister={handleRegister} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
               ) : (
                 <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex font-sans text-gray-800 dark:text-gray-100 transition-colors duration-300">
                   <Navigation />
@@ -1080,6 +1214,13 @@
                       <>
                         <TopBar showBack={true} title={activeCourse?.title} />
                         <CoursePathView />
+                      </>
+                    )}
+                    
+                    {currentView === 'profile' && (
+                      <>
+                        <TopBar title="Profile" />
+                        <ProfileView />
                       </>
                     )}
 
