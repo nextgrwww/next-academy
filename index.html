@@ -1208,7 +1208,9 @@
             useEffect(() => {
               const handleKeyDown = (e) => {
                 if (e.key === 'Enter') {
-                  if (e.target.tagName === 'BUTTON') return; // Prevent double firing if focused on button
+                  // Prevent double firing or unintended actions if focused on non-option buttons
+                  if (e.target.tagName === 'BUTTON' && !e.target.classList.contains('option-btn')) return; 
+
                   if (!disabledRef.current) {
                     e.preventDefault();
                     actionRef.current();
@@ -1241,7 +1243,7 @@
                     return (
                       <button 
                         key={idx} disabled={isSubmitted} onClick={() => setCurrentAnswer(idx)}
-                        className={`text-left font-bold text-lg p-4 rounded-2xl transition-all ${btnStateClass}`}
+                        className={`option-btn text-left font-bold text-lg p-4 rounded-2xl transition-all ${btnStateClass}`}
                       >
                         {opt}
                       </button>
