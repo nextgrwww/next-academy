@@ -65,6 +65,7 @@
         const ChevronDown = (p) => <Icon {...p}><path d="m6 9 6 6 6-6"/></Icon>;
         const ChevronUp = (p) => <Icon {...p}><path d="m18 15-6-6-6 6"/></Icon>;
         const FileText = (p) => <Icon {...p}><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></Icon>;
+        const LogOut = (p) => <Icon {...p}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></Icon>;
 
         // ==========================================
         // COURSE DATA 
@@ -261,19 +262,39 @@
         // MAIN APPLICATION COMPONENT
         // ==========================================
         function App() {
+          // --- USER MANAGEMENT & LOCAL STORAGE ---
+          const loadUsers = () => {
+            try {
+              return JSON.parse(localStorage.getItem('next_academy_users')) || [];
+            } catch (e) {
+              return [];
+            }
+          };
+
+          const loadActiveUser = () => {
+            try {
+              return localStorage.getItem('next_academy_active_user');
+            } catch (e) {
+              return null;
+            }
+          };
+
+          const [users, setUsers] = useState(loadUsers);
+          const [currentUsername, setCurrentUsername] = useState(loadActiveUser);
+          
+          const currentUser = users.find(u => u.username === currentUsername);
+
           // Application State
-          const [currentView, setCurrentView] = useState('home'); // 'home', 'course', 'lesson'
+          const [currentView, setCurrentView] = useState(currentUser ? 'home' : 'auth'); // 'auth', 'home', 'course', 'lesson'
           const [activeCourseId, setActiveCourseId] = useState(null);
           const [activeLesson, setActiveLesson] = useState(null); // { moduleIdx, lessonIdx, data }
           const [isDarkMode, setIsDarkMode] = useState(false);
           const [activePopup, setActivePopup] = useState(null); // 'streak', 'xp', or null
           
-          // User Progress State (Simulated)
-          const [userStats, setUserStats] = useState({
-            xp: 0,
-            streak: 1,
-            completedLessons: [] // Start fresh to show unlocking mechanics
-          });
+          // Auth State
+          const [authTab, setAuthTab] = useState('login');
+          const [authForm, setAuthForm] = useState({ username: '', password: '', name: '' });
+          const [authError, setAuthError] = useState('');
 
           // Derived State
           const activeCourse = COURSES_DATA.find(c => c.id === activeCourseId);
@@ -297,7 +318,57 @@
             }
           }, [isDarkMode]);
 
-          // --- Handlers ---
+          // --- Authentication Handlers ---
+          const handleAuthSubmit = (e) => {
+            e.preventDefault();
+            setAuthError('');
+            
+            if (authTab === 'register') {
+                if (users.some(u => u.username.toLowerCase() === authForm.username.toLowerCase())) {
+                    setAuthError("Username already exists. Please choose another.");
+                    return;
+                }
+                const newUser = {
+                    username: authForm.username,
+                    password: authForm.password,
+                    name: authForm.name || authForm.username,
+                    stats: { xp: 0, streak: 1, completedLessons: [] }
+                };
+                const updatedUsers = [...users, newUser];
+                setUsers(updatedUsers);
+                
+                try {
+                  localStorage.setItem('next_academy_users', JSON.stringify(updatedUsers));
+                  localStorage.setItem('next_academy_active_user', newUser.username);
+                } catch(e) { console.warn("Local storage blocked."); }
+                
+                setCurrentUsername(newUser.username);
+                setCurrentView('home');
+                setAuthForm({ username: '', password: '', name: '' });
+            } else {
+                const user = users.find(u => u.username.toLowerCase() === authForm.username.toLowerCase() && u.password === authForm.password);
+                if (user) {
+                    setCurrentUsername(user.username);
+                    try {
+                      localStorage.setItem('next_academy_active_user', user.username);
+                    } catch(e) { console.warn("Local storage blocked."); }
+                    setCurrentView('home');
+                    setAuthForm({ username: '', password: '', name: '' });
+                } else {
+                    setAuthError("Invalid username or password.");
+                }
+            }
+          };
+
+          const handleLogout = () => {
+            setCurrentUsername(null);
+            try {
+              localStorage.removeItem('next_academy_active_user');
+            } catch(e) { console.warn("Local storage blocked."); }
+            setCurrentView('auth');
+          };
+
+          // --- Course Handlers ---
           const handleOpenCourse = (courseId) => {
             setActiveCourseId(courseId);
             setCurrentView('course');
@@ -309,19 +380,32 @@
           };
 
           const handleCompleteLesson = (lessonId, xpEarned) => {
-            setUserStats(prev => ({
-              ...prev,
-              xp: prev.xp + xpEarned,
-              completedLessons: prev.completedLessons.includes(lessonId) 
-                ? prev.completedLessons 
-                : [...prev.completedLessons, lessonId]
-            }));
+            if (!currentUser) return;
+            
+            const updatedUser = {
+                ...currentUser,
+                stats: {
+                    ...currentUser.stats,
+                    xp: currentUser.stats.xp + xpEarned,
+                    completedLessons: currentUser.stats.completedLessons.includes(lessonId) 
+                        ? currentUser.stats.completedLessons 
+                        : [...currentUser.stats.completedLessons, lessonId]
+                }
+            };
+            
+            const updatedUsers = users.map(u => u.username === updatedUser.username ? updatedUser : u);
+            setUsers(updatedUsers);
+            
+            try {
+               localStorage.setItem('next_academy_users', JSON.stringify(updatedUsers));
+            } catch(e) { console.warn("Local storage blocked"); }
+
             setCurrentView('course');
             setActiveLesson(null);
           };
 
-          // Progression Checks
-          const isLessonCompleted = (lessonId) => userStats.completedLessons.includes(lessonId);
+          // Progression Checks (tied to currentUser)
+          const isLessonCompleted = (lessonId) => currentUser?.stats?.completedLessons.includes(lessonId) || false;
           const isModuleCompleted = (module) => module.lessons.every(l => isLessonCompleted(l.id));
           const isModuleUnlocked = (mIdx) => {
             if (mIdx === 0) return true;
@@ -332,9 +416,83 @@
             return isLessonCompleted(activeCourse.modules[mIdx].lessons[lIdx - 1].id);
           };
 
+
           // ==========================================
-          // SUB-COMPONENTS
+          // SUB-COMPONENTS & VIEWS
           // ==========================================
+
+          const AuthView = () => (
+            <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex flex-col items-center justify-center p-4 transition-colors duration-300">
+              <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 animate-fade-in">
+                
+                {/* Hero / Motivational Section */}
+                <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-center text-white relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMSIgZmlsbD0id2hpdGUiLz48L3N2Zz4=')]"></div>
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 rounded-2xl bg-white text-blue-600 flex items-center justify-center font-black text-4xl mx-auto mb-4 shadow-lg shadow-black/20">N</div>
+                    <h1 className="text-3xl font-extrabold mb-2 tracking-tight">Next Academy</h1>
+                    <p className="opacity-90 font-medium text-sm leading-relaxed">
+                      Unlock your potential. Master your GCSE and A-Level curriculum with interactive, bite-sized lessons designed for rapid learning.
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Auth Form Section */}
+                <div className="p-6 md:p-8">
+                  <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-xl mb-6">
+                    <button onClick={() => { setAuthTab('login'); setAuthError(''); }} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${authTab === 'login' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>Sign In</button>
+                    <button onClick={() => { setAuthTab('register'); setAuthError(''); }} className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all ${authTab === 'register' ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}>Create Account</button>
+                  </div>
+                  
+                  <form onSubmit={handleAuthSubmit} className="flex flex-col gap-4">
+                    {authTab === 'register' && (
+                      <div className="relative">
+                        <Icon name="User" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                        <input 
+                          required 
+                          type="text" 
+                          placeholder="Display Name" 
+                          className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
+                          value={authForm.name} 
+                          onChange={(e) => setAuthForm({...authForm, name: e.target.value})} 
+                        />
+                      </div>
+                    )}
+                    
+                    <div className="relative">
+                      <Icon name="User" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                      <input 
+                        required 
+                        type="text" 
+                        placeholder="Username" 
+                        className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
+                        value={authForm.username} 
+                        onChange={(e) => setAuthForm({...authForm, username: e.target.value})} 
+                      />
+                    </div>
+                    
+                    <div className="relative">
+                      <Icon name="Lock" className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                      <input 
+                        required 
+                        type="password" 
+                        placeholder="Password" 
+                        className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none focus:border-blue-500 dark:focus:border-blue-500 transition-colors text-gray-800 dark:text-gray-200" 
+                        value={authForm.password} 
+                        onChange={(e) => setAuthForm({...authForm, password: e.target.value})} 
+                      />
+                    </div>
+                    
+                    {authError && <p className="text-red-500 dark:text-red-400 text-sm font-bold text-center mt-1">{authError}</p>}
+                    
+                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition-colors mt-2 shadow-md shadow-blue-500/20 active:translate-y-0.5">
+                      {authTab === 'login' ? 'Start Learning' : 'Join Next Academy'}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          );
 
           const TopBar = ({ showBack, title }) => (
             <div className="sticky top-0 z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center justify-between transition-colors duration-300">
@@ -358,6 +516,15 @@
                   {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
 
+                {/* Logout Button */}
+                <button 
+                  onClick={handleLogout} 
+                  className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition"
+                  title="Log Out"
+                >
+                  <LogOut size={20} />
+                </button>
+
                 {/* Streak Counter with hover title and click popup */}
                 <div className="relative">
                   <button 
@@ -366,7 +533,7 @@
                     title="Streak"
                   >
                     <Flame size={20} fill="currentColor" />
-                    <span>{userStats.streak}</span>
+                    <span>{currentUser?.stats?.streak || 0}</span>
                   </button>
                   
                   {activePopup === 'streak' && (
@@ -389,7 +556,7 @@
                     title="Experience Points (XP)"
                   >
                     <Star size={20} fill="currentColor" />
-                    <span>{userStats.xp}</span>
+                    <span>{currentUser?.stats?.xp || 0}</span>
                   </button>
                   
                   {activePopup === 'xp' && (
@@ -414,16 +581,19 @@
                 <NavButton icon={<Home size={24} />} label="Learn" active={true} />
                 <NavButton icon={<BookOpen size={24} />} label="Practice" active={false} />
                 <NavButton icon={<Trophy size={24} />} label="Leaderboard" active={false} />
-                <NavButton icon={<User size={24} />} label="Profile" active={false} />
+                <NavButton icon={<User size={24} />} label={currentUser?.name || "Profile"} active={false} />
               </div>
 
               {/* Desktop Side Navigation */}
               <div className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 py-6 px-4 z-40 transition-colors duration-300">
                 <div className="flex items-center gap-2 mb-10 px-2">
-                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xl shrink-0">
                     N
                   </div>
-                  <h1 className="font-bold text-2xl tracking-tight text-gray-800 dark:text-gray-100">Next Academy</h1>
+                  <div className="overflow-hidden">
+                    <h1 className="font-bold text-xl tracking-tight text-gray-800 dark:text-gray-100 truncate">Next Academy</h1>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Hi, {currentUser?.name}</p>
+                  </div>
                 </div>
                 <nav className="flex flex-col gap-2 flex-1">
                   <SideNavButton icon={<Home size={24} />} label="Learn" active={true} />
@@ -438,14 +608,14 @@
           const NavButton = ({ icon, label, active }) => (
             <button className={`flex flex-col items-center gap-1 ${active ? 'text-blue-600 dark:text-blue-500' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}>
               {icon}
-              <span className="text-[10px] font-semibold">{label}</span>
+              <span className="text-[10px] font-semibold truncate w-16 text-center">{label}</span>
             </button>
           );
 
           const SideNavButton = ({ icon, label, active }) => (
             <button className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition ${active ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 font-semibold'}`}>
               {icon}
-              <span className="text-base">{label}</span>
+              <span className="text-base truncate">{label}</span>
             </button>
           );
 
@@ -461,7 +631,7 @@
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {COURSES_DATA.map((course) => {
                   const totalLessons = course.modules.reduce((acc, m) => acc + m.lessons.length, 0);
-                  const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => userStats.completedLessons.includes(l.id)).length;
+                  const completedInCourse = course.modules.flatMap(m => m.lessons).filter(l => isLessonCompleted(l.id)).length;
                   const progressPercent = totalLessons === 0 ? 0 : Math.round((completedInCourse / totalLessons) * 100);
 
                   return (
@@ -875,28 +1045,32 @@
           // ==========================================
           return (
             <div className={`${isDarkMode ? 'dark' : ''}`}>
-              <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex font-sans text-gray-800 dark:text-gray-100 transition-colors duration-300">
-                <Navigation />
-                
-                {/* Main Content Area */}
-                <main className="flex-1 md:ml-64 flex flex-col min-h-screen relative">
-                  {currentView === 'home' && (
-                    <>
-                      <TopBar />
-                      <HomeView />
-                    </>
-                  )}
+              {currentView === 'auth' ? (
+                <AuthView />
+              ) : (
+                <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex font-sans text-gray-800 dark:text-gray-100 transition-colors duration-300">
+                  <Navigation />
                   
-                  {currentView === 'course' && (
-                    <>
-                      <TopBar showBack={true} title={activeCourse?.title} />
-                      <CoursePathView />
-                    </>
-                  )}
+                  {/* Main Content Area */}
+                  <main className="flex-1 md:ml-64 flex flex-col min-h-screen relative">
+                    {currentView === 'home' && (
+                      <>
+                        <TopBar />
+                        <HomeView />
+                      </>
+                    )}
+                    
+                    {currentView === 'course' && (
+                      <>
+                        <TopBar showBack={true} title={activeCourse?.title} />
+                        <CoursePathView />
+                      </>
+                    )}
 
-                  {currentView === 'lesson' && <LessonInteractiveView />}
-                </main>
-              </div>
+                    {currentView === 'lesson' && <LessonInteractiveView />}
+                  </main>
+                </div>
+              )}
             </div>
           );
         }
