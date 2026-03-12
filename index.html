@@ -1264,15 +1264,16 @@
             if (currentStep.type === 'quiz') {
               isCorrect = currentAnswer === currentStep.correctOption;
             } else if (currentStep.type === 'fill_blank') {
-              isCorrect = currentAnswer?.trim().toLowerCase() === currentStep.correctAnswer.toLowerCase();
+              isCorrect = typeof currentAnswer === 'string' && currentAnswer.trim().toLowerCase() === String(currentStep.correctAnswer).toLowerCase();
             } else if (currentStep.type === 'rearrange') {
-              isCorrect = JSON.stringify(currentAnswer) === JSON.stringify(currentStep.correctOrder);
+              isCorrect = Array.isArray(currentAnswer) && JSON.stringify(currentAnswer) === JSON.stringify(currentStep.correctOrder);
             }
 
             const isActionDisabled = () => {
               if (currentStep.type === 'theory' || isSubmitted) return false;
               if (currentStep.type === 'quiz' && currentAnswer === null) return true;
-              if (currentStep.type === 'fill_blank' && (!currentAnswer || currentAnswer.trim() === '')) return true;
+              if (currentStep.type === 'fill_blank' && (typeof currentAnswer !== 'string' || currentAnswer.trim() === '')) return true;
+              if (currentStep.type === 'rearrange' && !Array.isArray(currentAnswer)) return true;
               return false;
             };
 
@@ -1372,7 +1373,7 @@
                   <input
                     type="text"
                     disabled={isSubmitted}
-                    value={currentAnswer || ''}
+                    value={typeof currentAnswer === 'string' ? currentAnswer : ''}
                     onChange={(e) => setCurrentAnswer(e.target.value)}
                     className={`w-32 border-b-4 outline-none text-center bg-transparent transition-colors pb-1 text-gray-800 dark:text-white
                       ${isSubmitted && isCorrect ? 'border-green-500 text-green-600 dark:text-green-400' :
@@ -1394,7 +1395,7 @@
                   onMouseLeave={() => setDragOverIdx(null)}
                   onTouchCancel={() => { setDraggedIdx(null); setDragOverIdx(null); }}
                 >
-                  {currentAnswer?.map((item, idx) => {
+                  {Array.isArray(currentAnswer) && currentAnswer.map((item, idx) => {
                     let itemClass = "bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300";
                     
                     if (isSubmitted) {
