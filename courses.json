@@ -1,59 +1,5 @@
 [
   {
-    "id": "gcse-geography",
-    "level": "GCSE",
-    "title": "Geography",
-    "description": "Explore physical landscapes and human environmental challenges.",
-    "color": "bg-orange-500",
-    "textColor": "text-orange-500",
-    "lightBg": "bg-orange-50",
-    "iconName": "BookOpen",
-    "modules": [
-      {
-        "id": "geo_m1",
-        "title": "The Living World",
-        "lessons": [
-          {
-            "id": "geo_l1",
-            "title": "Ecosystems",
-            "steps": [
-              {
-                "type": "theory",
-                "content": "An ecosystem is a community of living organisms in conjunction with the nonliving components of their environment."
-              },
-              {
-                "type": "quiz",
-                "question": "Which of these is a 'biotic' component of an ecosystem?",
-                "options": ["Rocks", "Bacteria", "Sunlight", "Water"],
-                "correctOption": 1
-              }
-            ]
-          },
-          {
-            "id": "geo_m1_quiz",
-            "title": "Module 1 Quiz",
-            "isModuleQuiz": true,
-            "steps": [
-              {
-                "type": "fill_blank",
-                "question": "What is the primary source of energy for most ecosystems?",
-                "textBefore": "The",
-                "textAfter": "",
-                "correctAnswer": "Sun"
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange the food chain in the correct order (Bottom to Top):",
-                "items": ["Secondary Consumer", "Primary Consumer", "Producer", "Apex Predator"],
-                "correctOrder": ["Producer", "Primary Consumer", "Secondary Consumer", "Apex Predator"]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }, 
-  {
     "id": "alevel-physics-mechanics",
     "level": "A-Level",
     "title": "Physics: Mechanics",
@@ -183,6 +129,1656 @@
                 "question": "Work done is defined as Force multiplied by:",
                 "options": ["Time", "Velocity", "Distance moved in direction of force", "Acceleration"],
                 "correctOption": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gcse-geography",
+    "level": "GCSE",
+    "title": "Geography",
+    "description": "Explore physical landscapes and human environmental challenges.",
+    "color": "bg-orange-500",
+    "textColor": "text-orange-500",
+    "lightBg": "bg-orange-50",
+    "iconName": "BookOpen",
+    "modules": [
+      {
+        "id": "geo_m1",
+        "title": "The Living World",
+        "lessons": [
+          {
+            "id": "geo_l1",
+            "title": "Ecosystems",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "An ecosystem is a community of living organisms in conjunction with the nonliving components of their environment."
+              },
+              {
+                "type": "quiz",
+                "question": "Which of these is a 'biotic' component of an ecosystem?",
+                "options": ["Rocks", "Bacteria", "Sunlight", "Water"],
+                "correctOption": 1
+              }
+            ]
+          },
+          {
+            "id": "geo_m1_quiz",
+            "title": "Module 1 Quiz",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "fill_blank",
+                "question": "What is the primary source of energy for most ecosystems?",
+                "textBefore": "The",
+                "textAfter": "",
+                "correctAnswer": "Sun"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the food chain in the correct order (Bottom to Top):",
+                "items": ["Secondary Consumer", "Primary Consumer", "Producer", "Apex Predator"],
+                "correctOrder": ["Producer", "Primary Consumer", "Secondary Consumer", "Apex Predator"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gcse-computer-science-j277",
+    "level": "GCSE",
+    "title": "Computer Science",
+    "description": "An in-depth study of computer systems, computational thinking, algorithms, and programming based on the Cambridge OCR GCSE specification.",
+    "color": "bg-blue-600",
+    "textColor": "text-blue-600",
+    "lightBg": "bg-blue-50",
+    "iconName": "Cpu",
+    "modules": [
+      {
+        "id": "cs_m1",
+        "title": "Systems Architecture",
+        "lessons": [
+          {
+            "id": "cs_l1_1",
+            "title": "Architecture of the CPU",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**The Purpose of the CPU**\n\nThe Central Processing Unit (CPU) is the brain of the computer. Its purpose is to execute instructions by following the **fetch-execute cycle**:\n\n- **Fetch**: Get an instruction from memory (RAM)\n- **Decode**: Work out what the instruction means\n- **Execute**: Carry out the instruction\n\n**Common CPU Components:**\n\n- **ALU (Arithmetic Logic Unit)**: Performs arithmetic calculations (+, -, ×, ÷) and logical operations (AND, OR, NOT)\n- **CU (Control Unit)**: Controls and coordinates the activities of the CPU. It manages the flow of data and instructions\n- **Cache**: Very fast, small memory inside the CPU that stores frequently used data and instructions\n- **Registers**: Small, fast temporary storage locations within the CPU"
+              },
+              {
+                "type": "quiz",
+                "question": "What are the three stages of the fetch-execute cycle in order?",
+                "options": [
+                  "Execute, Fetch, Decode",
+                  "Decode, Execute, Fetch",
+                  "Fetch, Decode, Execute",
+                  "Fetch, Execute, Decode"
+                ],
+                "correctOption": 2,
+                "explanation": "The correct order is: Fetch → Decode → Execute. First, the CPU fetches the instruction from memory, then decodes it to understand what to do, and finally executes it."
+              },
+              {
+                "type": "theory",
+                "content": "**Von Neumann Architecture**\n\nNamed after mathematician John von Neumann, this architecture describes a system where both **data and instructions** are stored in the same memory. Key registers include:\n\n- **MAR (Memory Address Register)**: Stores the address in memory where data or an instruction is to be read from or written to\n- **MDR (Memory Data Register)**: Stores the actual data or instruction that has just been fetched from memory or is about to be written to memory\n- **Program Counter**: Holds the memory address of the next instruction to be executed\n- **Accumulator**: Stores the results of calculations performed by the ALU\n\n**Key Difference**: The MAR stores an **address** (a location), while the MDR stores **data or an instruction** (the actual content)."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Which register stores the address of the next instruction to be executed?",
+                "textBefore": "The",
+                "textAfter": "holds the address of the next instruction.",
+                "correctAnswer": "Program Counter",
+                "explanation": "The Program Counter (PC) keeps track of where the CPU is in its program sequence by storing the memory address of the next instruction."
+              },
+              {
+                "type": "theory",
+                "content": "**CPU Performance**\n\nThree main characteristics affect CPU performance:\n\n**1. Clock Speed**\n- Measured in Hertz (Hz) – billions of cycles per second (GHz)\n- Higher clock speed = more instructions executed per second = faster performance\n\n**2. Cache Size**\n- More cache means more frequently used data can be stored close to the CPU\n- Larger cache reduces the need to fetch data from slower main memory (RAM)\n- Increases processing speed\n\n**3. Number of Cores**\n- Each core can process instructions independently\n- More cores allow the CPU to execute multiple tasks simultaneously (parallel processing)\n- The operating system must be designed to use multiple cores effectively\n\n**Combined Effect**: These factors work together. For example, doubling the clock speed might give better performance than adding one more core, depending on the task."
+              },
+              {
+                "type": "quiz",
+                "question": "Which of the following would MOST significantly improve performance for multitasking (running many applications at once)?",
+                "options": [
+                  "Increasing clock speed from 2.4GHz to 3.0GHz",
+                  "Adding more cores to the CPU",
+                  "Increasing the size of the hard drive",
+                  "Adding more RAM only"
+                ],
+                "correctOption": 1,
+                "explanation": "While RAM helps, for multitasking specifically, more cores allow the CPU to work on different applications simultaneously. Clock speed helps each task run faster, but cores enable true parallel processing of multiple tasks."
+              },
+              {
+                "type": "theory",
+                "content": "**Embedded Systems**\n\nAn **embedded system** is a computer system built into another device to perform a specific dedicated function. Unlike general-purpose computers (like PCs), they run a single program repeatedly.\n\n**Characteristics:**\n- Designed for one specific task\n- Limited user interface (sometimes no interface at all)\n- Low power consumption\n- Low cost to manufacture\n- Often use a simple processor with limited resources\n\n**Examples:**\n- Washing machines and microwaves\n- Digital watches\n- Car engine management systems\n- Traffic lights\n- Medical devices (pacemakers)\n- TV remote controls\n- Smart home devices (thermostats)"
+              },
+              {
+                "type": "quiz",
+                "question": "Which of the following is an example of an embedded system?",
+                "options": [
+                  "A desktop PC running Windows",
+                  "A laptop computer",
+                  "A smart TV's main processor",
+                  "A digital alarm clock"
+                ],
+                "correctOption": 3,
+                "explanation": "A digital alarm clock is a classic embedded system – it's designed to do one specific job (tell time and sound an alarm) with minimal user interaction. A desktop PC, laptop, and smart TV processor are general-purpose systems that can run many different programs."
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_quiz",
+            "title": "Module 1 Review Quiz: Systems Architecture",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which component performs calculations and logical operations?",
+                "options": ["Control Unit", "Cache", "ALU", "MAR"],
+                "correctOption": 2,
+                "explanation": "The Arithmetic Logic Unit (ALU) handles all mathematical calculations and logical comparisons."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The register that stores data fetched from memory is called the Memory ____ Register.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Data",
+                "explanation": "The MDR (Memory Data Register) holds the actual data or instruction that has been fetched."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the difference between MAR and MDR?",
+                "options": [
+                  "MAR stores data, MDR stores addresses",
+                  "MAR stores addresses, MDR stores data/instructions",
+                  "They are different names for the same register",
+                  "MAR is in the ALU, MDR is in the cache"
+                ],
+                "correctOption": 1,
+                "explanation": "The MAR (Memory Address Register) holds memory addresses. The MDR (Memory Data Register) holds the actual data or instructions."
+              },
+              {
+                "type": "quiz",
+                "question": "Which characteristic of a CPU would most help a video editing program that needs to process large amounts of data quickly?",
+                "options": [
+                  "Having a large hard drive",
+                  "High clock speed",
+                  "Having a DVD drive",
+                  "More USB ports"
+                ],
+                "correctOption": 1,
+                "explanation": "High clock speed means the CPU can process instructions faster, which is crucial for demanding tasks like video editing."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the fetch-execute cycle in the correct order:",
+                "items": [
+                  "Execute the instruction",
+                  "Decode the instruction",
+                  "Fetch instruction from memory"
+                ],
+                "correctOrder": [
+                  "Fetch instruction from memory",
+                  "Decode the instruction",
+                  "Execute the instruction"
+                ],
+                "explanation": "The correct order is always Fetch → Decode → Execute."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is a typical characteristic of an embedded system?",
+                "options": [
+                  "Runs multiple applications simultaneously",
+                  "Has a powerful general-purpose processor",
+                  "Designed for a single dedicated function",
+                  "Requires frequent user updates"
+                ],
+                "correctOption": 2,
+                "explanation": "Embedded systems are designed to perform one specific task, unlike general-purpose computers that run many different programs."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The type of memory inside the CPU that stores frequently used data for quick access is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "cache",
+                "explanation": "Cache is fast memory inside the CPU that holds frequently used instructions and data to speed up processing."
+              },
+              {
+                "type": "quiz",
+                "question": "If you double the number of cores in a CPU, what is the guaranteed result?",
+                "options": [
+                  "Processing speed doubles",
+                  "Power consumption halves",
+                  "The CPU can potentially handle more tasks simultaneously",
+                  "Clock speed doubles"
+                ],
+                "correctOption": 2,
+                "explanation": "More cores mean the CPU can potentially execute more tasks in parallel. However, performance gain depends on software being designed for multi-core processing."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cs_m2",
+        "title": "Memory and Storage",
+        "lessons": [
+          {
+            "id": "cs_l2_1",
+            "title": "Primary Storage (Memory)",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Primary Storage (Memory)**\n\nPrimary storage is directly accessible by the CPU. It holds data and instructions that the computer is currently using.\n\n**RAM (Random Access Memory)**\n- **Volatile**: Contents are lost when power is off\n- **Read/Write**: Can be both read from and written to\n- Stores the operating system, applications, and data currently in use\n- More RAM allows more programs to run simultaneously\n\n**ROM (Read-Only Memory)**\n- **Non-volatile**: Contents are preserved when power is off\n- **Read-Only**: Cannot be written to (under normal operation)\n- Stores the **bootloader** (firmware) – instructions to start the computer\n- Performs POST (Power-On Self-Test) and hands control to the operating system\n\n**Cache**\n- Very fast, small memory inside the CPU\n- Stores frequently accessed data and instructions\n- Levels: L1 (fastest, smallest), L2, L3 (slower, larger)"
+              },
+              {
+                "type": "quiz",
+                "question": "Why does a computer need both RAM and ROM?",
+                "options": [
+                  "ROM is for storage, RAM is for processing",
+                  "ROM stores permanent boot instructions, RAM stores currently running programs and data",
+                  "RAM is faster than ROM for everything",
+                  "ROM is for the hard drive, RAM is for the CPU"
+                ],
+                "correctOption": 1,
+                "explanation": "ROM provides the essential startup instructions that must not be lost when power is off. RAM provides workspace for active programs and data, which can be changed but is temporary."
+              },
+              {
+                "type": "theory",
+                "content": "**Virtual Memory**\n\nWhen RAM becomes full, the operating system uses **virtual memory** to free up space.\n\n**How it works:**\n1. The OS identifies data in RAM that hasn't been used recently\n2. This data is moved to a reserved space on the hard drive (called the page file or swap file)\n3. This frees up RAM for currently active programs\n4. If the moved data is needed again, it's swapped back into RAM\n\n**Consequences:**\n- Using virtual memory is much **slower** than using RAM because hard drives are significantly slower\n- Excessive use of virtual memory (thrashing) severely slows down the computer\n- Virtual memory allows programs to run even when RAM is full, preventing crashes"
+              },
+              {
+                "type": "quiz",
+                "question": "What happens when a computer runs out of RAM and needs to use virtual memory?",
+                "options": [
+                  "The computer shuts down to prevent damage",
+                  "Performance increases because the hard drive is faster",
+                  "Performance decreases because hard drives are slower than RAM",
+                  "Programs automatically close"
+                ],
+                "correctOption": 2,
+                "explanation": "Virtual memory uses hard drive space as 'fake RAM'. Hard drives are much slower than RAM, so the computer's performance drops significantly."
+              },
+              {
+                "type": "theory",
+                "content": "**Secondary Storage**\n\nSecondary storage holds data permanently (non-volatile) even when the computer is off.\n\n**Three Main Types:**\n\n**1. Magnetic Storage**\n- Examples: Hard Disk Drives (HDD), magnetic tape\n- How it works: Magnetised spots on a spinning platter\n- Advantages: Large capacity, low cost per GB\n- Disadvantages: Moving parts (slower, less durable), susceptible to magnets\n\n**2. Optical Storage**\n- Examples: CD, DVD, Blu-ray\n- How it works: Pits and lands read by a laser\n- Advantages: Cheap, portable, durable against magnets\n- Disadvantages: Limited capacity, slow, easily scratched\n\n**3. Solid State Storage**\n- Examples: SSD (Solid State Drive), USB flash drives, memory cards\n- How it works: Flash memory with no moving parts\n- Advantages: Very fast, durable (no moving parts), low power\n- Disadvantages: More expensive per GB, limited write cycles"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these storage types from fastest to slowest access speed:",
+                "items": [
+                  "Solid State Drive (SSD)",
+                  "Optical Disc (DVD)",
+                  "Hard Disk Drive (HDD)"
+                ],
+                "correctOrder": [
+                  "Solid State Drive (SSD)",
+                  "Hard Disk Drive (HDD)",
+                  "Optical Disc (DVD)"
+                ],
+                "explanation": "SSDs are fastest (no moving parts). HDDs are next (spinning platters but direct access). Optical discs are slowest (laser must move to correct position)."
+              },
+              {
+                "type": "quiz",
+                "question": "A game developer needs to distribute a 50GB game on physical media. Which storage type is most suitable?",
+                "options": [
+                  "USB Flash Drive (Solid State)",
+                  "Blu-ray Disc (Optical)",
+                  "External HDD (Magnetic)",
+                  "SD Card (Solid State)"
+                ],
+                "correctOption": 1,
+                "explanation": "Blu-ray discs can hold up to 50GB (dual-layer), are cheap to mass produce, and are the standard distribution format for physical game media."
+              },
+              {
+                "type": "theory",
+                "content": "**Data Storage Units**\n\nComputers store everything in **binary** (1s and 0s). A single binary digit is a **bit**.\n\n**Units of Storage:**\n- 1 bit = Smallest unit (0 or 1)\n- 1 nibble = 4 bits\n- 1 byte = 8 bits (stores one character)\n- 1 Kilobyte (KB) = 1,000 bytes\n- 1 Megabyte (MB) = 1,000 KB\n- 1 Gigabyte (GB) = 1,000 MB\n- 1 Terabyte (TB) = 1,000 GB\n- 1 Petabyte (PB) = 1,000 TB\n\n**Calculating File Sizes:**\n- **Text file**: Number of characters × bits per character\n- **Image file**: Image height (px) × Image width (px) × Colour depth (bits)\n- **Sound file**: Sample rate (Hz) × Duration (seconds) × Bit depth (bits)"
+              },
+              {
+                "type": "fill_blank",
+                "question": "How many bytes are in 3 Kilobytes?",
+                "textBefore": "",
+                "textAfter": "bytes",
+                "correctAnswer": "3000",
+                "explanation": "1 KB = 1000 bytes, so 3 KB = 3 × 1000 = 3000 bytes."
+              },
+              {
+                "type": "quiz",
+                "question": "A 10-second audio clip has a sample rate of 1000 Hz and a bit depth of 16 bits. What is the file size in bits?",
+                "options": [
+                  "16,000 bits",
+                  "160,000 bits",
+                  "1,600 bits",
+                  "10,000 bits"
+                ],
+                "correctOption": 1,
+                "explanation": "Formula: sample rate × duration × bit depth = 1000 × 10 × 16 = 160,000 bits."
+              },
+              {
+                "type": "theory",
+                "content": "**Number Representation**\n\n**Binary to Denary (Decimal) Conversion:**\nEach binary digit (bit) represents a power of 2.\n\nBinary: 1 0 1 1\nPowers:  8 4 2 1\nValue:   8+0+2+1 = 11\n\n**Denary to Binary:**\nDivide the number by 2 repeatedly, reading remainders backwards.\n\nExample: Convert 13 to binary:\n13 ÷ 2 = 6 remainder 1\n6 ÷ 2 = 3 remainder 0\n3 ÷ 2 = 1 remainder 1\n1 ÷ 2 = 0 remainder 1\nReading backwards: 1101\n\n**Binary Addition:**\nAdd binary numbers column by column, carrying over when a column exceeds 1.\n\nExample: 101 + 011 = 1000\n(5 + 3 = 8)\n\n**Overflow Error:**\nOccurs when the result of an addition exceeds the available bits. For 8 bits, 11111111 (255) + 1 = overflow."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Convert the binary number 1101 to denary (decimal).",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "13",
+                "explanation": "1101 = (1×8) + (1×4) + (0×2) + (1×1) = 8 + 4 + 0 + 1 = 13"
+              },
+              {
+                "type": "quiz",
+                "question": "What is the result of adding binary 0111 (7) and 1010 (10) in 4 bits?",
+                "options": [
+                  "10001 (17)",
+                  "0001 with overflow (1 with overflow)",
+                  "1111 (15)",
+                  "Overflow error occurs"
+                ],
+                "correctOption": 3,
+                "explanation": "0111 + 1010 = 10001, which is 5 bits. Since we're limited to 4 bits, the fifth bit is lost (overflow), leaving 0001 (1). An overflow error occurs."
+              },
+              {
+                "type": "theory",
+                "content": "**Hexadecimal**\n\nHexadecimal (hex) is base-16, using digits 0-9 and letters A-F (A=10, B=11, C=12, D=13, E=14, F=15).\n\n**Why use hex?**\n- More compact than binary (one hex digit = 4 bits)\n- Easier for humans to read and remember\n- Used in memory addresses, colour codes, MAC addresses\n\n**Binary to Hex:**\nGroup binary into groups of 4 bits (from right), convert each group.\n\nExample: 11010110 → 1101 0110 → D 6 → D6\n\n**Hex to Denary:**\nMultiply each digit by its place value (16ⁿ).\n\nExample: 3F → (3×16) + (15×1) = 48 + 15 = 63\n\n**Denary to Hex:**\nDivide by 16 repeatedly, reading remainders backwards.\n\nExample: 45 → 45÷16=2 remainder 13 (D) → 2D"
+              },
+              {
+                "type": "quiz",
+                "question": "Convert the binary number 11110000 to hexadecimal.",
+                "options": [
+                  "F0",
+                  "0F",
+                  "FF",
+                  "240"
+                ],
+                "correctOption": 0,
+                "explanation": "1111 0000 grouped as 4 bits. 1111 = F, 0000 = 0. So the answer is F0."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Convert the hexadecimal number 2A to denary (decimal).",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "42",
+                "explanation": "2A = (2×16) + (10×1) = 32 + 10 = 42"
+              },
+              {
+                "type": "theory",
+                "content": "**Characters, Images, and Sound**\n\n**Characters:**\n- Each character is stored as a binary code\n- **ASCII**: 7 or 8 bits per character, 128-256 characters\n- **Unicode**: Up to 32 bits, supports all world languages and emojis\n- Character sets are ordered (e.g., 'B' is one more than 'A')\n\n**Images:**\n- Made of **pixels** (picture elements)\n- Each pixel has a colour, represented by binary\n- **Colour depth**: Bits per pixel (e.g., 24-bit = 16.7 million colours)\n- **Resolution**: Width × height in pixels\n- **Metadata**: Additional data about the image (dimensions, date taken, camera settings)\n- Higher colour depth/resolution = better quality but larger file\n\n**Sound:**\n- Analogue sound waves are **sampled** at regular intervals\n- **Sample rate**: Number of samples per second (Hz) – higher rate = better quality\n- **Bit depth**: Bits per sample – more bits = more precise volume levels\n- Higher sample rate/bit depth = better quality but larger file"
+              },
+              {
+                "type": "quiz",
+                "question": "Why is Unicode preferred over ASCII for modern applications?",
+                "options": [
+                  "Unicode files are smaller",
+                  "Unicode is faster to process",
+                  "Unicode can represent characters from all world languages",
+                  "Unicode uses less bits per character"
+                ],
+                "correctOption": 2,
+                "explanation": "ASCII only supports English and basic symbols (128-256 characters). Unicode supports over 143,000 characters including all world languages and emojis."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these steps to calculate an image file size in the correct order:",
+                "items": [
+                  "Multiply width × height to get total pixels",
+                  "Multiply total pixels × colour depth",
+                  "Identify image width and height in pixels",
+                  "Identify colour depth in bits"
+                ],
+                "correctOrder": [
+                  "Identify image width and height in pixels",
+                  "Multiply width × height to get total pixels",
+                  "Identify colour depth in bits",
+                  "Multiply total pixels × colour depth"
+                ],
+                "explanation": "First find dimensions, calculate total pixels, identify colour depth, then multiply pixels × colour depth."
+              },
+              {
+                "type": "theory",
+                "content": "**Data Compression**\n\n**Why compress?**\n- Save storage space\n- Reduce file transfer time (upload/download)\n- Reduce bandwidth usage\n\n**Lossy Compression**\n- Permanently removes some data (irreversible)\n- Reduces file size significantly\n- Quality degrades, but often not noticeable\n- Used for: images (JPEG), music (MP3), video (MP4)\n\n**Lossless Compression**\n- Reduces file size without losing any data\n- Original data can be perfectly reconstructed\n- Less size reduction than lossy\n- Used for: text documents (ZIP), executable programs, spreadsheets\n\n**Examples:**\n- Lossy: Compressing a photo from 5MB to 500KB – some detail lost\n- Lossless: Zipping a Word document – all text preserved exactly"
+              },
+              {
+                "type": "quiz",
+                "question": "Which type of compression should be used for a medical image where every detail must be preserved exactly?",
+                "options": [
+                  "Lossy compression",
+                  "Lossless compression",
+                  "Either lossy or lossless",
+                  "No compression needed"
+                ],
+                "correctOption": 1,
+                "explanation": "Lossless compression must be used for medical images because any loss of data could hide important diagnostic details. The original must be perfectly recoverable."
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_quiz",
+            "title": "Module 2 Review Quiz: Memory and Storage",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which statement about RAM is TRUE?",
+                "options": [
+                  "RAM is non-volatile and stores the bootloader",
+                  "RAM is volatile and stores currently running programs",
+                  "RAM is read-only and stores firmware",
+                  "RAM is a type of secondary storage"
+                ],
+                "correctOption": 1,
+                "explanation": "RAM is volatile (loses data when power off) and holds the operating system, applications, and data currently in use."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The process of moving data from RAM to the hard drive when RAM is full is called ____ memory.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "virtual",
+                "explanation": "Virtual memory uses hard drive space as an extension of RAM when the physical RAM becomes full."
+              },
+              {
+                "type": "quiz",
+                "question": "Which storage type has no moving parts and is fastest?",
+                "options": [
+                  "Hard Disk Drive (Magnetic)",
+                  "Solid State Drive (SSD)",
+                  "DVD (Optical)",
+                  "Magnetic Tape"
+                ],
+                "correctOption": 1,
+                "explanation": "SSDs use flash memory with no moving parts, making them much faster than magnetic or optical storage."
+              },
+              {
+                "type": "fill_blank",
+                "question": "How many bits are in 5 bytes?",
+                "textBefore": "",
+                "textAfter": "bits",
+                "correctAnswer": "40",
+                "explanation": "1 byte = 8 bits, so 5 bytes = 5 × 8 = 40 bits."
+              },
+              {
+                "type": "quiz",
+                "question": "Convert the denary number 172 to binary.",
+                "options": [
+                  "10101100",
+                  "11001100",
+                  "10101010",
+                  "11110000"
+                ],
+                "correctOption": 0,
+                "explanation": "128 + 32 + 8 + 4 = 172, so binary is 10101100."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these storage units from smallest to largest:",
+                "items": [
+                  "Megabyte",
+                  "Kilobyte",
+                  "Terabyte",
+                  "Gigabyte"
+                ],
+                "correctOrder": [
+                  "Kilobyte",
+                  "Megabyte",
+                  "Gigabyte",
+                  "Terabyte"
+                ],
+                "explanation": "The correct order is KB (1000 bytes), MB (1000 KB), GB (1000 MB), TB (1000 GB)."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is an example of lossy compression?",
+                "options": [
+                  "ZIP file",
+                  "MP3 audio file",
+                  "PNG image",
+                  "Text document compression"
+                ],
+                "correctOption": 1,
+                "explanation": "MP3 uses lossy compression, removing audio frequencies humans can't easily hear. ZIP, PNG, and text compression are typically lossless."
+              },
+              {
+                "type": "fill_blank",
+                "question": "A character set that uses up to 32 bits to represent characters from all world languages is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Unicode",
+                "explanation": "Unicode supports over 143,000 characters from all world languages and scripts, plus emojis and symbols."
+              },
+              {
+                "type": "quiz",
+                "question": "What does 'colour depth' measure in an image?",
+                "options": [
+                  "The number of pixels in the image",
+                  "The number of bits used to represent each pixel's colour",
+                  "The physical size of the image",
+                  "The brightness of the image"
+                ],
+                "correctOption": 1,
+                "explanation": "Colour depth is the number of bits per pixel. More bits = more possible colours (e.g., 8-bit = 256 colours, 24-bit = 16.7 million colours)."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cs_m3",
+        "title": "Computer Networks",
+        "lessons": [
+          {
+            "id": "cs_l3_1",
+            "title": "Networks and Topologies",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Types of Networks**\n\n**LAN (Local Area Network)**\n- Covers a small geographical area (one building, school, office)\n- All hardware is owned by the organisation\n- High speed, low cost\n- Examples: School network, home network\n\n**WAN (Wide Area Network)**\n- Covers a large geographical area (cities, countries, worldwide)\n- Uses third-party infrastructure (telephone lines, satellites, undersea cables)\n- Slower than LAN, more expensive\n- The **Internet** is the largest example of a WAN\n\n**Factors Affecting Network Performance:**\n- **Bandwidth**: The maximum data transfer rate of a connection\n- **Number of users**: More devices = more competition for bandwidth\n- **Wired vs Wireless**: Wired is generally faster and more reliable\n- **Network hardware**: Quality of routers, switches, cables\n- **Distance**: Longer distances = slower speeds and higher latency"
+              },
+              {
+                "type": "quiz",
+                "question": "What is the main difference between a LAN and a WAN?",
+                "options": [
+                  "LANs are wireless, WANs are wired",
+                  "LANs cover a small area, WANs cover a large area",
+                  "LANs are faster than WANs",
+                  "LANs use the Internet, WANs don't"
+                ],
+                "correctOption": 1,
+                "explanation": "LAN covers a small area like a school or office. WAN covers a large geographical area, with the Internet being the largest WAN."
+              },
+              {
+                "type": "theory",
+                "content": "**Client-Server and Peer-to-Peer Networks**\n\n**Client-Server Network:**\n- Central server provides services (file storage, printing, email, web hosting)\n- Clients request and use these services\n- Server manages security, access rights, and backups\n- **Advantages**: Centralised control, easier backup, better security\n- **Disadvantages**: Expensive (server hardware/software), single point of failure\n\n**Peer-to-Peer Network:**\n- All computers are equal (peers)\n- Each computer shares its own resources and accesses others'\n- No central server\n- **Advantages**: Cheap to set up, no specialist hardware, no single point of failure\n- **Disadvantages**: No central control, harder to manage security, backups difficult\n\n**The Cloud:**\n- Using remote servers via the Internet to store, manage, and process data\n- Instead of local storage/software, you access services hosted by providers\n- **Advantages**: Access anywhere, no hardware to maintain, scalable\n- **Disadvantages**: Requires Internet connection, ongoing costs, security concerns"
+              },
+              {
+                "type": "quiz",
+                "question": "Which statement about a client-server network is TRUE?",
+                "options": [
+                  "All computers are equal with no central control",
+                  "It's cheaper to set up than peer-to-peer",
+                  "A central server manages resources and security",
+                  "There's no single point of failure"
+                ],
+                "correctOption": 2,
+                "explanation": "In a client-server network, a central server manages resources, user accounts, security, and backups. This provides centralised control but creates a single point of failure."
+              },
+              {
+                "type": "theory",
+                "content": "**Network Hardware**\n\n**NIC (Network Interface Controller/Card)**\n- Hardware that connects a device to a network\n- Each NIC has a unique MAC address\n- Can be wired (Ethernet port) or wireless (Wi-Fi antenna)\n\n**Switch**\n- Connects devices on a LAN\n- Sends data only to the intended recipient (using MAC addresses)\n- More efficient than hubs\n\n**Router**\n- Connects different networks together (e.g., LAN to the Internet)\n- Forwards data between networks using IP addresses\n- Often includes switch, firewall, and wireless access point functions\n\n**Wireless Access Point (WAP)**\n- Allows wireless devices to connect to a wired network\n- Extends the range of a wireless network\n- Often built into routers\n\n**Transmission Media**\n- **Wired**: Copper cables (Ethernet), Fibre optic (light signals, very fast)\n- **Wireless**: Radio waves (Wi-Fi, Bluetooth, mobile data)"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these steps showing what happens when you send data to another device on the same LAN:",
+                "items": [
+                  "Data sent to switch",
+                  "Application creates data",
+                  "Switch forwards data directly to destination MAC address",
+                  "Data passed to NIC with destination MAC address"
+                ],
+                "correctOrder": [
+                  "Application creates data",
+                  "Data passed to NIC with destination MAC address",
+                  "Data sent to switch",
+                  "Switch forwards data directly to destination MAC address"
+                ],
+                "explanation": "First the application creates data, which is passed to the NIC with the destination MAC. The NIC sends it to the switch, which forwards it directly to the correct device."
+              },
+              {
+                "type": "theory",
+                "content": "**The Internet and DNS**\n\n**The Internet**\n- A global network of computer networks\n- Uses TCP/IP protocols to connect everything\n- Not the same as the World Wide Web (which runs on the Internet)\n\n**IP Addresses**\n- Unique identifier for each device on a network\n- **IPv4**: 32-bit, e.g., 192.168.1.1 (4.3 billion addresses – nearly exhausted)\n- **IPv6**: 128-bit, e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (vast number of addresses)\n\n**DNS (Domain Name System)**\n- Converts human-readable domain names (www.google.com) into IP addresses (142.250.185.46)\n- Like a phonebook for the Internet\n- **How it works:**\n  1. You type a URL in your browser\n  2. Browser asks a DNS server for the IP address\n  3. DNS server returns the IP address\n  4. Browser connects to that IP address\n\n**Hosting**\n- Storing website files on a server that is always connected to the Internet\n- Web hosting companies provide server space and bandwidth"
+              },
+              {
+                "type": "fill_blank",
+                "question": "What does DNS stand for?",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Domain Name System",
+                "explanation": "DNS (Domain Name System) translates domain names into IP addresses so browsers can load Internet resources."
+              },
+              {
+                "type": "quiz",
+                "question": "Why was IPv6 developed?",
+                "options": [
+                  "It's faster than IPv4",
+                  "IPv4 addresses are running out",
+                  "It's more secure than IPv4",
+                  "It's easier to remember"
+                ],
+                "correctOption": 1,
+                "explanation": "IPv4 provides about 4.3 billion addresses, which isn't enough for all modern devices. IPv6 provides a virtually unlimited number of addresses."
+              },
+              {
+                "type": "theory",
+                "content": "**Network Topologies**\n\n**Star Topology**\n- All devices connect to a central switch or server\n- Data passes through the central device\n\n**Advantages:**\n- If one cable fails, only that device is affected\n- Easy to add new devices\n- High performance (dedicated connection to centre)\n\n**Disadvantages:**\n- If central switch fails, whole network fails\n- More cabling required (costly)\n\n**Mesh Topology**\n- Devices connect directly to multiple other devices\n- Two types: Full mesh (all connected to all) and Partial mesh (some connections)\n\n**Advantages:**\n- No single point of failure (very robust)\n- Multiple paths for data\n- Can handle high traffic loads\n\n**Disadvantages:**\n- Expensive (lots of cabling)\n- Complex to set up and manage"
+              },
+              {
+                "type": "quiz",
+                "question": "In a star topology, what happens if the central switch fails?",
+                "options": [
+                  "Only one device loses connection",
+                  "All devices lose connection",
+                  "The network continues normally",
+                  "Devices connect directly to each other"
+                ],
+                "correctOption": 1,
+                "explanation": "In a star topology, all traffic goes through the central switch. If it fails, the entire network goes down – this is the main disadvantage."
+              },
+              {
+                "type": "theory",
+                "content": "**Wired vs Wireless and Encryption**\n\n**Wired Connections (Ethernet)**\n- **Advantages**: Faster, more secure, reliable, no interference\n- **Disadvantages**: Cabling costs, less mobile, installation difficulty\n\n**Wireless Connections (Wi-Fi, Bluetooth)**\n- **Advantages**: Mobility, no cables, easy to add devices\n- **Disadvantages**: Slower, less secure, interference, signal range issues\n\n**Encryption**\n- Scrambles data so it's unreadable without the correct key\n- Essential for wireless networks (data travels through the air)\n- Prevents eavesdropping and data theft\n- Common standards: WPA2, WPA3 (Wi-Fi Protected Access)\n\n**MAC Addressing**\n- **MAC (Media Access Control) address**: Unique hardware identifier burned into every NIC\n- Format: 6 pairs of hex digits, e.g., 00:1A:2B:3C:4D:5E\n- Used for communication within a local network\n\n**IP Addressing**\n- Logical address assigned by the network\n- Used for communication between networks (routing)\n- Can be static (fixed) or dynamic (assigned by DHCP)"
+              },
+              {
+                "type": "quiz",
+                "question": "Why is encryption particularly important for wireless networks?",
+                "options": [
+                  "Wireless signals are easier to intercept than wired signals",
+                  "Wireless networks are always public",
+                  "Encryption makes wireless faster",
+                  "Wireless devices don't have passwords"
+                ],
+                "correctOption": 0,
+                "explanation": "Wireless signals travel through the air and can be intercepted by anyone within range. Encryption scrambles the data so intercepted signals are unreadable without the key."
+              },
+              {
+                "type": "fill_blank",
+                "question": "A hardware address burned into a network interface card is called a ____ address.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "MAC",
+                "explanation": "MAC (Media Access Control) addresses are unique identifiers assigned to network hardware during manufacturing."
+              },
+              {
+                "type": "theory",
+                "content": "**Protocols and Layers**\n\n**Protocols**: Rules that govern how data is transmitted across a network.\n\n**Common Protocols:**\n- **TCP/IP**: Core Internet protocols (Transmission Control Protocol/Internet Protocol)\n- **HTTP**: Web page transfer (HyperText Transfer Protocol)\n- **HTTPS**: Secure web page transfer (HTTP + encryption)\n- **FTP**: File transfer (File Transfer Protocol)\n- **POP/IMAP**: Email retrieval (Post Office Protocol/Internet Message Access Protocol)\n- **SMTP**: Email sending (Simple Mail Transfer Protocol)\n\n**The Concept of Layers (TCP/IP Model)**\nNetworking protocols are organised in layers. Each layer has a specific job.\n\n**Benefits of Layering:**\n- **Modularity**: Each layer can be developed independently\n- **Interoperability**: Different manufacturers' equipment can work together\n- **Fault finding**: Problems can be isolated to specific layers\n- **Standardisation**: Clear rules for each layer"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these protocols with their correct purpose:",
+                "items": [
+                  "HTTP - Web browsing",
+                  "FTP - File transfer",
+                  "SMTP - Sending email",
+                  "POP - Retrieving email"
+                ],
+                "correctOrder": [
+                  "HTTP - Web browsing",
+                  "FTP - File transfer",
+                  "SMTP - Sending email",
+                  "POP - Retrieving email"
+                ],
+                "explanation": "HTTP is for web pages, FTP for files, SMTP for sending email, and POP for retrieving email from a server."
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_quiz",
+            "title": "Module 3 Review Quiz: Computer Networks",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which network covers the largest geographical area?",
+                "options": [
+                  "LAN",
+                  "WAN",
+                  "PAN",
+                  "VPN"
+                ],
+                "correctOption": 1,
+                "explanation": "WAN (Wide Area Network) covers the largest area – cities, countries, or globally. The Internet is the biggest WAN."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The device that connects different networks together and forwards data based on IP addresses is a ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "router",
+                "explanation": "A router connects different networks (like your home network to the Internet) and directs traffic between them using IP addresses."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the main purpose of DNS?",
+                "options": [
+                  "To encrypt network traffic",
+                  "To convert domain names to IP addresses",
+                  "To connect wireless devices",
+                  "To store website files"
+                ],
+                "correctOption": 1,
+                "explanation": "DNS (Domain Name System) translates human-readable domain names (like google.com) into IP addresses that computers use to connect."
+              },
+              {
+                "type": "quiz",
+                "question": "Which topology has no single point of failure?",
+                "options": [
+                  "Star topology",
+                  "Bus topology",
+                  "Mesh topology",
+                  "Ring topology"
+                ],
+                "correctOption": 2,
+                "explanation": "In a mesh topology, devices have multiple connections. If one connection fails, data can take another path – so no single point of failure."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The protocol used for secure web browsing is ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "HTTPS",
+                "explanation": "HTTPS (HyperText Transfer Protocol Secure) is HTTP with encryption, providing secure communication for websites."
+              },
+              {
+                "type": "quiz",
+                "question": "What is a benefit of using layers in network protocols?",
+                "options": [
+                  "Makes networks slower but more reliable",
+                  "Allows different manufacturers' equipment to work together",
+                  "Reduces the amount of data transmitted",
+                  "Eliminates the need for IP addresses"
+                ],
+                "correctOption": 1,
+                "explanation": "Layering standardises how each part works, so equipment from different manufacturers can interoperate as long as they follow the same layer standards."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the DNS lookup process in correct order:",
+                "items": [
+                  "DNS server returns IP address",
+                  "Browser requests IP address from DNS",
+                  "Browser connects to IP address",
+                  "User types URL in browser"
+                ],
+                "correctOrder": [
+                  "User types URL in browser",
+                  "Browser requests IP address from DNS",
+                  "DNS server returns IP address",
+                  "Browser connects to IP address"
+                ],
+                "explanation": "First user enters URL, browser asks DNS for IP, DNS replies with IP, then browser connects to that IP."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is an IPv4 address?",
+                "options": [
+                  "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+                  "192.168.1.1",
+                  "00:1A:2B:3C:4D:5E",
+                  "www.google.com"
+                ],
+                "correctOption": 1,
+                "explanation": "192.168.1.1 is an IPv4 address (four numbers 0-255 separated by dots). The long one is IPv6, the hex pairs are a MAC address, and the last is a domain name."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cs_m4",
+        "title": "Network Security",
+        "lessons": [
+          {
+            "id": "cs_l4_1",
+            "title": "Threats to Computer Systems",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Malware**\n\nMalware (malicious software) is any program designed to cause harm or gain unauthorised access.\n\n**Types of Malware:**\n- **Virus**: Attaches to legitimate programs, spreads when program runs\n- **Worm**: Self-replicates across networks without user action\n- **Trojan**: Disguises as legitimate software but contains malicious code\n- **Ransomware**: Encrypts files and demands payment for decryption\n- **Spyware**: Secretly monitors user activity and steals data\n\n**How malware spreads:**\n- Email attachments\n- Infected downloads\n- Removable media (USB drives)\n- Malicious websites (drive-by downloads)\n- Network vulnerabilities"
+              },
+              {
+                "type": "quiz",
+                "question": "Which type of malware spreads automatically across networks without requiring user action?",
+                "options": [
+                  "Virus",
+                  "Trojan",
+                  "Worm",
+                  "Ransomware"
+                ],
+                "correctOption": 2,
+                "explanation": "Worms are designed to self-replicate and spread across networks automatically. Viruses need user action to spread, Trojans trick users, and ransomware is the outcome after infection."
+              },
+              {
+                "type": "theory",
+                "content": "**Social Engineering**\n\nSocial engineering manipulates people into revealing confidential information or performing actions. Humans are often the 'weakest link' in security.\n\n**Phishing:**\n- Fraudulent emails/messages pretending to be legitimate organisations\n- Aim to trick users into revealing passwords, bank details, or clicking malicious links\n- Often create urgency (\"Your account will be closed!\")\n\n**Other social engineering techniques:**\n- **Pretexting**: Creating a fake scenario to obtain information\n- **Baiting**: Offering something enticing (free music, USB drops)\n- **Shoulder surfing**: Looking over someone's shoulder to see passwords\n- **Tailgating**: Following authorised person into secure area"
+              },
+              {
+                "type": "quiz",
+                "question": "You receive an email claiming to be from your bank saying your account is locked and you must click a link to verify details. This is an example of:",
+                "options": [
+                  "A virus",
+                  "Phishing",
+                  "Ransomware",
+                  "A worm"
+                ],
+                "correctOption": 1,
+                "explanation": "This is a classic phishing attempt – pretending to be a trusted organisation to trick you into revealing information or clicking malicious links."
+              },
+              {
+                "type": "theory",
+                "content": "**Brute-Force Attacks and DoS**\n\n**Brute-Force Attack**\n- Automated trial of every possible password combination\n- Software tries thousands of passwords per second\n- Effective against weak or common passwords\n- Can be prevented by account lockouts after failed attempts and strong password policies\n\n**Denial of Service (DoS) Attack**\n- Overwhelms a system with traffic so it can't serve legitimate users\n- **DoS**: From a single source\n- **DDoS (Distributed DoS)**: From many compromised computers (botnet)\n- Causes website/service to slow down or crash\n\n**Data Interception and Theft**\n- Eavesdropping on network traffic to capture data\n- Can target unencrypted Wi-Fi, email, login credentials\n- **Man-in-the-Middle (MitM)**: Attacker intercepts communication between two parties\n- Encryption is the main defence"
+              },
+              {
+                "type": "fill_blank",
+                "question": "An attack that tries every possible password combination until the correct one is found is called a ____-force attack.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "brute",
+                "explanation": "Brute-force attacks use automated software to try all possible combinations of passwords until they find the correct one."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the difference between a DoS and a DDoS attack?",
+                "options": [
+                  "DoS attacks malware, DDoS attacks hardware",
+                  "DoS is from one source, DDoS is from many sources",
+                  "DoS is for data theft, DDoS is for disruption",
+                  "They are the same thing"
+                ],
+                "correctOption": 1,
+                "explanation": "DoS (Denial of Service) comes from a single source. DDoS (Distributed DoS) uses many compromised computers (a botnet) to overwhelm the target."
+              },
+              {
+                "type": "theory",
+                "content": "**SQL Injection**\n\nSQL injection attacks target databases through web forms.\n\n**How it works:**\n1. Website expects user input (login form, search box)\n2. Instead of valid data, attacker enters malicious SQL code\n3. If input isn't validated/sanitised, database runs the malicious code\n\n**What attackers can do:**\n- Bypass login (enter ' OR '1'='1' -- to always return true)\n- View, modify, or delete database contents\n- Access other users' data\n- Gain administrative privileges\n\n**Example:**\nLogin form expects: SELECT * FROM users WHERE username='[input]' AND password='[input]'\nAttacker enters: username: admin' -- password: anything\nResult: SELECT * FROM users WHERE username='admin' --' AND password='anything'\nThe -- comments out the password check, granting access."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the primary defence against SQL injection attacks?",
+                "options": [
+                  "Firewalls",
+                  "Input validation and parameterised queries",
+                  "Strong passwords",
+                  "Encryption"
+                ],
+                "correctOption": 1,
+                "explanation": "Input validation ensures data is what it should be. Parameterised queries separate SQL code from data, so user input can't be interpreted as commands."
+              },
+              {
+                "type": "theory",
+                "content": "**Identifying and Preventing Vulnerabilities**\n\n**Penetration Testing**\n- Authorised simulated attacks to find vulnerabilities\n- **Black box**: Tester has no prior knowledge (like real hacker)\n- **White box**: Tester has full system knowledge\n- Identifies weaknesses before real attackers do\n\n**Anti-Malware Software**\n- Scans files and programs for known malware signatures\n- Monitors system behaviour for suspicious activity\n- Quarantines or removes infected files\n- Needs regular updates for new threats\n\n**Firewalls**\n- Monitors and controls incoming/outgoing network traffic\n- Based on predetermined security rules\n- Can block certain ports, IP addresses, or applications\n- Hardware (separate device) or software (on computer)\n\n**User Access Levels**\n- Users only have access to resources they need (principle of least privilege)\n- Different permission levels (standard user, administrator)\n- Limits damage if account is compromised"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these security measures from most to least technical:",
+                "items": [
+                  "Physical security (locks, guards)",
+                  "Firewall configuration",
+                  "Password policy",
+                  "Penetration testing"
+                ],
+                "correctOrder": [
+                  "Penetration testing",
+                  "Firewall configuration",
+                  "Password policy",
+                  "Physical security"
+                ],
+                "explanation": "Penetration testing requires deep technical skill, firewall configuration is technical, password policy is procedural, physical security is non-technical."
+              },
+              {
+                "type": "quiz",
+                "question": "What does a firewall do?",
+                "options": [
+                  "Protects against viruses by scanning files",
+                  "Monitors and controls network traffic based on rules",
+                  "Encrypts all data on the hard drive",
+                  "Creates backups of important files"
+                ],
+                "correctOption": 1,
+                "explanation": "A firewall monitors incoming and outgoing network traffic and decides whether to allow or block it based on security rules."
+              },
+              {
+                "type": "theory",
+                "content": "**Passwords, Encryption, and Physical Security**\n\n**Passwords**\n- First line of defence for user accounts\n- **Strong password characteristics:**\n  - Long (12+ characters)\n  - Mix of uppercase, lowercase, numbers, symbols\n  - Not dictionary words or personal information\n  - Unique for different accounts\n\n**Encryption**\n- Converts data into unreadable format without the key\n- Protects data in transit (network) and at rest (storage)\n- Even if data is stolen/intercepted, it's useless without key\n\n**Physical Security**\n- Protects hardware from theft or tampering\n- **Examples:**\n  - Locked server rooms\n  - CCTV cameras\n  - Security guards\n  - Biometric access controls\n  - Cable locks for laptops\n  - RFID badges"
+              },
+              {
+                "type": "fill_blank",
+                "question": "The security measure that scrambles data so it's unreadable without a key is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "encryption",
+                "explanation": "Encryption transforms readable data (plaintext) into an unreadable format (ciphertext) using an algorithm and key. Only those with the key can decrypt it."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is an example of physical security?",
+                "options": [
+                  "Firewall",
+                  "Anti-virus software",
+                  "Biometric door lock",
+                  "Password policy"
+                ],
+                "correctOption": 2,
+                "explanation": "Biometric door locks physically prevent unauthorised access to rooms or buildings. The others are digital/software security measures."
+              }
+            ]
+          },
+          {
+            "id": "cs_m4_quiz",
+            "title": "Module 4 Review Quiz: Network Security",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which attack uses many compromised computers to overwhelm a target?",
+                "options": [
+                  "DoS",
+                  "DDoS",
+                  "SQL injection",
+                  "Phishing"
+                ],
+                "correctOption": 1,
+                "explanation": "DDoS (Distributed Denial of Service) uses a botnet of many infected computers to flood the target with traffic."
+              },
+              {
+                "type": "fill_blank",
+                "question": "An email pretending to be from a legitimate organisation to steal information is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "phishing",
+                "explanation": "Phishing attacks use fraudulent emails or messages disguised as coming from trusted sources to trick people into revealing sensitive information."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the purpose of penetration testing?",
+                "options": [
+                  "To remove viruses from infected computers",
+                  "To legally hack a system to find vulnerabilities",
+                  "To encrypt sensitive data",
+                  "To monitor employee internet usage"
+                ],
+                "correctOption": 1,
+                "explanation": "Penetration testing is authorised simulated hacking to identify security weaknesses before real attackers can exploit them."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is a characteristic of a strong password?",
+                "options": [
+                  "Your pet's name",
+                  "8 characters or less",
+                  "A dictionary word",
+                  "Mix of uppercase, lowercase, numbers, symbols"
+                ],
+                "correctOption": 3,
+                "explanation": "Strong passwords use a mix of character types, are long, and avoid dictionary words or personal information."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these in order of how a SQL injection attack works:",
+                "items": [
+                  "Malicious SQL code is executed",
+                  "Website form accepts user input without validation",
+                  "Attacker gains unauthorised access to data",
+                  "Attacker enters SQL commands instead of expected data"
+                ],
+                "correctOrder": [
+                  "Website form accepts user input without validation",
+                  "Attacker enters SQL commands instead of expected data",
+                  "Malicious SQL code is executed",
+                  "Attacker gains unauthorised access to data"
+                ],
+                "explanation": "First the form lacks validation, attacker inputs SQL, the database executes it, and the attacker gets unauthorised access."
+              },
+              {
+                "type": "quiz",
+                "question": "What type of malware encrypts files and demands payment?",
+                "options": [
+                  "Trojan",
+                  "Worm",
+                  "Ransomware",
+                  "Spyware"
+                ],
+                "correctOption": 2,
+                "explanation": "Ransomware encrypts the victim's files and demands payment (ransom) for the decryption key."
+              },
+              {
+                "type": "fill_blank",
+                "question": "A device or software that monitors and controls network traffic based on security rules is called a ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "firewall",
+                "explanation": "Firewalls inspect network traffic and block or allow it based on predefined security rules."
+              },
+              {
+                "type": "quiz",
+                "question": "Why is encryption important even with other security measures?",
+                "options": [
+                  "It makes data transfer faster",
+                  "It protects data even if other defences are bypassed",
+                  "It replaces the need for passwords",
+                  "It's required by law for all data"
+                ],
+                "correctOption": 1,
+                "explanation": "Encryption provides defence in depth – even if attackers bypass other controls and steal data, encryption makes that data unreadable without the key."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cs_m5",
+        "title": "Systems Software",
+        "lessons": [
+          {
+            "id": "cs_l5_1",
+            "title": "Operating Systems",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Operating Systems**\n\nAn operating system (OS) is system software that manages computer hardware and software resources and provides common services for programs.\n\n**Main Functions:**\n\n**1. User Interface**\n- How users interact with the computer\n- **GUI (Graphical User Interface)**: Windows, icons, menus, pointer (WIMP)\n- **Command Line Interface (CLI)**: Text-based commands\n- **Menu-driven**: Options presented in menus\n\n**2. Memory Management**\n- Controls allocation of RAM to running programs\n- Prevents programs from interfering with each other's memory\n- Manages virtual memory when RAM is full\n- Enables multitasking by switching between programs\n\n**3. Multitasking**\n- Allows multiple programs to run simultaneously\n- CPU switches rapidly between programs (time-slicing)\n- Gives illusion of parallel execution"
+              },
+              {
+                "type": "quiz",
+                "question": "What does an operating system manage when multiple programs are running?",
+                "options": [
+                  "Only the user interface",
+                  "Memory allocation between programs",
+                  "The computer's physical security",
+                  "Internet connection speed"
+                ],
+                "correctOption": 1,
+                "explanation": "The OS manages memory allocation between running programs, ensuring they don't interfere with each other and enabling multitasking by switching the CPU between them."
+              },
+              {
+                "type": "theory",
+                "content": "**Operating System Functions (continued)**\n\n**4. Peripheral Management**\n- Manages input/output devices (keyboard, mouse, printer, etc.)\n- Uses **device drivers** – software that allows OS to communicate with hardware\n- Different devices need different drivers\n- Handles data transfer between devices and processor\n\n**5. User Management**\n- Creates and manages user accounts\n- Controls access rights and permissions\n- Provides security (authentication, file permissions)\n- Multiple users can have personalised settings\n\n**6. File Management**\n- Organises files and folders/directories\n- Handles file operations: create, open, save, delete, move, rename\n- Manages file permissions (read, write, execute)\n- Tracks file locations on storage devices\n- Maintains file system structure (NTFS, FAT32, etc.)"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these steps of using a peripheral device in correct order:",
+                "items": [
+                  "Device sends data to computer",
+                  "Driver translates data for OS",
+                  "OS communicates with application",
+                  "User interacts with application to use device"
+                ],
+                "correctOrder": [
+                  "User interacts with application to use device",
+                  "Device sends data to computer",
+                  "Driver translates data for OS",
+                  "OS communicates with application"
+                ],
+                "explanation": "First user action triggers device, device sends data, driver translates it, then OS passes it to the application."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the purpose of a device driver?",
+                "options": [
+                  "To physically connect a device to the computer",
+                  "To allow the OS to communicate with hardware devices",
+                  "To speed up the device's performance",
+                  "To replace the device if it breaks"
+                ],
+                "correctOption": 1,
+                "explanation": "Device drivers act as translators between the operating system and hardware devices, allowing them to communicate and work together."
+              },
+              {
+                "type": "theory",
+                "content": "**Utility Software**\n\nUtility software performs maintenance tasks to keep the computer system running efficiently.\n\n**Encryption Software**\n- Encrypts/decrypts files and folders\n- Protects sensitive data from unauthorised access\n- Examples: BitLocker, VeraCrypt\n\n**Defragmentation Software**\n- Reorganises files on magnetic hard drives (HDDs)\n- Files become fragmented (split into pieces) over time\n- Defragmentation puts pieces back together contiguously\n- Reduces head movement, improving access speed\n- **Not needed for SSDs** (can reduce lifespan)\n\n**Data Compression Software**\n- Reduces file size to save space\n- Can be lossless (ZIP, RAR) or lossy (for media)\n- Useful for archiving files and reducing transfer time\n- Combines multiple files into one archive"
+              },
+              {
+                "type": "quiz",
+                "question": "Why should you NOT defragment an SSD (Solid State Drive)?",
+                "options": [
+                  "SSDs are too fast to need defragmentation",
+                  "Defragmentation can reduce the lifespan of an SSD",
+                  "SSDs don't store files in fragments",
+                  "SSDs don't work with defragmentation software"
+                ],
+                "correctOption": 1,
+                "explanation": "SSDs have limited write cycles. Defragmentation causes unnecessary writes, reducing lifespan. Also, SSDs access data instantly regardless of location, so defragmentation provides no speed benefit."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Software that performs housekeeping tasks to maintain a computer system is called ____ software.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "utility",
+                "explanation": "Utility software helps manage, maintain, and optimise computer systems. Examples include antivirus, defragmentation tools, backup software, and file compression tools."
+              }
+            ]
+          },
+          {
+            "id": "cs_m5_quiz",
+            "title": "Module 5 Review Quiz: Systems Software",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which is NOT a function of an operating system?",
+                "options": [
+                  "Memory management",
+                  "User interface",
+                  "Word processing",
+                  "File management"
+                ],
+                "correctOption": 2,
+                "explanation": "Word processing is application software, not an operating system function. The OS manages hardware and provides services for applications to run."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The OS feature that allows multiple programs to run seemingly at the same time is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "multitasking",
+                "explanation": "Multitasking allows multiple applications to run concurrently by rapidly switching the CPU between them (time-slicing)."
+              },
+              {
+                "type": "quiz",
+                "question": "What does defragmentation software do?",
+                "options": [
+                  "Deletes unnecessary files",
+                  "Reorganises files so they are stored contiguously",
+                  "Scans for viruses",
+                  "Encrypts sensitive data"
+                ],
+                "correctOption": 1,
+                "explanation": "Defragmentation rearranges file pieces on magnetic hard drives so each file is stored in contiguous sectors, reducing head movement and improving access speed."
+              },
+              {
+                "type": "quiz",
+                "question": "Which type of interface uses windows, icons, menus, and pointers?",
+                "options": [
+                  "CLI",
+                  "GUI",
+                  "Menu-driven",
+                  "Voice interface"
+                ],
+                "correctOption": 1,
+                "explanation": "GUI (Graphical User Interface) uses WIMP – Windows, Icons, Menus, and Pointer – for visual interaction."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these types of software from most essential to least essential for basic computer operation:",
+                "items": [
+                  "Word processor",
+                  "Operating system",
+                  "Game",
+                  "Device drivers"
+                ],
+                "correctOrder": [
+                  "Operating system",
+                  "Device drivers",
+                  "Word processor",
+                  "Game"
+                ],
+                "explanation": "OS is essential, drivers are needed for hardware, applications like word processors are useful, games are optional."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the principle of 'least privilege' in user management?",
+                "options": [
+                  "Users should have the minimum access needed to do their job",
+                  "Administrators should have all access",
+                  "All users should have equal access",
+                  "Guests should have no access"
+                ],
+                "correctOption": 0,
+                "explanation": "The principle of least privilege means giving users only the permissions they absolutely need, limiting potential damage if their account is compromised."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Software that translates between the OS and hardware devices is called a device ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "driver",
+                "explanation": "Device drivers allow the operating system to communicate with and control hardware devices like printers, graphics cards, and network adapters."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cs_m6",
+        "title": "Ethical, Legal, and Environmental Impacts",
+        "lessons": [
+          {
+            "id": "cs_l6_1",
+            "title": "Impacts of Digital Technology",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Ethical and Cultural Issues**\n\nDigital technology raises important ethical and cultural questions:\n\n**Ethical Issues:**\n- **Privacy**: Collection of personal data by companies/governments\n- **Surveillance**: CCTV, tracking online activity, location tracking\n- **AI decision-making**: Who is responsible when AI makes mistakes?\n- **Automation**: Job losses due to computerisation\n- **Addiction**: Social media, gaming, screen time\n\n**Cultural Issues:**\n- **Digital divide**: Unequal access to technology (rich/poor, urban/rural, developed/developing)\n- **Globalisation**: Technology connects cultures but may homogenise them\n- **Censorship**: Some countries block access to information\n- **Language dominance**: English dominance online may marginalise other languages\n- **Cultural representation**: Who is represented in media and how?"
+              },
+              {
+                "type": "quiz",
+                "question": "What is the 'digital divide'?",
+                "options": [
+                  "The difference between old and new technology",
+                  "The gap between those with and without access to technology",
+                  "The separation of work and personal digital devices",
+                  "The difference between hardware and software"
+                ],
+                "correctOption": 1,
+                "explanation": "The digital divide refers to the gap between those who have access to computers and the Internet and those who don't, often due to economic, geographic, or social factors."
+              },
+              {
+                "type": "theory",
+                "content": "**Environmental and Legal Issues**\n\n**Environmental Issues:**\n- **E-waste**: Discarded electronic devices contain toxic materials\n- **Energy consumption**: Data centres, cryptocurrency mining use huge amounts of electricity\n- **Resource depletion**: Rare earth metals mining for components\n- **Carbon footprint**: Manufacturing, transportation, and operation of devices\n- **Solutions**: Energy-efficient devices, recycling, cloud computing efficiency\n\n**Legal Issues – UK Legislation:**\n\n**Data Protection Act 2018** (UK implementation of GDPR)\n- Controls how personal data is collected, stored, and used\n- Rights: access data, correct errors, be forgotten\n- Requirements: data must be secure, used fairly, not kept longer than needed\n\n**Computer Misuse Act 1990**\n- Makes unauthorised access to computer material illegal\n- Three offences:\n  1. Unauthorised access to computer material\n  2. Unauthorised access with intent to commit further offences\n  3. Unauthorised modification of computer material\n\n**Copyright, Designs and Patents Act 1988**\n- Protects intellectual property (software, music, films, books)\n- Makes illegal copying/distribution an offence\n- Covers downloading copyrighted material without permission"
+              },
+              {
+                "type": "quiz",
+                "question": "Which law makes hacking into someone's computer illegal?",
+                "options": [
+                  "Data Protection Act",
+                  "Computer Misuse Act",
+                  "Copyright Act",
+                  "Freedom of Information Act"
+                ],
+                "correctOption": 1,
+                "explanation": "The Computer Misuse Act 1990 specifically makes unauthorised access to computer systems, hacking, and modifying data without permission criminal offences."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Discarded electronic devices that contain toxic materials are called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "e-waste",
+                "explanation": "E-waste (electronic waste) includes discarded computers, phones, and other electronics that often contain hazardous materials requiring special disposal."
+              },
+              {
+                "type": "theory",
+                "content": "**Privacy and Software Licensing**\n\n**Privacy Issues:**\n- Companies collecting personal data for advertising\n- Government surveillance programmes\n- Social media sharing personal information\n- Data breaches exposing sensitive information\n- Location tracking by apps and devices\n\n**Software Licensing:**\n\n**Open Source Software:**\n- Source code is freely available\n- Can be modified and distributed\n- Usually free of charge\n- Examples: Linux, Firefox, LibreOffice\n- **Advantages**: Free, customisable, community support, transparent\n- **Disadvantages**: Less user-friendly, may lack official support\n\n**Proprietary Software:**\n- Source code is kept secret\n- Cannot be modified (only used under licence)\n- Purchased or subscribed\n- Examples: Windows, Microsoft Office, Adobe Photoshop\n- **Advantages**: Professional support, user-friendly, regular updates\n- **Disadvantages**: Cost, can't customise, vendor lock-in"
+              },
+              {
+                "type": "quiz",
+                "question": "What is the main difference between open source and proprietary software?",
+                "options": [
+                  "Open source is always free, proprietary always costs money",
+                  "Open source allows access to source code, proprietary does not",
+                  "Open source is only for programmers, proprietary for everyone",
+                  "Open source is older than proprietary"
+                ],
+                "correctOption": 1,
+                "explanation": "The key difference is access to source code: open source makes it available for anyone to view, modify, and distribute, while proprietary software keeps it secret."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these steps of a typical data protection breach in order:",
+                "items": [
+                  "Company suffers data breach",
+                  "Personal data is stolen",
+                  "Company collects user data",
+                  "Individuals' privacy is compromised"
+                ],
+                "correctOrder": [
+                  "Company collects user data",
+                  "Company suffers data breach",
+                  "Personal data is stolen",
+                  "Individuals' privacy is compromised"
+                ],
+                "explanation": "First data is collected legitimately, then a security breach occurs, data is stolen, and finally individuals' privacy is affected."
+              }
+            ]
+          },
+          {
+            "id": "cs_m6_quiz",
+            "title": "Module 6 Review Quiz: Ethical, Legal, and Environmental Impacts",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which Act makes it illegal to modify computer data without authorisation?",
+                "options": [
+                  "Data Protection Act",
+                  "Computer Misuse Act",
+                  "Copyright, Designs and Patents Act",
+                  "Freedom of Information Act"
+                ],
+                "correctOption": 1,
+                "explanation": "The Computer Misuse Act 1990's third offence covers unauthorised modification of computer material, including deleting or altering files without permission."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The gap between those with and without access to technology is called the digital ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "divide",
+                "explanation": "The digital divide separates those who have access to computers and the Internet from those who don't."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is an example of proprietary software?",
+                "options": [
+                  "Linux operating system",
+                  "Firefox web browser",
+                  "LibreOffice",
+                  "Microsoft Windows"
+                ],
+                "correctOption": 3,
+                "explanation": "Microsoft Windows is proprietary software – source code is kept secret, and it's sold under licence. The others are open source."
+              },
+              {
+                "type": "quiz",
+                "question": "What does the Data Protection Act 2018 regulate?",
+                "options": [
+                  "How computer hardware is manufactured",
+                  "How personal data is collected and used",
+                  "How software is licensed",
+                  "How the Internet is accessed"
+                ],
+                "correctOption": 1,
+                "explanation": "The Data Protection Act controls how organisations collect, store, process, and share personal data, giving individuals rights over their information."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these from most to least environmentally friendly:",
+                "items": [
+                  "Recycling old electronics",
+                  "Throwing electronics in regular bin",
+                  "Repairing instead of replacing",
+                  "Buying new devices every year"
+                ],
+                "correctOrder": [
+                  "Repairing instead of replacing",
+                  "Recycling old electronics",
+                  "Buying new devices every year",
+                  "Throwing electronics in regular bin"
+                ],
+                "explanation": "Repairing extends device life and is best. Recycling recovers materials. Buying new uses resources. Throwing in bin causes toxic e-waste."
+              },
+              {
+                "type": "quiz",
+                "question": "What is a disadvantage of open source software?",
+                "options": [
+                  "It's always expensive",
+                  "Source code can't be modified",
+                  "May lack professional support",
+                  "Requires expensive hardware"
+                ],
+                "correctOption": 2,
+                "explanation": "Open source software often lacks formal technical support, relying on community forums instead of dedicated helpdesks."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The UK law that protects intellectual property like software and music is the ____, Designs and Patents Act 1988.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Copyright",
+                "explanation": "The Copyright, Designs and Patents Act 1988 protects creators' rights over their original work, including software, music, films, and literature."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cs_m7",
+        "title": "Algorithms",
+        "lessons": [
+          {
+            "id": "cs_l7_1",
+            "title": "Computational Thinking",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Computational Thinking**\n\nComputational thinking is a problem-solving approach that uses concepts from computer science.\n\n**Three Key Principles:**\n\n**1. Abstraction**\n- Removing unnecessary details to focus on what's important\n- Creating a simplified model of a complex system\n- **Examples:**\n  - A map shows roads but not every tree or building\n  - A satnav system ignores scenery, focuses on routes\n  - A flight booking system hides aircraft maintenance details\n\n**2. Decomposition**\n- Breaking down a complex problem into smaller, manageable parts\n- Each part can be solved separately\n- **Examples:**\n  - Making a sandwich: get bread, add filling, cut, serve\n  - Planning a party: guest list, venue, food, entertainment\n  - Writing a program: input, processing, output, error handling\n\n**3. Algorithmic Thinking**\n- Creating step-by-step rules to solve a problem\n- A sequence of instructions that, if followed exactly, will solve the problem\n- The basis for writing computer programs"
+              },
+              {
+                "type": "quiz",
+                "question": "A satnav app shows roads but not every building or tree. This is an example of:",
+                "options": [
+                  "Decomposition",
+                  "Abstraction",
+                  "Algorithmic thinking",
+                  "Pattern recognition"
+                ],
+                "correctOption": 1,
+                "explanation": "Abstraction involves removing unnecessary details and focusing only on what's important. The satnav ignores buildings and trees to focus on roads and routes."
+              },
+              {
+                "type": "theory",
+                "content": "**Designing Algorithms**\n\n**Identifying Inputs, Processes, and Outputs:**\n- **Inputs**: Data the algorithm receives (user input, sensor readings, file data)\n- **Processes**: What the algorithm does with the inputs (calculations, decisions, sorting)\n- **Outputs**: Results produced (display, file, message, action)\n\n**Structure Diagrams:**\n- Visual way to show the breakdown of a system (decomposition)\n- Shows hierarchy and relationships between components\n- Top-down design – start with main problem, break into sub-problems\n\n**Example – Calculate average of three numbers:**\n```\n          Calculate Average\n         /        |         \\\n    Get Input   Calculate   Display\n                (sum/3)     Result\n    /     \\\nInput1  Input2  Input3\n```"
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these steps of computational thinking in the logical order when solving a new problem:",
+                "items": [
+                  "Create an algorithm to solve each part",
+                  "Decompose the problem into smaller parts",
+                  "Identify the overall problem",
+                  "Use abstraction to identify essential elements"
+                ],
+                "correctOrder": [
+                  "Identify the overall problem",
+                  "Decompose the problem into smaller parts",
+                  "Use abstraction to identify essential elements",
+                  "Create an algorithm to solve each part"
+                ],
+                "explanation": "First identify the problem, then break it down (decomposition), then remove unnecessary details (abstraction), then design solutions (algorithmic thinking)."
+              },
+              {
+                "type": "theory",
+                "content": "**Representing Algorithms: Flowcharts**\n\nFlowcharts use standard symbols to show algorithm flow.\n\n**Common Flowchart Symbols:**\n\n- **Oval (Terminal)**: Start and end\n- **Parallelogram (Input/Output)**: Input or output of data\n- **Rectangle (Process)**: Calculation or action\n- **Diamond (Decision)**: Yes/no or true/false question\n- **Arrow (Flow line)**: Shows direction of flow\n\n**Example – Check if age is 18 or over:**\n```\n    [Start]\n       ↓\n[Input age]\n       ↓\n  < age ≥ 18? >──No──>[Output \"Too young\"]\n       ↓Yes                      ↓\n[Output \"Welcome\"]          [End]\n       ↓\n    [End]\n```"
+              },
+              {
+                "type": "quiz",
+                "question": "Which flowchart symbol represents a decision (yes/no question)?",
+                "options": [
+                  "Rectangle",
+                  "Parallelogram",
+                  "Diamond",
+                  "Oval"
+                ],
+                "correctOption": 2,
+                "explanation": "The diamond (or rhombus) represents a decision point where the algorithm branches based on a condition (yes/no, true/false)."
+              },
+              {
+                "type": "theory",
+                "content": "**Representing Algorithms: Pseudocode**\n\nPseudocode is a simplified, informal way of describing an algorithm using everyday language and programming-like structures.\n\n**Common Pseudocode Structures:**\n\n**Sequence (steps in order):**\n```\nINPUT number\nOUTPUT number * 2\n```\n\n**Selection (if-then-else):**\n```\nIF age >= 18 THEN\n    OUTPUT \"Adult\"\nELSE\n    OUTPUT \"Child\"\nEND IF\n```\n\n**Iteration (loops):**\n```\n// Count-controlled loop\nFOR i = 1 TO 10\n    OUTPUT i\nNEXT i\n\n// Condition-controlled loop\nWHILE answer != \"yes\"\n    INPUT answer\nEND WHILE\n```\n\n**Benefits:**\n- Language-independent (not tied to specific programming language)\n- Easier to read and write than real code\n- Focuses on logic, not syntax"
+              },
+              {
+                "type": "fill_blank",
+                "question": "An informal, language-independent way of describing algorithms is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "pseudocode",
+                "explanation": "Pseudocode uses everyday language and programming-like structures to describe algorithms without worrying about specific syntax of any programming language."
+              },
+              {
+                "type": "quiz",
+                "question": "In pseudocode, what does the statement 'FOR i = 1 TO 10' do?",
+                "options": [
+                  "Checks if i equals 10",
+                  "Repeats the following code 10 times",
+                  "Creates a variable called i",
+                  "Ends the program"
+                ],
+                "correctOption": 1,
+                "explanation": "A FOR loop with 'i = 1 TO 10' will repeat the code inside the loop 10 times, with i taking values 1, 2, 3, ..., 10 in sequence."
+              },
+              {
+                "type": "theory",
+                "content": "**Trace Tables and Error Detection**\n\n**Trace Tables:**\n- Used to track the values of variables as an algorithm executes\n- Helps understand how an algorithm works\n- Useful for finding logic errors\n\n**Example trace table for a simple loop:**\nAlgorithm:\n```\ntotal = 0\nFOR i = 1 TO 3\n    total = total + i\nNEXT i\nOUTPUT total\n```\n\nTrace Table:\n| i | total | Output |\n|---|---|---|\n|   | 0     |       |\n| 1 | 1     |       |\n| 2 | 3     |       |\n| 3 | 6     |       |\n|   |       | 6     |\n\n**Common Errors:**\n- **Syntax errors**: Breaking language rules (misspelling, missing brackets) – prevents program running\n- **Logic errors**: Program runs but produces wrong output – hardest to find\n- **Runtime errors**: Occur during execution (division by zero, file not found)"
+              },
+              {
+                "type": "quiz",
+                "question": "What is the purpose of a trace table?",
+                "options": [
+                  "To write code faster",
+                  "To track variable values as an algorithm executes",
+                  "To convert pseudocode to real code",
+                  "To measure program execution time"
+                ],
+                "correctOption": 1,
+                "explanation": "Trace tables allow you to manually track how variable values change during algorithm execution, helping to understand logic and find errors."
+              },
+              {
+                "type": "theory",
+                "content": "**Searching Algorithms**\n\n**Linear Search:**\n- Checks each item in sequence until target found or end reached\n- **Advantages**: Works on unsorted data, simple to implement\n- **Disadvantages**: Slow for large datasets\n- **Complexity**: O(n) – time increases linearly with data size\n\n**Binary Search:**\n- Works on **sorted** data only\n- Repeatedly divides the search interval in half\n- Compares target to middle element, eliminates half each time\n- **Advantages**: Very fast for large sorted datasets\n- **Disadvantages**: Data must be sorted first\n- **Complexity**: O(log n) – very efficient\n\n**Binary Search Steps:**\n1. Find middle element of list\n2. If middle == target → found\n3. If target < middle → search left half\n4. If target > middle → search right half\n5. Repeat until found or sublist empty"
+              },
+              {
+                "type": "quiz",
+                "question": "What is a prerequisite for using binary search?",
+                "options": [
+                  "The data must be small",
+                  "The data must be sorted",
+                  "The data must be numbers",
+                  "The data must be stored in an array"
+                ],
+                "correctOption": 1,
+                "explanation": "Binary search requires the data to be sorted in order. It works by comparing the target to the middle element and eliminating half the remaining data based on that comparison – which only works if data is ordered."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these steps of a binary search for the number 7 in [1,3,5,7,9,11,13]:",
+                "items": [
+                  "Compare 7 to middle element 7 – found!",
+                  "7 > 3, so search right half [5,7,9,11,13]",
+                  "Start with full list [1,3,5,7,9,11,13], middle is 7",
+                  "7 > 5, so search right half [7,9,11,13]"
+                ],
+                "correctOrder": [
+                  "Start with full list [1,3,5,7,9,11,13], middle is 7",
+                  "Compare 7 to middle element 7 – found!"
+                ],
+                "explanation": "With this specific list, the middle element is 7, so it's found immediately. The other steps would apply if the target was different."
+              },
+              {
+                "type": "theory",
+                "content": "**Sorting Algorithms – Bubble Sort**\n\n**Bubble Sort:**\n- Repeatedly steps through the list, compares adjacent elements\n- Swaps them if they're in the wrong order\n- Passes continue until no swaps needed\n\n**Steps:**\n1. Compare first two elements, swap if first > second\n2. Move to next pair, continue to end of list (first pass complete)\n3. Repeat from start until a complete pass with no swaps\n\n**Example sorting [5, 1, 4, 2]:**\nPass 1: [1, 5, 4, 2] → [1, 4, 5, 2] → [1, 4, 2, 5]\nPass 2: [1, 4, 2, 5] → [1, 2, 4, 5]\nPass 3: No swaps needed – sorted!\n\n**Characteristics:**\n- Simple to understand and implement\n- Inefficient for large datasets (O(n²))\n- Best used for small lists or educational purposes"
+              },
+              {
+                "type": "quiz",
+                "question": "After one complete pass of bubble sort on [3, 1, 4, 2], what will the list look like?",
+                "options": [
+                  "[1, 3, 2, 4]",
+                  "[1, 2, 3, 4]",
+                  "[3, 1, 2, 4]",
+                  "[1, 3, 4, 2]"
+                ],
+                "correctOption": 0,
+                "explanation": "First pass: Compare 3&1 → swap [1,3,4,2]; 3&4 → no swap [1,3,4,2]; 4&2 → swap [1,3,2,4]. So after one pass: [1,3,2,4]"
+              },
+              {
+                "type": "theory",
+                "content": "**Sorting Algorithms – Merge Sort**\n\n**Merge Sort (Divide and Conquer):**\n1. **Divide**: Split the list repeatedly into halves until each sublist has one element\n2. **Conquer (Merge)**: Merge sublists back together in sorted order\n\n**Steps:**\n- Recursively split lists in half\n- When down to single elements, start merging\n- When merging, compare elements from each sublist and place in correct order\n\n**Example sorting [38, 27, 43, 3]:**\n```\n        [38, 27, 43, 3]\n           /        \\\n     [38, 27]    [43, 3]\n      /    \\      /    \\\n    [38]  [27]  [43]  [3]\n      \\    /      \\    /\n     [27, 38]    [3, 43]\n           \\      /\n        [3, 27, 38, 43]\n```\n\n**Characteristics:**\n- Very efficient (O(n log n))\n- Guaranteed fast even for large datasets\n- Requires extra memory for merging\n- Used in many real-world applications"
+              },
+              {
+                "type": "quiz",
+                "question": "What is the first step in merge sort?",
+                "options": [
+                  "Compare adjacent elements and swap",
+                  "Repeatedly divide the list into halves",
+                  "Find the smallest element and move it to the front",
+                  "Compare the first and last elements"
+                ],
+                "correctOption": 1,
+                "explanation": "Merge sort starts by dividing (splitting) the list recursively into smaller halves until each sublist contains just one element."
+              },
+              {
+                "type": "theory",
+                "content": "**Sorting Algorithms – Insertion Sort**\n\n**Insertion Sort:**\n- Builds the final sorted list one item at a time\n- Takes each element and inserts it into its correct position in the already-sorted portion\n\n**Steps:**\n1. Start with first element as sorted portion\n2. Take next element, compare with elements in sorted portion\n3. Shift larger elements right to make space\n4. Insert element in correct position\n5. Repeat until all elements processed\n\n**Example sorting [5, 2, 4, 6, 1, 3]:**\n```\nStart: [5] | 2, 4, 6, 1, 3\nInsert 2: [2, 5] | 4, 6, 1, 3\nInsert 4: [2, 4, 5] | 6, 1, 3\nInsert 6: [2, 4, 5, 6] | 1, 3\nInsert 1: [1, 2, 4, 5, 6] | 3\nInsert 3: [1, 2, 3, 4, 5, 6]\n```\n\n**Characteristics:**\n- Simple and intuitive (like sorting cards in hand)\n- Efficient for small datasets or nearly-sorted data\n- O(n²) worst case, but O(n) best case (already sorted)"
+              },
+              {
+                "type": "fill_blank",
+                "question": "The sorting algorithm that builds a sorted list by repeatedly inserting elements into their correct position is called ____ sort.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "insertion",
+                "explanation": "Insertion sort works by taking each element and inserting it into its correct position in the already-sorted portion of the list."
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_quiz",
+            "title": "Module 7 Review Quiz: Algorithms",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Breaking down a complex problem into smaller parts is called:",
+                "options": [
+                  "Abstraction",
+                  "Decomposition",
+                  "Algorithmic thinking",
+                  "Pattern recognition"
+                ],
+                "correctOption": 1,
+                "explanation": "Decomposition is the process of breaking a complex problem down into smaller, more manageable sub-problems."
+              },
+              {
+                "type": "fill_blank",
+                "question": "A simplified model that focuses on important details and ignores irrelevant ones is called an ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "abstraction",
+                "explanation": "Abstraction removes unnecessary details to focus on what's essential for solving a particular problem."
+              },
+              {
+                "type": "quiz",
+                "question": "Which search algorithm works by repeatedly dividing the search interval in half?",
+                "options": [
+                  "Linear search",
+                  "Binary search",
+                  "Bubble search",
+                  "Merge search"
+                ],
+                "correctOption": 1,
+                "explanation": "Binary search repeatedly divides the sorted list in half, comparing the target to the middle element and eliminating half the remaining data each time."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the main disadvantage of bubble sort?",
+                "options": [
+                  "It only works on numbers",
+                  "It's very slow for large datasets",
+                  "It requires extra memory",
+                  "It can't sort descending order"
+                ],
+                "correctOption": 1,
+                "explanation": "Bubble sort has O(n²) time complexity, making it inefficient for large datasets. Merge sort and other algorithms are much faster for large amounts of data."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange these sorting algorithms from slowest to fastest for large datasets:",
+                "items": [
+                  "Merge sort",
+                  "Bubble sort",
+                  "Insertion sort"
+                ],
+                "correctOrder": [
+                  "Bubble sort",
+                  "Insertion sort",
+                  "Merge sort"
+                ],
+                "explanation": "Bubble sort is slowest (O(n²)), insertion sort is also O(n²) but faster than bubble, merge sort is fastest (O(n log n))."
+              },
+              {
+                "type": "quiz",
+                "question": "Which flowchart symbol represents a process or calculation?",
+                "options": [
+                  "Oval",
+                  "Parallelogram",
+                  "Rectangle",
+                  "Diamond"
+                ],
+                "correctOption": 2,
+                "explanation": "A rectangle represents a process or calculation step in a flowchart."
+              },
+              {
+                "type": "fill_blank",
+                "question": "A table used to track variable values as an algorithm executes is called a ____ table.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "trace",
+                "explanation": "Trace tables help follow algorithm execution by recording how variable values change step by step."
+              },
+              {
+                "type": "quiz",
+                "question": "What type of error occurs when a program runs but produces the wrong output?",
+                "options": [
+                  "Syntax error",
+                  "Logic error",
+                  "Runtime error",
+                  "Compilation error"
+                ],
+                "correctOption": 1,
+                "explanation": "Logic errors mean the program runs successfully but doesn't do what it's supposed to – the logic is flawed."
               }
             ]
           }
