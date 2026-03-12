@@ -11,9 +11,12 @@
     
     <!-- Babel for in-browser JSX compilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Marked for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS with Typography Plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -1510,9 +1513,10 @@
                   </h2>
                   
                   {currentStep.type === 'theory' && (
-                    <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-10 shadow-sm text-lg text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
-                      {currentStep.content}
-                    </div>
+                    <div 
+                      className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-10 shadow-sm text-lg text-gray-700 dark:text-gray-300 leading-relaxed prose dark:prose-invert max-w-none"
+                      dangerouslySetInnerHTML={{ __html: marked.parse(currentStep.content) }}
+                    />
                   )}
                   {currentStep.type === 'quiz' && renderQuiz()}
                   {currentStep.type === 'fill_blank' && renderFillBlank()}
@@ -1524,17 +1528,31 @@
                 <div className={`border-t p-4 md:p-6 md:px-20 flex justify-center w-full transition-colors duration-300
                   ${isSubmitted && isCorrect ? 'bg-green-100 dark:bg-green-900/40 border-green-200 dark:border-green-800' : 
                     isSubmitted && !isCorrect ? 'bg-red-100 dark:bg-red-900/40 border-red-200 dark:border-red-800' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800'}`}>
-                  <div className="max-w-4xl w-full flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="max-w-4xl w-full flex items-center justify-between gap-4">
                     
-                    <div className="hidden md:block">
-                      {isSubmitted && isCorrect && <span className="text-xl font-extrabold text-green-600 dark:text-green-400 flex items-center gap-2"><Check size={32}/> Excellent!</span>}
-                      {isSubmitted && !isCorrect && <span className="text-xl font-extrabold text-red-600 dark:text-red-400">Not quite right. Try again!</span>}
+                    <div className="flex items-center gap-4">
+                        <button 
+                            onClick={() => setStepIdx(prev => Math.max(0, prev - 1))}
+                            disabled={stepIdx === 0}
+                            className={`py-3 px-6 md:py-4 md:px-8 rounded-2xl font-extrabold text-sm md:text-lg border-b-4 active:border-b-0 active:translate-y-1 transition-all ${
+                                stepIdx === 0 
+                                ? 'bg-gray-200 border-gray-300 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:border-gray-700 dark:text-gray-600' 
+                                : 'bg-gray-300 border-gray-400 text-gray-700 hover:bg-gray-400 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600'
+                            }`}
+                        >
+                            BACK
+                        </button>
+
+                        <div className="hidden md:block">
+                          {isSubmitted && isCorrect && <span className="text-xl font-extrabold text-green-600 dark:text-green-400 flex items-center gap-2"><Check size={32}/> Excellent!</span>}
+                          {isSubmitted && !isCorrect && <span className="text-xl font-extrabold text-red-600 dark:text-red-400">Not quite right. Try again!</span>}
+                        </div>
                     </div>
 
                     <button 
                       onClick={handleAction}
                       disabled={isActionDisabled()}
-                      className={`w-full md:w-auto py-4 px-12 rounded-2xl font-extrabold text-lg text-white border-b-4 active:border-b-0 active:translate-y-1 transition-all
+                      className={`py-3 px-8 md:py-4 md:px-12 rounded-2xl font-extrabold text-sm md:text-lg text-white border-b-4 active:border-b-0 active:translate-y-1 transition-all
                         ${currentStep.type === 'theory' ? activeCourse.color + ' border-black/20 dark:border-black/40' : 
                           isSubmitted && isCorrect ? 'bg-green-500 border-green-600 dark:border-green-700' :
                           isSubmitted && !isCorrect ? 'bg-red-500 border-red-600 dark:border-red-700' :
