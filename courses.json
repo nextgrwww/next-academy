@@ -1,196 +1,5 @@
 [
   {
-    "id": "alevel-physics-mechanics",
-    "level": "A-Level",
-    "title": "Physics: Mechanics",
-    "description": "An in-depth study of motion, forces, energy, and material properties.",
-    "color": "bg-red-600",
-    "textColor": "text-red-600",
-    "lightBg": "bg-red-50",
-    "iconName": "Atom",
-    "modules": [
-      {
-        "id": "phys_m1",
-        "title": "Motion and Forces",
-        "lessons": [
-          {
-            "id": "phys_l1_1",
-            "title": "Newton's First Law",
-            "steps": [
-              {
-                "type": "theory",
-                "content": "Newton's First Law states that an object will remain at rest or move with constant velocity unless acted upon by a resultant force."
-              },
-              {
-                "type": "quiz",
-                "question": "If the resultant force on a moving car is zero, what happens?",
-                "options": [
-                  "The car stops immediately",
-                  "The car accelerates",
-                  "The car continues at a constant velocity",
-                  "The car slows down gradually"
-                ],
-                "correctOption": 2
-              },
-              {
-                "type": "fill_blank",
-                "question": "The tendency of an object to resist changes in its state of motion is called:",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "Inertia"
-              }
-            ]
-          },
-          {
-            "id": "phys_l1_2",
-            "title": "Newton's Second Law",
-            "steps": [
-              {
-                "type": "theory",
-                "content": "The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.\n\nFormula: F = ma"
-              },
-              {
-                "type": "fill_blank",
-                "question": "Calculate the force required to accelerate a 5kg mass at 2m/s².",
-                "textBefore": "Force =",
-                "textAfter": "Newtons",
-                "correctAnswer": "10"
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange the units to show the derivation of a Newton (N):",
-                "items": ["kg", "m", "s⁻²"],
-                "correctOrder": ["kg", "m", "s⁻²"]
-              }
-            ]
-          },
-          {
-            "id": "phys_m1_quiz",
-            "title": "Module 1 Review Quiz",
-            "isModuleQuiz": true,
-            "steps": [
-              {
-                "type": "quiz",
-                "question": "What is the unit of Force?",
-                "options": ["Joule", "Watt", "Newton", "Pascal"],
-                "correctOption": 2
-              },
-              {
-                "type": "fill_blank",
-                "question": "Weight is the force exerted on an object due to ____.",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "gravity"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "phys_m2",
-        "title": "Work, Energy, and Power",
-        "lessons": [
-          {
-            "id": "phys_l2_1",
-            "title": "Kinetic Energy",
-            "steps": [
-              {
-                "type": "theory",
-                "content": "Kinetic energy (Ek) is the energy an object possesses due to its motion.\n\nFormula: Ek = ½mv²"
-              },
-              {
-                "type": "quiz",
-                "question": "If the velocity of an object doubles, its kinetic energy increases by a factor of:",
-                "options": ["2", "4", "8", "Stay the same"],
-                "correctOption": 1
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange the steps to calculate Ek for a 2kg object moving at 3m/s:",
-                "items": ["Square the velocity (3² = 9)", "Multiply by mass (9 * 2 = 18)", "Multiply by ½ (18 * 0.5 = 9)", "Identify m=2, v=3"],
-                "correctOrder": ["Identify m=2, v=3", "Square the velocity (3² = 9)", "Multiply by mass (9 * 2 = 18)", "Multiply by ½ (18 * 0.5 = 9)"]
-              }
-            ]
-          },
-          {
-            "id": "phys_m2_quiz",
-            "title": "Module 2 Review Quiz",
-            "isModuleQuiz": true,
-            "steps": [
-              {
-                "type": "fill_blank",
-                "question": "The principle of conservation of energy states that energy cannot be created or ____.",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "destroyed"
-              },
-              {
-                "type": "quiz",
-                "question": "Work done is defined as Force multiplied by:",
-                "options": ["Time", "Velocity", "Distance moved in direction of force", "Acceleration"],
-                "correctOption": 2
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "gcse-geography",
-    "level": "GCSE",
-    "title": "Geography",
-    "description": "Explore physical landscapes and human environmental challenges.",
-    "color": "bg-orange-500",
-    "textColor": "text-orange-500",
-    "lightBg": "bg-orange-50",
-    "iconName": "BookOpen",
-    "modules": [
-      {
-        "id": "geo_m1",
-        "title": "The Living World",
-        "lessons": [
-          {
-            "id": "geo_l1",
-            "title": "Ecosystems",
-            "steps": [
-              {
-                "type": "theory",
-                "content": "An ecosystem is a community of living organisms in conjunction with the nonliving components of their environment."
-              },
-              {
-                "type": "quiz",
-                "question": "Which of these is a 'biotic' component of an ecosystem?",
-                "options": ["Rocks", "Bacteria", "Sunlight", "Water"],
-                "correctOption": 1
-              }
-            ]
-          },
-          {
-            "id": "geo_m1_quiz",
-            "title": "Module 1 Quiz",
-            "isModuleQuiz": true,
-            "steps": [
-              {
-                "type": "fill_blank",
-                "question": "What is the primary source of energy for most ecosystems?",
-                "textBefore": "The",
-                "textAfter": "",
-                "correctAnswer": "Sun"
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange the food chain in the correct order (Bottom to Top):",
-                "items": ["Secondary Consumer", "Primary Consumer", "Producer", "Apex Predator"],
-                "correctOrder": ["Producer", "Primary Consumer", "Secondary Consumer", "Apex Predator"]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "gcse-computer-science-j277",
     "level": "GCSE",
     "title": "Computer Science",
@@ -205,8 +14,8 @@
         "title": "Systems Architecture",
         "lessons": [
           {
-            "id": "cs_l1_1",
-            "title": "Architecture of the CPU",
+            "id": "cs_m1_l1",
+            "title": "CPU Architecture and Components",
             "steps": [
               {
                 "type": "theory",
@@ -223,7 +32,13 @@
                 ],
                 "correctOption": 2,
                 "explanation": "The correct order is: Fetch → Decode → Execute. First, the CPU fetches the instruction from memory, then decodes it to understand what to do, and finally executes it."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_l2",
+            "title": "Von Neumann Architecture and Registers",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Von Neumann Architecture**\n\nNamed after mathematician John von Neumann, this architecture describes a system where both **data and instructions** are stored in the same memory. Key registers include:\n\n- **MAR (Memory Address Register)**: Stores the address in memory where data or an instruction is to be read from or written to\n- **MDR (Memory Data Register)**: Stores the actual data or instruction that has just been fetched from memory or is about to be written to memory\n- **Program Counter**: Holds the memory address of the next instruction to be executed\n- **Accumulator**: Stores the results of calculations performed by the ALU\n\n**Key Difference**: The MAR stores an **address** (a location), while the MDR stores **data or an instruction** (the actual content)."
@@ -235,7 +50,13 @@
                 "textAfter": "holds the address of the next instruction.",
                 "correctAnswer": "Program Counter",
                 "explanation": "The Program Counter (PC) keeps track of where the CPU is in its program sequence by storing the memory address of the next instruction."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_l3",
+            "title": "CPU Performance Factors",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**CPU Performance**\n\nThree main characteristics affect CPU performance:\n\n**1. Clock Speed**\n- Measured in Hertz (Hz) – billions of cycles per second (GHz)\n- Higher clock speed = more instructions executed per second = faster performance\n\n**2. Cache Size**\n- More cache means more frequently used data can be stored close to the CPU\n- Larger cache reduces the need to fetch data from slower main memory (RAM)\n- Increases processing speed\n\n**3. Number of Cores**\n- Each core can process instructions independently\n- More cores allow the CPU to execute multiple tasks simultaneously (parallel processing)\n- The operating system must be designed to use multiple cores effectively\n\n**Combined Effect**: These factors work together. For example, doubling the clock speed might give better performance than adding one more core, depending on the task."
@@ -251,7 +72,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "While RAM helps, for multitasking specifically, more cores allow the CPU to work on different applications simultaneously. Clock speed helps each task run faster, but cores enable true parallel processing of multiple tasks."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_l4",
+            "title": "Embedded Systems",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Embedded Systems**\n\nAn **embedded system** is a computer system built into another device to perform a specific dedicated function. Unlike general-purpose computers (like PCs), they run a single program repeatedly.\n\n**Characteristics:**\n- Designed for one specific task\n- Limited user interface (sometimes no interface at all)\n- Low power consumption\n- Low cost to manufacture\n- Often use a simple processor with limited resources\n\n**Examples:**\n- Washing machines and microwaves\n- Digital watches\n- Car engine management systems\n- Traffic lights\n- Medical devices (pacemakers)\n- TV remote controls\n- Smart home devices (thermostats)"
@@ -370,8 +197,8 @@
         "title": "Memory and Storage",
         "lessons": [
           {
-            "id": "cs_l2_1",
-            "title": "Primary Storage (Memory)",
+            "id": "cs_m2_l1",
+            "title": "Primary Storage: RAM and ROM",
             "steps": [
               {
                 "type": "theory",
@@ -388,7 +215,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "ROM provides the essential startup instructions that must not be lost when power is off. RAM provides workspace for active programs and data, which can be changed but is temporary."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l2",
+            "title": "Virtual Memory",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Virtual Memory**\n\nWhen RAM becomes full, the operating system uses **virtual memory** to free up space.\n\n**How it works:**\n1. The OS identifies data in RAM that hasn't been used recently\n2. This data is moved to a reserved space on the hard drive (called the page file or swap file)\n3. This frees up RAM for currently active programs\n4. If the moved data is needed again, it's swapped back into RAM\n\n**Consequences:**\n- Using virtual memory is much **slower** than using RAM because hard drives are significantly slower\n- Excessive use of virtual memory (thrashing) severely slows down the computer\n- Virtual memory allows programs to run even when RAM is full, preventing crashes"
@@ -404,7 +237,13 @@
                 ],
                 "correctOption": 2,
                 "explanation": "Virtual memory uses hard drive space as 'fake RAM'. Hard drives are much slower than RAM, so the computer's performance drops significantly."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l3",
+            "title": "Secondary Storage Types",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Secondary Storage**\n\nSecondary storage holds data permanently (non-volatile) even when the computer is off.\n\n**Three Main Types:**\n\n**1. Magnetic Storage**\n- Examples: Hard Disk Drives (HDD), magnetic tape\n- How it works: Magnetised spots on a spinning platter\n- Advantages: Large capacity, low cost per GB\n- Disadvantages: Moving parts (slower, less durable), susceptible to magnets\n\n**2. Optical Storage**\n- Examples: CD, DVD, Blu-ray\n- How it works: Pits and lands read by a laser\n- Advantages: Cheap, portable, durable against magnets\n- Disadvantages: Limited capacity, slow, easily scratched\n\n**3. Solid State Storage**\n- Examples: SSD (Solid State Drive), USB flash drives, memory cards\n- How it works: Flash memory with no moving parts\n- Advantages: Very fast, durable (no moving parts), low power\n- Disadvantages: More expensive per GB, limited write cycles"
@@ -423,19 +262,13 @@
                   "Optical Disc (DVD)"
                 ],
                 "explanation": "SSDs are fastest (no moving parts). HDDs are next (spinning platters but direct access). Optical discs are slowest (laser must move to correct position)."
-              },
-              {
-                "type": "quiz",
-                "question": "A game developer needs to distribute a 50GB game on physical media. Which storage type is most suitable?",
-                "options": [
-                  "USB Flash Drive (Solid State)",
-                  "Blu-ray Disc (Optical)",
-                  "External HDD (Magnetic)",
-                  "SD Card (Solid State)"
-                ],
-                "correctOption": 1,
-                "explanation": "Blu-ray discs can hold up to 50GB (dual-layer), are cheap to mass produce, and are the standard distribution format for physical game media."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l4",
+            "title": "Data Storage Units and Calculation",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Data Storage Units**\n\nComputers store everything in **binary** (1s and 0s). A single binary digit is a **bit**.\n\n**Units of Storage:**\n- 1 bit = Smallest unit (0 or 1)\n- 1 nibble = 4 bits\n- 1 byte = 8 bits (stores one character)\n- 1 Kilobyte (KB) = 1,000 bytes\n- 1 Megabyte (MB) = 1,000 KB\n- 1 Gigabyte (GB) = 1,000 MB\n- 1 Terabyte (TB) = 1,000 GB\n- 1 Petabyte (PB) = 1,000 TB\n\n**Calculating File Sizes:**\n- **Text file**: Number of characters × bits per character\n- **Image file**: Image height (px) × Image width (px) × Colour depth (bits)\n- **Sound file**: Sample rate (Hz) × Duration (seconds) × Bit depth (bits)"
@@ -447,19 +280,13 @@
                 "textAfter": "bytes",
                 "correctAnswer": "3000",
                 "explanation": "1 KB = 1000 bytes, so 3 KB = 3 × 1000 = 3000 bytes."
-              },
-              {
-                "type": "quiz",
-                "question": "A 10-second audio clip has a sample rate of 1000 Hz and a bit depth of 16 bits. What is the file size in bits?",
-                "options": [
-                  "16,000 bits",
-                  "160,000 bits",
-                  "1,600 bits",
-                  "10,000 bits"
-                ],
-                "correctOption": 1,
-                "explanation": "Formula: sample rate × duration × bit depth = 1000 × 10 × 16 = 160,000 bits."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l5",
+            "title": "Binary and Denary Conversion",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Number Representation**\n\n**Binary to Denary (Decimal) Conversion:**\nEach binary digit (bit) represents a power of 2.\n\nBinary: 1 0 1 1\nPowers:  8 4 2 1\nValue:   8+0+2+1 = 11\n\n**Denary to Binary:**\nDivide the number by 2 repeatedly, reading remainders backwards.\n\nExample: Convert 13 to binary:\n13 ÷ 2 = 6 remainder 1\n6 ÷ 2 = 3 remainder 0\n3 ÷ 2 = 1 remainder 1\n1 ÷ 2 = 0 remainder 1\nReading backwards: 1101\n\n**Binary Addition:**\nAdd binary numbers column by column, carrying over when a column exceeds 1.\n\nExample: 101 + 011 = 1000\n(5 + 3 = 8)\n\n**Overflow Error:**\nOccurs when the result of an addition exceeds the available bits. For 8 bits, 11111111 (255) + 1 = overflow."
@@ -471,19 +298,13 @@
                 "textAfter": "",
                 "correctAnswer": "13",
                 "explanation": "1101 = (1×8) + (1×4) + (0×2) + (1×1) = 8 + 4 + 0 + 1 = 13"
-              },
-              {
-                "type": "quiz",
-                "question": "What is the result of adding binary 0111 (7) and 1010 (10) in 4 bits?",
-                "options": [
-                  "10001 (17)",
-                  "0001 with overflow (1 with overflow)",
-                  "1111 (15)",
-                  "Overflow error occurs"
-                ],
-                "correctOption": 3,
-                "explanation": "0111 + 1010 = 10001, which is 5 bits. Since we're limited to 4 bits, the fifth bit is lost (overflow), leaving 0001 (1). An overflow error occurs."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l6",
+            "title": "Hexadecimal System",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Hexadecimal**\n\nHexadecimal (hex) is base-16, using digits 0-9 and letters A-F (A=10, B=11, C=12, D=13, E=14, F=15).\n\n**Why use hex?**\n- More compact than binary (one hex digit = 4 bits)\n- Easier for humans to read and remember\n- Used in memory addresses, colour codes, MAC addresses\n\n**Binary to Hex:**\nGroup binary into groups of 4 bits (from right), convert each group.\n\nExample: 11010110 → 1101 0110 → D 6 → D6\n\n**Hex to Denary:**\nMultiply each digit by its place value (16ⁿ).\n\nExample: 3F → (3×16) + (15×1) = 48 + 15 = 63\n\n**Denary to Hex:**\nDivide by 16 repeatedly, reading remainders backwards.\n\nExample: 45 → 45÷16=2 remainder 13 (D) → 2D"
@@ -499,15 +320,13 @@
                 ],
                 "correctOption": 0,
                 "explanation": "1111 0000 grouped as 4 bits. 1111 = F, 0000 = 0. So the answer is F0."
-              },
-              {
-                "type": "fill_blank",
-                "question": "Convert the hexadecimal number 2A to denary (decimal).",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "42",
-                "explanation": "2A = (2×16) + (10×1) = 32 + 10 = 42"
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l7",
+            "title": "Characters, Images, and Sound Representation",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Characters, Images, and Sound**\n\n**Characters:**\n- Each character is stored as a binary code\n- **ASCII**: 7 or 8 bits per character, 128-256 characters\n- **Unicode**: Up to 32 bits, supports all world languages and emojis\n- Character sets are ordered (e.g., 'B' is one more than 'A')\n\n**Images:**\n- Made of **pixels** (picture elements)\n- Each pixel has a colour, represented by binary\n- **Colour depth**: Bits per pixel (e.g., 24-bit = 16.7 million colours)\n- **Resolution**: Width × height in pixels\n- **Metadata**: Additional data about the image (dimensions, date taken, camera settings)\n- Higher colour depth/resolution = better quality but larger file\n\n**Sound:**\n- Analogue sound waves are **sampled** at regular intervals\n- **Sample rate**: Number of samples per second (Hz) – higher rate = better quality\n- **Bit depth**: Bits per sample – more bits = more precise volume levels\n- Higher sample rate/bit depth = better quality but larger file"
@@ -523,24 +342,13 @@
                 ],
                 "correctOption": 2,
                 "explanation": "ASCII only supports English and basic symbols (128-256 characters). Unicode supports over 143,000 characters including all world languages and emojis."
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange these steps to calculate an image file size in the correct order:",
-                "items": [
-                  "Multiply width × height to get total pixels",
-                  "Multiply total pixels × colour depth",
-                  "Identify image width and height in pixels",
-                  "Identify colour depth in bits"
-                ],
-                "correctOrder": [
-                  "Identify image width and height in pixels",
-                  "Multiply width × height to get total pixels",
-                  "Identify colour depth in bits",
-                  "Multiply total pixels × colour depth"
-                ],
-                "explanation": "First find dimensions, calculate total pixels, identify colour depth, then multiply pixels × colour depth."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m2_l8",
+            "title": "Data Compression",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Data Compression**\n\n**Why compress?**\n- Save storage space\n- Reduce file transfer time (upload/download)\n- Reduce bandwidth usage\n\n**Lossy Compression**\n- Permanently removes some data (irreversible)\n- Reduces file size significantly\n- Quality degrades, but often not noticeable\n- Used for: images (JPEG), music (MP3), video (MP4)\n\n**Lossless Compression**\n- Reduces file size without losing any data\n- Original data can be perfectly reconstructed\n- Less size reduction than lossy\n- Used for: text documents (ZIP), executable programs, spreadsheets\n\n**Examples:**\n- Lossy: Compressing a photo from 5MB to 500KB – some detail lost\n- Lossless: Zipping a Word document – all text preserved exactly"
@@ -674,8 +482,8 @@
         "title": "Computer Networks",
         "lessons": [
           {
-            "id": "cs_l3_1",
-            "title": "Networks and Topologies",
+            "id": "cs_m3_l1",
+            "title": "Network Types: LAN and WAN",
             "steps": [
               {
                 "type": "theory",
@@ -692,7 +500,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "LAN covers a small area like a school or office. WAN covers a large geographical area, with the Internet being the largest WAN."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_l2",
+            "title": "Client-Server and Peer-to-Peer Networks",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Client-Server and Peer-to-Peer Networks**\n\n**Client-Server Network:**\n- Central server provides services (file storage, printing, email, web hosting)\n- Clients request and use these services\n- Server manages security, access rights, and backups\n- **Advantages**: Centralised control, easier backup, better security\n- **Disadvantages**: Expensive (server hardware/software), single point of failure\n\n**Peer-to-Peer Network:**\n- All computers are equal (peers)\n- Each computer shares its own resources and accesses others'\n- No central server\n- **Advantages**: Cheap to set up, no specialist hardware, no single point of failure\n- **Disadvantages**: No central control, harder to manage security, backups difficult\n\n**The Cloud:**\n- Using remote servers via the Internet to store, manage, and process data\n- Instead of local storage/software, you access services hosted by providers\n- **Advantages**: Access anywhere, no hardware to maintain, scalable\n- **Disadvantages**: Requires Internet connection, ongoing costs, security concerns"
@@ -708,7 +522,13 @@
                 ],
                 "correctOption": 2,
                 "explanation": "In a client-server network, a central server manages resources, user accounts, security, and backups. This provides centralised control but creates a single point of failure."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_l3",
+            "title": "Network Hardware",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Network Hardware**\n\n**NIC (Network Interface Controller/Card)**\n- Hardware that connects a device to a network\n- Each NIC has a unique MAC address\n- Can be wired (Ethernet port) or wireless (Wi-Fi antenna)\n\n**Switch**\n- Connects devices on a LAN\n- Sends data only to the intended recipient (using MAC addresses)\n- More efficient than hubs\n\n**Router**\n- Connects different networks together (e.g., LAN to the Internet)\n- Forwards data between networks using IP addresses\n- Often includes switch, firewall, and wireless access point functions\n\n**Wireless Access Point (WAP)**\n- Allows wireless devices to connect to a wired network\n- Extends the range of a wireless network\n- Often built into routers\n\n**Transmission Media**\n- **Wired**: Copper cables (Ethernet), Fibre optic (light signals, very fast)\n- **Wireless**: Radio waves (Wi-Fi, Bluetooth, mobile data)"
@@ -729,7 +549,13 @@
                   "Switch forwards data directly to destination MAC address"
                 ],
                 "explanation": "First the application creates data, which is passed to the NIC with the destination MAC. The NIC sends it to the switch, which forwards it directly to the correct device."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_l4",
+            "title": "The Internet and DNS",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**The Internet and DNS**\n\n**The Internet**\n- A global network of computer networks\n- Uses TCP/IP protocols to connect everything\n- Not the same as the World Wide Web (which runs on the Internet)\n\n**IP Addresses**\n- Unique identifier for each device on a network\n- **IPv4**: 32-bit, e.g., 192.168.1.1 (4.3 billion addresses – nearly exhausted)\n- **IPv6**: 128-bit, e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (vast number of addresses)\n\n**DNS (Domain Name System)**\n- Converts human-readable domain names (www.google.com) into IP addresses (142.250.185.46)\n- Like a phonebook for the Internet\n- **How it works:**\n  1. You type a URL in your browser\n  2. Browser asks a DNS server for the IP address\n  3. DNS server returns the IP address\n  4. Browser connects to that IP address\n\n**Hosting**\n- Storing website files on a server that is always connected to the Internet\n- Web hosting companies provide server space and bandwidth"
@@ -741,19 +567,13 @@
                 "textAfter": "",
                 "correctAnswer": "Domain Name System",
                 "explanation": "DNS (Domain Name System) translates domain names into IP addresses so browsers can load Internet resources."
-              },
-              {
-                "type": "quiz",
-                "question": "Why was IPv6 developed?",
-                "options": [
-                  "It's faster than IPv4",
-                  "IPv4 addresses are running out",
-                  "It's more secure than IPv4",
-                  "It's easier to remember"
-                ],
-                "correctOption": 1,
-                "explanation": "IPv4 provides about 4.3 billion addresses, which isn't enough for all modern devices. IPv6 provides a virtually unlimited number of addresses."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_l5",
+            "title": "Network Topologies: Star and Mesh",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Network Topologies**\n\n**Star Topology**\n- All devices connect to a central switch or server\n- Data passes through the central device\n\n**Advantages:**\n- If one cable fails, only that device is affected\n- Easy to add new devices\n- High performance (dedicated connection to centre)\n\n**Disadvantages:**\n- If central switch fails, whole network fails\n- More cabling required (costly)\n\n**Mesh Topology**\n- Devices connect directly to multiple other devices\n- Two types: Full mesh (all connected to all) and Partial mesh (some connections)\n\n**Advantages:**\n- No single point of failure (very robust)\n- Multiple paths for data\n- Can handle high traffic loads\n\n**Disadvantages:**\n- Expensive (lots of cabling)\n- Complex to set up and manage"
@@ -769,7 +589,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "In a star topology, all traffic goes through the central switch. If it fails, the entire network goes down – this is the main disadvantage."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_l6",
+            "title": "Wired vs Wireless and Encryption",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Wired vs Wireless and Encryption**\n\n**Wired Connections (Ethernet)**\n- **Advantages**: Faster, more secure, reliable, no interference\n- **Disadvantages**: Cabling costs, less mobile, installation difficulty\n\n**Wireless Connections (Wi-Fi, Bluetooth)**\n- **Advantages**: Mobility, no cables, easy to add devices\n- **Disadvantages**: Slower, less secure, interference, signal range issues\n\n**Encryption**\n- Scrambles data so it's unreadable without the correct key\n- Essential for wireless networks (data travels through the air)\n- Prevents eavesdropping and data theft\n- Common standards: WPA2, WPA3 (Wi-Fi Protected Access)\n\n**MAC Addressing**\n- **MAC (Media Access Control) address**: Unique hardware identifier burned into every NIC\n- Format: 6 pairs of hex digits, e.g., 00:1A:2B:3C:4D:5E\n- Used for communication within a local network\n\n**IP Addressing**\n- Logical address assigned by the network\n- Used for communication between networks (routing)\n- Can be static (fixed) or dynamic (assigned by DHCP)"
@@ -785,15 +611,13 @@
                 ],
                 "correctOption": 0,
                 "explanation": "Wireless signals travel through the air and can be intercepted by anyone within range. Encryption scrambles the data so intercepted signals are unreadable without the key."
-              },
-              {
-                "type": "fill_blank",
-                "question": "A hardware address burned into a network interface card is called a ____ address.",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "MAC",
-                "explanation": "MAC (Media Access Control) addresses are unique identifiers assigned to network hardware during manufacturing."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m3_l7",
+            "title": "Protocols and the TCP/IP Model",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Protocols and Layers**\n\n**Protocols**: Rules that govern how data is transmitted across a network.\n\n**Common Protocols:**\n- **TCP/IP**: Core Internet protocols (Transmission Control Protocol/Internet Protocol)\n- **HTTP**: Web page transfer (HyperText Transfer Protocol)\n- **HTTPS**: Secure web page transfer (HTTP + encryption)\n- **FTP**: File transfer (File Transfer Protocol)\n- **POP/IMAP**: Email retrieval (Post Office Protocol/Internet Message Access Protocol)\n- **SMTP**: Email sending (Simple Mail Transfer Protocol)\n\n**The Concept of Layers (TCP/IP Model)**\nNetworking protocols are organised in layers. Each layer has a specific job.\n\n**Benefits of Layering:**\n- **Modularity**: Each layer can be developed independently\n- **Interoperability**: Different manufacturers' equipment can work together\n- **Fault finding**: Problems can be isolated to specific layers\n- **Standardisation**: Clear rules for each layer"
@@ -924,8 +748,8 @@
         "title": "Network Security",
         "lessons": [
           {
-            "id": "cs_l4_1",
-            "title": "Threats to Computer Systems",
+            "id": "cs_m4_l1",
+            "title": "Malware",
             "steps": [
               {
                 "type": "theory",
@@ -942,7 +766,13 @@
                 ],
                 "correctOption": 2,
                 "explanation": "Worms are designed to self-replicate and spread across networks automatically. Viruses need user action to spread, Trojans trick users, and ransomware is the outcome after infection."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m4_l2",
+            "title": "Social Engineering",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Social Engineering**\n\nSocial engineering manipulates people into revealing confidential information or performing actions. Humans are often the 'weakest link' in security.\n\n**Phishing:**\n- Fraudulent emails/messages pretending to be legitimate organisations\n- Aim to trick users into revealing passwords, bank details, or clicking malicious links\n- Often create urgency (\"Your account will be closed!\")\n\n**Other social engineering techniques:**\n- **Pretexting**: Creating a fake scenario to obtain information\n- **Baiting**: Offering something enticing (free music, USB drops)\n- **Shoulder surfing**: Looking over someone's shoulder to see passwords\n- **Tailgating**: Following authorised person into secure area"
@@ -958,7 +788,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "This is a classic phishing attempt – pretending to be a trusted organisation to trick you into revealing information or clicking malicious links."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m4_l3",
+            "title": "Brute-Force Attacks and DoS",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Brute-Force Attacks and DoS**\n\n**Brute-Force Attack**\n- Automated trial of every possible password combination\n- Software tries thousands of passwords per second\n- Effective against weak or common passwords\n- Can be prevented by account lockouts after failed attempts and strong password policies\n\n**Denial of Service (DoS) Attack**\n- Overwhelms a system with traffic so it can't serve legitimate users\n- **DoS**: From a single source\n- **DDoS (Distributed DoS)**: From many compromised computers (botnet)\n- Causes website/service to slow down or crash\n\n**Data Interception and Theft**\n- Eavesdropping on network traffic to capture data\n- Can target unencrypted Wi-Fi, email, login credentials\n- **Man-in-the-Middle (MitM)**: Attacker intercepts communication between two parties\n- Encryption is the main defence"
@@ -970,19 +806,13 @@
                 "textAfter": "",
                 "correctAnswer": "brute",
                 "explanation": "Brute-force attacks use automated software to try all possible combinations of passwords until they find the correct one."
-              },
-              {
-                "type": "quiz",
-                "question": "What is the difference between a DoS and a DDoS attack?",
-                "options": [
-                  "DoS attacks malware, DDoS attacks hardware",
-                  "DoS is from one source, DDoS is from many sources",
-                  "DoS is for data theft, DDoS is for disruption",
-                  "They are the same thing"
-                ],
-                "correctOption": 1,
-                "explanation": "DoS (Denial of Service) comes from a single source. DDoS (Distributed DoS) uses many compromised computers (a botnet) to overwhelm the target."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m4_l4",
+            "title": "SQL Injection",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**SQL Injection**\n\nSQL injection attacks target databases through web forms.\n\n**How it works:**\n1. Website expects user input (login form, search box)\n2. Instead of valid data, attacker enters malicious SQL code\n3. If input isn't validated/sanitised, database runs the malicious code\n\n**What attackers can do:**\n- Bypass login (enter ' OR '1'='1' -- to always return true)\n- View, modify, or delete database contents\n- Access other users' data\n- Gain administrative privileges\n\n**Example:**\nLogin form expects: SELECT * FROM users WHERE username='[input]' AND password='[input]'\nAttacker enters: username: admin' -- password: anything\nResult: SELECT * FROM users WHERE username='admin' --' AND password='anything'\nThe -- comments out the password check, granting access."
@@ -998,7 +828,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "Input validation ensures data is what it should be. Parameterised queries separate SQL code from data, so user input can't be interpreted as commands."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m4_l5",
+            "title": "Identifying and Preventing Vulnerabilities",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Identifying and Preventing Vulnerabilities**\n\n**Penetration Testing**\n- Authorised simulated attacks to find vulnerabilities\n- **Black box**: Tester has no prior knowledge (like real hacker)\n- **White box**: Tester has full system knowledge\n- Identifies weaknesses before real attackers do\n\n**Anti-Malware Software**\n- Scans files and programs for known malware signatures\n- Monitors system behaviour for suspicious activity\n- Quarantines or removes infected files\n- Needs regular updates for new threats\n\n**Firewalls**\n- Monitors and controls incoming/outgoing network traffic\n- Based on predetermined security rules\n- Can block certain ports, IP addresses, or applications\n- Hardware (separate device) or software (on computer)\n\n**User Access Levels**\n- Users only have access to resources they need (principle of least privilege)\n- Different permission levels (standard user, administrator)\n- Limits damage if account is compromised"
@@ -1019,19 +855,13 @@
                   "Physical security"
                 ],
                 "explanation": "Penetration testing requires deep technical skill, firewall configuration is technical, password policy is procedural, physical security is non-technical."
-              },
-              {
-                "type": "quiz",
-                "question": "What does a firewall do?",
-                "options": [
-                  "Protects against viruses by scanning files",
-                  "Monitors and controls network traffic based on rules",
-                  "Encrypts all data on the hard drive",
-                  "Creates backups of important files"
-                ],
-                "correctOption": 1,
-                "explanation": "A firewall monitors incoming and outgoing network traffic and decides whether to allow or block it based on security rules."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m4_l6",
+            "title": "Passwords, Encryption, and Physical Security",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Passwords, Encryption, and Physical Security**\n\n**Passwords**\n- First line of defence for user accounts\n- **Strong password characteristics:**\n  - Long (12+ characters)\n  - Mix of uppercase, lowercase, numbers, symbols\n  - Not dictionary words or personal information\n  - Unique for different accounts\n\n**Encryption**\n- Converts data into unreadable format without the key\n- Protects data in transit (network) and at rest (storage)\n- Even if data is stolen/intercepted, it's useless without key\n\n**Physical Security**\n- Protects hardware from theft or tampering\n- **Examples:**\n  - Locked server rooms\n  - CCTV cameras\n  - Security guards\n  - Biometric access controls\n  - Cable locks for laptops\n  - RFID badges"
@@ -1043,18 +873,6 @@
                 "textAfter": "",
                 "correctAnswer": "encryption",
                 "explanation": "Encryption transforms readable data (plaintext) into an unreadable format (ciphertext) using an algorithm and key. Only those with the key can decrypt it."
-              },
-              {
-                "type": "quiz",
-                "question": "Which is an example of physical security?",
-                "options": [
-                  "Firewall",
-                  "Anti-virus software",
-                  "Biometric door lock",
-                  "Password policy"
-                ],
-                "correctOption": 2,
-                "explanation": "Biometric door locks physically prevent unauthorised access to rooms or buildings. The others are digital/software security measures."
               }
             ]
           },
@@ -1165,8 +983,8 @@
         "title": "Systems Software",
         "lessons": [
           {
-            "id": "cs_l5_1",
-            "title": "Operating Systems",
+            "id": "cs_m5_l1",
+            "title": "Operating Systems: Purpose and Functions",
             "steps": [
               {
                 "type": "theory",
@@ -1183,7 +1001,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "The OS manages memory allocation between running programs, ensuring they don't interfere with each other and enabling multitasking by switching the CPU between them."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m5_l2",
+            "title": "Peripheral, User, and File Management",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Operating System Functions (continued)**\n\n**4. Peripheral Management**\n- Manages input/output devices (keyboard, mouse, printer, etc.)\n- Uses **device drivers** – software that allows OS to communicate with hardware\n- Different devices need different drivers\n- Handles data transfer between devices and processor\n\n**5. User Management**\n- Creates and manages user accounts\n- Controls access rights and permissions\n- Provides security (authentication, file permissions)\n- Multiple users can have personalised settings\n\n**6. File Management**\n- Organises files and folders/directories\n- Handles file operations: create, open, save, delete, move, rename\n- Manages file permissions (read, write, execute)\n- Tracks file locations on storage devices\n- Maintains file system structure (NTFS, FAT32, etc.)"
@@ -1204,19 +1028,13 @@
                   "OS communicates with application"
                 ],
                 "explanation": "First user action triggers device, device sends data, driver translates it, then OS passes it to the application."
-              },
-              {
-                "type": "quiz",
-                "question": "What is the purpose of a device driver?",
-                "options": [
-                  "To physically connect a device to the computer",
-                  "To allow the OS to communicate with hardware devices",
-                  "To speed up the device's performance",
-                  "To replace the device if it breaks"
-                ],
-                "correctOption": 1,
-                "explanation": "Device drivers act as translators between the operating system and hardware devices, allowing them to communicate and work together."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m5_l3",
+            "title": "Utility Software",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Utility Software**\n\nUtility software performs maintenance tasks to keep the computer system running efficiently.\n\n**Encryption Software**\n- Encrypts/decrypts files and folders\n- Protects sensitive data from unauthorised access\n- Examples: BitLocker, VeraCrypt\n\n**Defragmentation Software**\n- Reorganises files on magnetic hard drives (HDDs)\n- Files become fragmented (split into pieces) over time\n- Defragmentation puts pieces back together contiguously\n- Reduces head movement, improving access speed\n- **Not needed for SSDs** (can reduce lifespan)\n\n**Data Compression Software**\n- Reduces file size to save space\n- Can be lossless (ZIP, RAR) or lossy (for media)\n- Useful for archiving files and reducing transfer time\n- Combines multiple files into one archive"
@@ -1232,14 +1050,6 @@
                 ],
                 "correctOption": 1,
                 "explanation": "SSDs have limited write cycles. Defragmentation causes unnecessary writes, reducing lifespan. Also, SSDs access data instantly regardless of location, so defragmentation provides no speed benefit."
-              },
-              {
-                "type": "fill_blank",
-                "question": "Software that performs housekeeping tasks to maintain a computer system is called ____ software.",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "utility",
-                "explanation": "Utility software helps manage, maintain, and optimise computer systems. Examples include antivirus, defragmentation tools, backup software, and file compression tools."
               }
             ]
           },
@@ -1338,8 +1148,8 @@
         "title": "Ethical, Legal, and Environmental Impacts",
         "lessons": [
           {
-            "id": "cs_l6_1",
-            "title": "Impacts of Digital Technology",
+            "id": "cs_m6_l1",
+            "title": "Ethical and Cultural Issues",
             "steps": [
               {
                 "type": "theory",
@@ -1356,7 +1166,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "The digital divide refers to the gap between those who have access to computers and the Internet and those who don't, often due to economic, geographic, or social factors."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m6_l2",
+            "title": "Environmental and Legal Issues",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Environmental and Legal Issues**\n\n**Environmental Issues:**\n- **E-waste**: Discarded electronic devices contain toxic materials\n- **Energy consumption**: Data centres, cryptocurrency mining use huge amounts of electricity\n- **Resource depletion**: Rare earth metals mining for components\n- **Carbon footprint**: Manufacturing, transportation, and operation of devices\n- **Solutions**: Energy-efficient devices, recycling, cloud computing efficiency\n\n**Legal Issues – UK Legislation:**\n\n**Data Protection Act 2018** (UK implementation of GDPR)\n- Controls how personal data is collected, stored, and used\n- Rights: access data, correct errors, be forgotten\n- Requirements: data must be secure, used fairly, not kept longer than needed\n\n**Computer Misuse Act 1990**\n- Makes unauthorised access to computer material illegal\n- Three offences:\n  1. Unauthorised access to computer material\n  2. Unauthorised access with intent to commit further offences\n  3. Unauthorised modification of computer material\n\n**Copyright, Designs and Patents Act 1988**\n- Protects intellectual property (software, music, films, books)\n- Makes illegal copying/distribution an offence\n- Covers downloading copyrighted material without permission"
@@ -1372,15 +1188,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "The Computer Misuse Act 1990 specifically makes unauthorised access to computer systems, hacking, and modifying data without permission criminal offences."
-              },
-              {
-                "type": "fill_blank",
-                "question": "Discarded electronic devices that contain toxic materials are called ____.",
-                "textBefore": "",
-                "textAfter": "",
-                "correctAnswer": "e-waste",
-                "explanation": "E-waste (electronic waste) includes discarded computers, phones, and other electronics that often contain hazardous materials requiring special disposal."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m6_l3",
+            "title": "Privacy and Software Licensing",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Privacy and Software Licensing**\n\n**Privacy Issues:**\n- Companies collecting personal data for advertising\n- Government surveillance programmes\n- Social media sharing personal information\n- Data breaches exposing sensitive information\n- Location tracking by apps and devices\n\n**Software Licensing:**\n\n**Open Source Software:**\n- Source code is freely available\n- Can be modified and distributed\n- Usually free of charge\n- Examples: Linux, Firefox, LibreOffice\n- **Advantages**: Free, customisable, community support, transparent\n- **Disadvantages**: Less user-friendly, may lack official support\n\n**Proprietary Software:**\n- Source code is kept secret\n- Cannot be modified (only used under licence)\n- Purchased or subscribed\n- Examples: Windows, Microsoft Office, Adobe Photoshop\n- **Advantages**: Professional support, user-friendly, regular updates\n- **Disadvantages**: Cost, can't customise, vendor lock-in"
@@ -1396,23 +1210,6 @@
                 ],
                 "correctOption": 1,
                 "explanation": "The key difference is access to source code: open source makes it available for anyone to view, modify, and distribute, while proprietary software keeps it secret."
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange these steps of a typical data protection breach in order:",
-                "items": [
-                  "Company suffers data breach",
-                  "Personal data is stolen",
-                  "Company collects user data",
-                  "Individuals' privacy is compromised"
-                ],
-                "correctOrder": [
-                  "Company collects user data",
-                  "Company suffers data breach",
-                  "Personal data is stolen",
-                  "Individuals' privacy is compromised"
-                ],
-                "explanation": "First data is collected legitimately, then a security breach occurs, data is stolen, and finally individuals' privacy is affected."
               }
             ]
           },
@@ -1511,8 +1308,8 @@
         "title": "Algorithms",
         "lessons": [
           {
-            "id": "cs_l7_1",
-            "title": "Computational Thinking",
+            "id": "cs_m7_l1",
+            "title": "Computational Thinking Principles",
             "steps": [
               {
                 "type": "theory",
@@ -1529,7 +1326,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "Abstraction involves removing unnecessary details and focusing only on what's important. The satnav ignores buildings and trees to focus on roads and routes."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l2",
+            "title": "Designing Algorithms: Inputs, Outputs, and Structure",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Designing Algorithms**\n\n**Identifying Inputs, Processes, and Outputs:**\n- **Inputs**: Data the algorithm receives (user input, sensor readings, file data)\n- **Processes**: What the algorithm does with the inputs (calculations, decisions, sorting)\n- **Outputs**: Results produced (display, file, message, action)\n\n**Structure Diagrams:**\n- Visual way to show the breakdown of a system (decomposition)\n- Shows hierarchy and relationships between components\n- Top-down design – start with main problem, break into sub-problems\n\n**Example – Calculate average of three numbers:**\n```\n          Calculate Average\n         /        |         \\\n    Get Input   Calculate   Display\n                (sum/3)     Result\n    /     \\\nInput1  Input2  Input3\n```"
@@ -1550,7 +1353,13 @@
                   "Create an algorithm to solve each part"
                 ],
                 "explanation": "First identify the problem, then break it down (decomposition), then remove unnecessary details (abstraction), then design solutions (algorithmic thinking)."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l3",
+            "title": "Flowcharts",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Representing Algorithms: Flowcharts**\n\nFlowcharts use standard symbols to show algorithm flow.\n\n**Common Flowchart Symbols:**\n\n- **Oval (Terminal)**: Start and end\n- **Parallelogram (Input/Output)**: Input or output of data\n- **Rectangle (Process)**: Calculation or action\n- **Diamond (Decision)**: Yes/no or true/false question\n- **Arrow (Flow line)**: Shows direction of flow\n\n**Example – Check if age is 18 or over:**\n```\n    [Start]\n       ↓\n[Input age]\n       ↓\n  < age ≥ 18? >──No──>[Output \"Too young\"]\n       ↓Yes                      ↓\n[Output \"Welcome\"]          [End]\n       ↓\n    [End]\n```"
@@ -1566,7 +1375,13 @@
                 ],
                 "correctOption": 2,
                 "explanation": "The diamond (or rhombus) represents a decision point where the algorithm branches based on a condition (yes/no, true/false)."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l4",
+            "title": "Pseudocode",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Representing Algorithms: Pseudocode**\n\nPseudocode is a simplified, informal way of describing an algorithm using everyday language and programming-like structures.\n\n**Common Pseudocode Structures:**\n\n**Sequence (steps in order):**\n```\nINPUT number\nOUTPUT number * 2\n```\n\n**Selection (if-then-else):**\n```\nIF age >= 18 THEN\n    OUTPUT \"Adult\"\nELSE\n    OUTPUT \"Child\"\nEND IF\n```\n\n**Iteration (loops):**\n```\n// Count-controlled loop\nFOR i = 1 TO 10\n    OUTPUT i\nNEXT i\n\n// Condition-controlled loop\nWHILE answer != \"yes\"\n    INPUT answer\nEND WHILE\n```\n\n**Benefits:**\n- Language-independent (not tied to specific programming language)\n- Easier to read and write than real code\n- Focuses on logic, not syntax"
@@ -1578,19 +1393,13 @@
                 "textAfter": "",
                 "correctAnswer": "pseudocode",
                 "explanation": "Pseudocode uses everyday language and programming-like structures to describe algorithms without worrying about specific syntax of any programming language."
-              },
-              {
-                "type": "quiz",
-                "question": "In pseudocode, what does the statement 'FOR i = 1 TO 10' do?",
-                "options": [
-                  "Checks if i equals 10",
-                  "Repeats the following code 10 times",
-                  "Creates a variable called i",
-                  "Ends the program"
-                ],
-                "correctOption": 1,
-                "explanation": "A FOR loop with 'i = 1 TO 10' will repeat the code inside the loop 10 times, with i taking values 1, 2, 3, ..., 10 in sequence."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l5",
+            "title": "Trace Tables and Error Detection",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Trace Tables and Error Detection**\n\n**Trace Tables:**\n- Used to track the values of variables as an algorithm executes\n- Helps understand how an algorithm works\n- Useful for finding logic errors\n\n**Example trace table for a simple loop:**\nAlgorithm:\n```\ntotal = 0\nFOR i = 1 TO 3\n    total = total + i\nNEXT i\nOUTPUT total\n```\n\nTrace Table:\n| i | total | Output |\n|---|---|---|\n|   | 0     |       |\n| 1 | 1     |       |\n| 2 | 3     |       |\n| 3 | 6     |       |\n|   |       | 6     |\n\n**Common Errors:**\n- **Syntax errors**: Breaking language rules (misspelling, missing brackets) – prevents program running\n- **Logic errors**: Program runs but produces wrong output – hardest to find\n- **Runtime errors**: Occur during execution (division by zero, file not found)"
@@ -1606,7 +1415,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "Trace tables allow you to manually track how variable values change during algorithm execution, helping to understand logic and find errors."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l6",
+            "title": "Searching Algorithms: Linear and Binary",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Searching Algorithms**\n\n**Linear Search:**\n- Checks each item in sequence until target found or end reached\n- **Advantages**: Works on unsorted data, simple to implement\n- **Disadvantages**: Slow for large datasets\n- **Complexity**: O(n) – time increases linearly with data size\n\n**Binary Search:**\n- Works on **sorted** data only\n- Repeatedly divides the search interval in half\n- Compares target to middle element, eliminates half each time\n- **Advantages**: Very fast for large sorted datasets\n- **Disadvantages**: Data must be sorted first\n- **Complexity**: O(log n) – very efficient\n\n**Binary Search Steps:**\n1. Find middle element of list\n2. If middle == target → found\n3. If target < middle → search left half\n4. If target > middle → search right half\n5. Repeat until found or sublist empty"
@@ -1622,22 +1437,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "Binary search requires the data to be sorted in order. It works by comparing the target to the middle element and eliminating half the remaining data based on that comparison – which only works if data is ordered."
-              },
-              {
-                "type": "rearrange",
-                "question": "Arrange these steps of a binary search for the number 7 in [1,3,5,7,9,11,13]:",
-                "items": [
-                  "Compare 7 to middle element 7 – found!",
-                  "7 > 3, so search right half [5,7,9,11,13]",
-                  "Start with full list [1,3,5,7,9,11,13], middle is 7",
-                  "7 > 5, so search right half [7,9,11,13]"
-                ],
-                "correctOrder": [
-                  "Start with full list [1,3,5,7,9,11,13], middle is 7",
-                  "Compare 7 to middle element 7 – found!"
-                ],
-                "explanation": "With this specific list, the middle element is 7, so it's found immediately. The other steps would apply if the target was different."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l7",
+            "title": "Sorting Algorithms: Bubble Sort",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Sorting Algorithms – Bubble Sort**\n\n**Bubble Sort:**\n- Repeatedly steps through the list, compares adjacent elements\n- Swaps them if they're in the wrong order\n- Passes continue until no swaps needed\n\n**Steps:**\n1. Compare first two elements, swap if first > second\n2. Move to next pair, continue to end of list (first pass complete)\n3. Repeat from start until a complete pass with no swaps\n\n**Example sorting [5, 1, 4, 2]:**\nPass 1: [1, 5, 4, 2] → [1, 4, 5, 2] → [1, 4, 2, 5]\nPass 2: [1, 4, 2, 5] → [1, 2, 4, 5]\nPass 3: No swaps needed – sorted!\n\n**Characteristics:**\n- Simple to understand and implement\n- Inefficient for large datasets (O(n²))\n- Best used for small lists or educational purposes"
@@ -1653,7 +1459,13 @@
                 ],
                 "correctOption": 0,
                 "explanation": "First pass: Compare 3&1 → swap [1,3,4,2]; 3&4 → no swap [1,3,4,2]; 4&2 → swap [1,3,2,4]. So after one pass: [1,3,2,4]"
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l8",
+            "title": "Sorting Algorithms: Merge Sort",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Sorting Algorithms – Merge Sort**\n\n**Merge Sort (Divide and Conquer):**\n1. **Divide**: Split the list repeatedly into halves until each sublist has one element\n2. **Conquer (Merge)**: Merge sublists back together in sorted order\n\n**Steps:**\n- Recursively split lists in half\n- When down to single elements, start merging\n- When merging, compare elements from each sublist and place in correct order\n\n**Example sorting [38, 27, 43, 3]:**\n```\n        [38, 27, 43, 3]\n           /        \\\n     [38, 27]    [43, 3]\n      /    \\      /    \\\n    [38]  [27]  [43]  [3]\n      \\    /      \\    /\n     [27, 38]    [3, 43]\n           \\      /\n        [3, 27, 38, 43]\n```\n\n**Characteristics:**\n- Very efficient (O(n log n))\n- Guaranteed fast even for large datasets\n- Requires extra memory for merging\n- Used in many real-world applications"
@@ -1669,7 +1481,13 @@
                 ],
                 "correctOption": 1,
                 "explanation": "Merge sort starts by dividing (splitting) the list recursively into smaller halves until each sublist contains just one element."
-              },
+              }
+            ]
+          },
+          {
+            "id": "cs_m7_l9",
+            "title": "Sorting Algorithms: Insertion Sort",
+            "steps": [
               {
                 "type": "theory",
                 "content": "**Sorting Algorithms – Insertion Sort**\n\n**Insertion Sort:**\n- Builds the final sorted list one item at a time\n- Takes each element and inserts it into its correct position in the already-sorted portion\n\n**Steps:**\n1. Start with first element as sorted portion\n2. Take next element, compare with elements in sorted portion\n3. Shift larger elements right to make space\n4. Insert element in correct position\n5. Repeat until all elements processed\n\n**Example sorting [5, 2, 4, 6, 1, 3]:**\n```\nStart: [5] | 2, 4, 6, 1, 3\nInsert 2: [2, 5] | 4, 6, 1, 3\nInsert 4: [2, 4, 5] | 6, 1, 3\nInsert 6: [2, 4, 5, 6] | 1, 3\nInsert 1: [1, 2, 4, 5, 6] | 3\nInsert 3: [1, 2, 3, 4, 5, 6]\n```\n\n**Characteristics:**\n- Simple and intuitive (like sorting cards in hand)\n- Efficient for small datasets or nearly-sorted data\n- O(n²) worst case, but O(n) best case (already sorted)"
