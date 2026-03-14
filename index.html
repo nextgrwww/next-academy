@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Academy GCSE & A-Level</title>
     
+    <!-- Dynamic SVG Favicon matching the 'N' logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%232563eb'/><text x='50' y='72' font-family='ui-sans-serif, system-ui, sans-serif' font-size='65' font-weight='900' fill='white' text-anchor='middle'>N</text></svg>" />
+
     <!-- React & ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -99,7 +102,8 @@
                         type: "quiz", 
                         question: "Expand the following: 5(y + 2)", 
                         options: ["5y + 2", "5y + 10", "y + 10", "10y"], 
-                        correctOption: 1 
+                        correctOption: 1,
+                        explanation: "Multiply the outer **5** by the inner **y** to get **5y**, then multiply **5** by **2** to get **10**."
                       },
                       { 
                         type: "theory", 
@@ -110,7 +114,8 @@
                         question: "Complete the expansion: -4(2x - 5)", 
                         textBefore: "-8x +",
                         textAfter: "",
-                        correctAnswer: "20" 
+                        correctAnswer: "20",
+                        explanation: "Multiplying **-4** by **-5** yields a positive **20**."
                       }
                     ]
                   },
@@ -126,7 +131,8 @@
                         type: "rearrange", 
                         question: "Arrange the FOIL steps in the correct order for (x+2)(x+3):", 
                         items: ["Multiply 2 by x (Inner)", "Multiply x by 3 (Outer)", "Multiply 2 by 3 (Last)", "Multiply x by x (First)"], 
-                        correctOrder: ["Multiply x by x (First)", "Multiply x by 3 (Outer)", "Multiply 2 by x (Inner)", "Multiply 2 by 3 (Last)"] 
+                        correctOrder: ["Multiply x by x (First)", "Multiply x by 3 (Outer)", "Multiply 2 by x (Inner)", "Multiply 2 by 3 (Last)"],
+                        explanation: "FOIL stands for **F**irst, **O**uter, **I**nner, **L**ast. This ensures each term in the first bracket multiplies every term in the second."
                       },
                       { 
                         type: "theory", 
@@ -136,7 +142,8 @@
                         type: "quiz", 
                         question: "Fully expand and simplify: (y + 4)(y + 5)", 
                         options: ["y² + 9y + 20", "y² + 20y + 9", "2y + 9", "y² + 9"], 
-                        correctOption: 0 
+                        correctOption: 0,
+                        explanation: "y*y = **y²**\ny*5 = **5y**\n4*y = **4y**\n4*5 = **20**\n\nAdding the middle terms (5y + 4y) gives **9y**."
                       }
                     ]
                   },
@@ -161,8 +168,8 @@
                     title: "Pythagoras' Theorem",
                     steps: [
                       { type: "theory", content: "For any right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.\n\nFormula: a² + b² = c²" },
-                      { type: "quiz", question: "Which side is the hypotenuse?", options: ["The shortest side", "The side opposite the right angle", "The adjacent side", "The vertical side"], correctOption: 1 },
-                      { type: "quiz", question: "If a=3 and b=4, calculate c.", options: ["5", "6", "7", "25"], correctOption: 0 }
+                      { type: "quiz", question: "Which side is the hypotenuse?", options: ["The shortest side", "The side opposite the right angle", "The adjacent side", "The vertical side"], correctOption: 1, explanation: "The hypotenuse is always the longest side, positioned directly opposite the 90° right angle." },
+                      { type: "quiz", question: "If a=3 and b=4, calculate c.", options: ["5", "6", "7", "25"], correctOption: 0, explanation: "3² + 4² = c²\n9 + 16 = c²\n25 = c²\nc = 5" }
                     ]
                   },
                   {
@@ -1060,7 +1067,7 @@
                                     </div>
                                     <div>
                                       <p className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-0.5">
-                                        {lesson.isModuleQuiz ? 'Quiz' : 'Lesson'}
+                                        {lesson.isModuleQuiz ? 'Quiz' : 'Lesson'} &bull; {lesson.steps.length} Slide{lesson.steps.length !== 1 ? 's' : ''}
                                       </p>
                                       <p className="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">
                                         {lesson.title}
@@ -1153,7 +1160,7 @@
                                     </div>
                                     <div>
                                       <p className="text-xs text-orange-400 dark:text-orange-500 uppercase font-bold tracking-wider mb-0.5">
-                                        Practice Quiz
+                                        Practice Quiz &bull; {lesson.steps.length} Slide{lesson.steps.length !== 1 ? 's' : ''}
                                       </p>
                                       <p className="font-bold text-gray-800 dark:text-gray-100 text-base md:text-lg">
                                         {lesson.title}
@@ -1508,9 +1515,14 @@
 
                 {/* Content Area */}
                 <div className="flex-1 overflow-y-auto px-6 md:px-20 lg:px-40 py-8 max-w-4xl mx-auto w-full flex flex-col">
-                  <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100 mb-8">
-                    {lesson.isModuleQuiz ? "Module Quiz" : lesson.title}
-                  </h2>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                    <h2 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">
+                      {lesson.isModuleQuiz ? "Module Quiz" : lesson.title}
+                    </h2>
+                    <span className="inline-flex items-center justify-center shrink-0 text-sm font-bold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 py-1.5 px-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                      Slide {stepIdx + 1} of {lesson.steps.length}
+                    </span>
+                  </div>
                   
                   {currentStep.type === 'theory' && (
                     <div 
@@ -1522,10 +1534,20 @@
                   {currentStep.type === 'fill_blank' && renderFillBlank()}
                   {currentStep.type === 'rearrange' && renderRearrange()}
                   
+                  {isSubmitted && currentStep.explanation && (
+                    <div className={`mt-6 p-5 rounded-2xl text-base font-medium border animate-fade-in ${isCorrect ? 'bg-green-50 border-green-200 text-green-900 dark:bg-green-900/20 dark:border-green-800/50 dark:text-green-100' : 'bg-red-50 border-red-200 text-red-900 dark:bg-red-900/20 dark:border-red-800/50 dark:text-red-100'}`}>
+                      <strong className="block mb-2 font-extrabold uppercase tracking-wide text-sm opacity-80">Explanation</strong>
+                      <div 
+                        className="prose dark:prose-invert max-w-none text-sm leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: marked.parse(currentStep.explanation) }}
+                      />
+                    </div>
+                  )}
+
                 </div>
 
                 {/* Footer Action Area */}
-                <div className={`border-t p-4 md:p-6 md:px-20 flex justify-center w-full transition-colors duration-300
+                <div className={`border-t p-4 md:p-6 md:px-20 flex justify-center w-full transition-colors duration-300 shrink-0
                   ${isSubmitted && isCorrect ? 'bg-green-100 dark:bg-green-900/40 border-green-200 dark:border-green-800' : 
                     isSubmitted && !isCorrect ? 'bg-red-100 dark:bg-red-900/40 border-red-200 dark:border-red-800' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800'}`}>
                   <div className="max-w-4xl w-full flex items-center justify-between gap-4">
