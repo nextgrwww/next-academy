@@ -10,396 +10,384 @@
     "iconName": "Cpu",
     "modules": [
       {
-        "id": "gcse-computer-science-j277",
-        "level": "GCSE",
-        "title": "Computer Science",
-        "description": "An in-depth study of computer systems, computational thinking, algorithms, and programming based on the Cambridge OCR GCSE specification.",
-        "color": "bg-blue-600",
-        "textColor": "text-blue-600",
-        "lightBg": "bg-blue-50",
-        "iconName": "Cpu",
-        "modules": [
+        "id": "cs_m1",
+        "title": "Systems Architecture",
+        "lessons": [
           {
-            "id": "cs_m1",
-            "title": "Systems Architecture",
-            "lessons": [
+            "id": "cs_m1_l1",
+            "title": "The Purpose of the CPU and the Fetch-Execute Cycle",
+            "steps": [
               {
-                "id": "cs_m1_l1",
-                "title": "The Purpose of the CPU and the Fetch-Execute Cycle",
-                "steps": [
-                  {
-                    "type": "theory",
-                    "content": "**The Purpose of the CPU**\n\nThe Central Processing Unit (CPU) is the brain of the computer. Its purpose is to execute instructions that are given to it by a computer program. These instructions are stored in the computer's main memory (RAM).\n\nThe CPU's entire job can be summarised as repeatedly performing a simple three-step process called the **fetch-execute cycle**:\n\n1.  **Fetch:** The CPU gets (fetches) an instruction from the computer's RAM. The address of this instruction is held in a special location inside the CPU called the Program Counter.\n2.  **Decode:** The fetched instruction is in binary. The CPU decodes it, which means it works out what the instruction actually means and what needs to be done (e.g., add two numbers, get more data from memory).\n3.  **Execute:** The CPU carries out (executes) the instruction. This could involve performing a calculation in the ALU, moving data, or changing the address in the Program Counter so the next instruction can be fetched.\n\nThe CPU then immediately starts the cycle again by fetching the next instruction. It does this billions of times per second."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "What are the three stages of the fetch-execute cycle, in the correct order?",
-                    "options": [
-                      "Decode, Fetch, Execute",
-                      "Execute, Decode, Fetch",
-                      "Fetch, Decode, Execute",
-                      "Fetch, Execute, Decode"
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The correct order is always Fetch, then Decode, then Execute. The CPU gets an instruction, figures out what it means, and then carries it out."
-                  },
-                  {
-                    "type": "theory",
-                    "content": "**Inside the CPU: Core Components**\n\nThe CPU isn't just one single part; it's made of several key components that work together:\n\n*   **ALU (Arithmetic Logic Unit):** This is the 'calculator' of the CPU. It performs all the arithmetic calculations (addition, subtraction, multiplication, division) and all the logical operations (comparing values, making decisions using AND, OR, NOT).\n*   **CU (Control Unit):** This is the 'traffic controller' of the CPU. It coordinates the activities of all the other components. It tells the ALU what to do, manages the flow of data between the CPU and memory, and controls the fetch-execute cycle by directing the flow of instructions.\n*   **Cache:** This is a small amount of extremely fast memory located *inside* the CPU. It stores frequently used data and instructions. By keeping this data close to the CPU, it can be accessed much faster than if the CPU had to fetch it from the slower main RAM. This significantly speeds up processing.\n*   **Registers:** These are tiny, super-fast memory locations *inside* the CPU. They are used to temporarily hold data and instructions that the CPU is currently working on. Think of them as the CPU's own immediate, scratchpad memory."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Which CPU component acts as the 'traffic controller' and manages the flow of data and instructions?",
-                    "options": [
-                      "Arithmetic Logic Unit (ALU)",
-                      "Cache",
-                      "Control Unit (CU)",
-                      "Registers"
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The Control Unit (CU) coordinates all CPU activities. It manages the fetch-execute cycle and controls the flow of data between the CPU, memory, and other components."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "The component that performs all arithmetic and logical operations, such as addition and comparison, is called the ____.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "ALU",
-                    "explanation": "ALU stands for Arithmetic Logic Unit. It is the part of the CPU responsible for carrying out all mathematical calculations and logical comparisons."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Why is cache memory important for CPU performance?",
-                    "options": [
-                      "It permanently stores all user data.",
-                      "It provides fast access to frequently used data, reducing the need to fetch from slower RAM.",
-                      "It is the main memory where all programs are stored.",
-                      "It controls the voltage supplied to the CPU cores."
-                    ],
-                    "correctOption": 1,
-                    "explanation": "Cache is very fast memory inside the CPU. By storing frequently used data and instructions, it allows the CPU to access them quickly without waiting for the slower main RAM, which speeds up processing."
-                  }
-                ]
+                "type": "theory",
+                "content": "**The Purpose of the CPU**\n\nThe Central Processing Unit (CPU) is the brain of the computer. Its purpose is to execute instructions that are given to it by a computer program. These instructions are stored in the computer's main memory (RAM).\n\nThe CPU's entire job can be summarised as repeatedly performing a simple three-step process called the **fetch-execute cycle**:\n\n1.  **Fetch:** The CPU gets (fetches) an instruction from the computer's RAM. The address of this instruction is held in a special location inside the CPU called the Program Counter.\n2.  **Decode:** The fetched instruction is in binary. The CPU decodes it, which means it works out what the instruction actually means and what needs to be done (e.g., add two numbers, get more data from memory).\n3.  **Execute:** The CPU carries out (executes) the instruction. This could involve performing a calculation in the ALU, moving data, or changing the address in the Program Counter so the next instruction can be fetched.\n\nThe CPU then immediately starts the cycle again by fetching the next instruction. It does this billions of times per second."
               },
               {
-                "id": "cs_m1_l2",
-                "title": "Von Neumann Architecture and Key Registers",
-                "steps": [
-                  {
-                    "type": "theory",
-                    "content": "**The Von Neumann Architecture**\n\nMost modern computers are based on the Von Neumann architecture, a model described by mathematician John von Neumann. Its most defining feature is the **stored program concept**:\n\n*   Both the **data** (like numbers in a spreadsheet) and the **instructions** (the program code) are stored in the **same memory space**.\n*   They are treated the same way by the CPU and are both fetched using the same mechanism.\n\nThis architecture relies on several dedicated registers to manage the flow of data and instructions between the CPU and memory.\n\n**Special-Purpose Registers:**\n\n*   **Program Counter (PC):** This register holds the **memory address** of the *next* instruction to be fetched and executed. After an instruction is fetched, the PC is updated to point to the following instruction.\n*   **Memory Address Register (MAR):** This register holds the **memory address** of the data or instruction that is currently being read from or written to. It's like the address on an envelope.\n*   **Memory Data Register (MDR):** This register holds the **actual data or instruction** that has just been fetched from the memory location pointed to by the MAR, or the data that is about to be written to that location. It's like the letter inside the envelope.\n*   **Accumulator (ACC):** This register stores the **intermediate results** of arithmetic and logical operations performed by the ALU. It's the ALU's main workspace for calculations."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "What is the key feature of the Von Neumann architecture?",
-                    "options": [
-                      "It uses separate memory for data and instructions.",
-                      "It has a dedicated processor for graphics.",
-                      "Data and instructions are stored in the same memory.",
-                      "It uses cache memory for all operations."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The defining feature of the Von Neumann architecture is the 'stored program concept' where both data and program instructions are stored together in the same memory unit."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "Which register stores the address of the next instruction to be executed?",
-                    "textBefore": "The",
-                    "textAfter": "holds the address of the next instruction.",
-                    "correctAnswer": "Program Counter",
-                    "explanation": "The Program Counter (PC) keeps track of where the CPU is in its program sequence by storing the memory address of the next instruction to be processed."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "What is the main difference between the MAR and the MDR?",
-                    "options": [
-                      "They are two names for the same register.",
-                      "The MAR stores data, and the MDR stores instructions.",
-                      "The MAR stores an address, and the MDR stores the actual data or instruction from that address.",
-                      "The MAR is in the ALU, and the MDR is in the Control Unit."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The MAR (Memory Address Register) holds a memory address (a location). The MDR (Memory Data Register) holds the actual data or instruction that lives at that address (the content)."
-                  },
-                  {
-                    "type": "rearrange",
-                    "question": "Arrange the following events in the correct sequence as they happen during the fetch part of the fetch-execute cycle:",
-                    "items": [
-                      "The instruction from that address is copied into the MDR.",
-                      "The PC provides an address to the MAR.",
-                      "The MAR sends the address to memory.",
-                      "The PC is updated to point to the next instruction."
-                    ],
-                    "correctOrder": [
-                      "The PC provides an address to the MAR.",
-                      "The MAR sends the address to memory.",
-                      "The instruction from that address is copied into the MDR.",
-                      "The PC is updated to point to the next instruction."
-                    ],
-                    "explanation": "First, the Program Counter gives an address to the MAR. The MAR then sends this address to memory. The data/instruction at that address is fetched into the MDR. Finally, the PC is updated for the next cycle."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "The register that stores the results of calculations performed by the ALU is called the ____.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "Accumulator",
-                    "explanation": "The Accumulator (ACC) is a special-purpose register used to hold the intermediate results of arithmetic and logical operations."
-                  }
-                ]
+                "type": "quiz",
+                "question": "What are the three stages of the fetch-execute cycle, in the correct order?",
+                "options": [
+                  "Decode, Fetch, Execute",
+                  "Execute, Decode, Fetch",
+                  "Fetch, Decode, Execute",
+                  "Fetch, Execute, Decode"
+                ],
+                "correctOption": 2,
+                "explanation": "The correct order is always Fetch, then Decode, then Execute. The CPU gets an instruction, figures out what it means, and then carries it out."
               },
               {
-                "id": "cs_m1_l3",
-                "title": "Factors Affecting CPU Performance",
-                "steps": [
-                  {
-                    "type": "theory",
-                    "content": "**Clock Speed**\n\nThe CPU's performance is influenced by three key factors that can be improved by manufacturers.\n\n**1. Clock Speed**\n*   The CPU has an internal 'clock' that sends out a pulse to synchronise its operations.\n*   **Clock speed** is measured in **Hertz (Hz)**. A CPU with a speed of 3GHz (gigahertz) can perform 3 billion clock cycles per second.\n*   One instruction often takes one or more clock cycles to complete.\n*   **Effect on Performance:** A higher clock speed means more fetch-execute cycles can be completed per second, so more instructions are executed. This generally makes the computer faster.\n\n**2. Cache Size**\n*   Cache is a small amount of very fast memory inside the CPU.\n*   It stores copies of frequently used data and instructions.\n*   **Effect on Performance:** A larger cache can hold more of this frequently used data. This means the CPU is less likely to have to wait for data to be fetched from the much slower main memory (RAM), which significantly speeds up processing.\n\n**3. Number of Cores**\n*   A **core** is an independent processing unit within the CPU that can fetch, decode, and execute its own instructions.\n*   A dual-core CPU has two cores, a quad-core has four, etc.\n*   **Effect on Performance:** A CPU with multiple cores can execute multiple instructions simultaneously (in parallel). This is excellent for **multitasking** (running several programs at once) or for running software specifically designed for multi-core processors. However, doubling the number of cores does not double the speed for all tasks, as the software must be written to take advantage of the extra cores."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "A CPU with a clock speed of 4GHz can execute approximately 4 billion instructions per second. What does 'GHz' stand for?",
-                    "options": [
-                      "Gigabytes",
-                      "Gigahertz",
-                      "Gigahops",
-                      "General Hardware"
-                    ],
-                    "correctOption": 1,
-                    "explanation": "GHz stands for Gigahertz. One Gigahertz is one billion cycles per second. A 4GHz CPU has a clock that 'ticks' 4 billion times a second."
-                  },
-                  {
-                    "type": "theory",
-                    "content": "**Combined Effect on Performance**\n\nThese three factors (clock speed, cache size, and number of cores) don't work in isolation. They combine to determine the overall performance of the CPU.\n\n*   A higher clock speed will make a single core faster.\n*   More cores allow the CPU to work on more tasks at the same time.\n*   A larger, faster cache means the cores spend less time waiting for data.\n\nThe best performance for a specific task depends on the task itself.\n*   **Video editing** might benefit from a high clock speed to process each frame quickly and multiple cores to handle rendering.\n*   **Web browsing** might not need many cores but would still feel snappier with a decent clock speed and good cache.\n*   **Running a web server** that handles many requests simultaneously would need many cores.\n\nIt's important to remember that you can't simply add more cores to a slow CPU and expect it to match a faster one, and software must be designed to use multiple cores to get the full benefit."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Which factor would MOST improve performance for a user who runs several demanding applications simultaneously, like a game, a stream, and a web browser?",
-                    "options": [
-                      "Increasing the clock speed of the single core.",
-                      "Increasing the number of CPU cores.",
-                      "Increasing the size of the hard drive.",
-                      "Increasing the size of the monitor."
-                    ],
-                    "correctOption": 1,
-                    "explanation": "For multitasking, more cores are most beneficial. Each core can handle a different application at the same time (in parallel), preventing one task from slowing down the others."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "An independent processing unit within the CPU that can fetch, decode, and execute instructions is called a ____.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "core",
-                    "explanation": "A core is an individual processor. A multi-core CPU contains two or more cores, allowing it to process multiple instructions simultaneously."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "If a CPU has a larger cache, what is the most likely outcome?",
-                    "options": [
-                      "The computer will take longer to start up.",
-                      "The CPU will get hotter.",
-                      "Faster processing as the CPU can access frequently used data more quickly.",
-                      "The computer will have more storage space for files."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "A larger cache can hold more frequently used data. This means the CPU can get what it needs from the very fast cache instead of having to wait for the slower main RAM, leading to faster processing."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "A 3.2GHz dual-core CPU is compared to a 2.8GHz quad-core CPU. Which statement is most likely true?",
-                    "options": [
-                      "The dual-core CPU is always faster.",
-                      "The quad-core CPU is always faster.",
-                      "The quad-core CPU may be faster for multitasking, while the dual-core may be faster for single-threaded tasks.",
-                      "They will perform exactly the same."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The quad-core has more cores (good for multitasking) but a slower clock speed. The dual-core has a faster clock speed (good for single tasks) but fewer cores. The 'best' CPU depends on the task."
-                  }
-                ]
+                "type": "theory",
+                "content": "**Inside the CPU: Core Components**\n\nThe CPU isn't just one single part; it's made of several key components that work together:\n\n*   **ALU (Arithmetic Logic Unit):** This is the 'calculator' of the CPU. It performs all the arithmetic calculations (addition, subtraction, multiplication, division) and all the logical operations (comparing values, making decisions using AND, OR, NOT).\n*   **CU (Control Unit):** This is the 'traffic controller' of the CPU. It coordinates the activities of all the other components. It tells the ALU what to do, manages the flow of data between the CPU and memory, and controls the fetch-execute cycle by directing the flow of instructions.\n*   **Cache:** This is a small amount of extremely fast memory located *inside* the CPU. It stores frequently used data and instructions. By keeping this data close to the CPU, it can be accessed much faster than if the CPU had to fetch it from the slower main RAM. This significantly speeds up processing.\n*   **Registers:** These are tiny, super-fast memory locations *inside* the CPU. They are used to temporarily hold data and instructions that the CPU is currently working on. Think of them as the CPU's own immediate, scratchpad memory."
               },
               {
-                "id": "cs_m1_l4",
-                "title": "Embedded Systems",
-                "steps": [
-                  {
-                    "type": "theory",
-                    "content": "**What is an Embedded System?**\n\nAn **embedded system** is a computer system built into another device to perform a specific, dedicated function. Unlike a general-purpose computer (like a desktop PC or laptop) that can run thousands of different applications, an embedded system is designed to do one job, or a small set of related jobs, very efficiently.\n\n**Purpose and Characteristics:**\n\n*   **Dedicated Function:** It is designed to perform a single task repeatedly. For example, a microwave's embedded system only knows how to control the microwave.\n*   **Minimal User Interface:** They often have very simple interfaces, like a few buttons and an LED display, or sometimes no interface at all.\n*   **Low Power Consumption:** They are usually designed to use very little power, which is essential for battery-powered devices.\n*   **Low Cost:** They are mass-produced using cheap, simple components.\n*   **Reliability:** They need to run reliably for long periods without crashing or needing maintenance.\n*   **Resource-Constrained:** They typically have a simple processor, very little RAM, and small amounts of permanent storage, just enough to do their job."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "What is the main difference between an embedded system and a general-purpose computer?",
-                    "options": [
-                      "Embedded systems are always more powerful.",
-                      "General-purpose computers are designed for a single task.",
-                      "Embedded systems are designed for a single, dedicated function.",
-                      "General-purpose computers use less power."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The key difference is purpose. An embedded system is built into a larger device to perform one specific job. A general-purpose computer (like a PC) is designed to run many different programs and perform a wide variety of tasks."
-                  },
-                  {
-                    "type": "theory",
-                    "content": "**Examples of Embedded Systems**\n\nEmbedded systems are everywhere! They are far more numerous than general-purpose computers.\n\n**Consumer Electronics:**\n*   **Microwave ovens, washing machines, dishwashers:** To control the program cycles and timers.\n*   **Digital watches:** To keep time and manage the display and alarm.\n*   **TV remote controls:** To process button presses and send infrared signals.\n*   **Smart TVs:** The main processor is an embedded system dedicated to managing the TV's functions.\n*   **Games consoles:** Although powerful, they are dedicated to running games.\n\n**Transportation and Industry:**\n*   **Car engine management systems:** To control fuel injection, ignition timing, and emissions.\n*   **Anti-lock Braking Systems (ABS):** To monitor wheel speed and control braking pressure.\n*   **Traffic lights:** To run the light sequence timers.\n\n**Medical and Other Applications:**\n*   **Pacemakers:** To monitor heartbeats and deliver electrical pulses if needed.\n*   **Digital thermometers:** To read the temperature sensor and display the result.\n*   **Smart home devices:** Like smart thermostats that learn your schedule and control heating."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Which of the following is an example of an embedded system?",
-                    "options": [
-                      "A laptop computer running a web browser.",
-                      "A desktop PC used for video editing.",
-                      "The computer that controls the anti-lock braking system (ABS) in a car.",
-                      "A tablet computer used for reading e-books."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The ABS controller in a car is a classic embedded system. It is a dedicated computer built into the braking system to perform one specific task: control braking pressure to prevent the wheels from locking."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "Devices like digital watches and traffic lights use a type of computer system built for a single purpose, called an ____ system.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "embedded",
-                    "explanation": "An embedded system is a specialised computer system that is part of a larger device and is designed to perform a specific function."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Which is NOT a typical characteristic of an embedded system?",
-                    "options": [
-                      "Dedicated function.",
-                      "Low power consumption.",
-                      "Designed to run a wide variety of software applications.",
-                      "Often has a very simple user interface."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "Running a wide variety of software applications is the job of a general-purpose computer. An embedded system is designed for a single, dedicated function and only runs the software required for that task."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Why are embedded systems often cheaper to manufacture than general-purpose computers?",
-                    "options": [
-                      "They use more expensive, high-end components.",
-                      "They are mass-produced with just enough hardware to perform their specific task.",
-                      "They require a complex operating system like Windows.",
-                      "They are always handmade."
-                    ],
-                    "correctOption": 1,
-                    "explanation": "Embedded systems are designed to be cost-effective. They use simple, low-cost processors and just enough memory and storage to do their dedicated job, making them cheap to produce in large quantities."
-                  }
-                ]
+                "type": "quiz",
+                "question": "Which CPU component acts as the 'traffic controller' and manages the flow of data and instructions?",
+                "options": [
+                  "Arithmetic Logic Unit (ALU)",
+                  "Cache",
+                  "Control Unit (CU)",
+                  "Registers"
+                ],
+                "correctOption": 2,
+                "explanation": "The Control Unit (CU) coordinates all CPU activities. It manages the fetch-execute cycle and controls the flow of data between the CPU, memory, and other components."
               },
               {
-                "id": "cs_m1_quiz",
-                "title": "Module 1 Review Quiz: Systems Architecture",
-                "isModuleQuiz": true,
-                "steps": [
-                  {
-                    "type": "quiz",
-                    "question": "Which component is responsible for performing arithmetic calculations and logical decisions (e.g., AND, OR)?",
-                    "options": ["Control Unit", "Cache", "ALU", "MAR"],
-                    "correctOption": 2,
-                    "explanation": "The Arithmetic Logic Unit (ALU) handles all mathematical calculations and logical comparisons."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "The register that temporarily stores the actual data or instruction fetched from memory is the Memory ____ Register.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "Data",
-                    "explanation": "The MDR (Memory Data Register) holds the actual data or instruction that has been fetched from the memory address held in the MAR."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "The defining feature of the Von Neumann architecture is that:",
-                    "options": [
-                      "Data and instructions are stored in separate memory units.",
-                      "It uses a single core for all processing.",
-                      "Data and instructions are stored in the same memory unit.",
-                      "It has no need for an Arithmetic Logic Unit."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The Von Neumann architecture is characterised by the 'stored program concept' where both program instructions and data are stored in the same memory space."
-                  },
-                  {
-                    "type": "rearrange",
-                    "question": "Arrange the stages of the fetch-execute cycle in the correct order:",
-                    "items": [
-                      "Execute the instruction",
-                      "Decode the instruction",
-                      "Fetch instruction from memory"
-                    ],
-                    "correctOrder": [
-                      "Fetch instruction from memory",
-                      "Decode the instruction",
-                      "Execute the instruction"
-                    ],
-                    "explanation": "The CPU always repeats this cycle: it first FETCHES an instruction, then DECODES it to understand it, and finally EXECUTES it."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "A programmer is writing software for a new medical pacemaker. Which type of system is the software being written for?",
-                    "options": [
-                      "A general-purpose computer",
-                      "An embedded system",
-                      "A supercomputer",
-                      "A mainframe computer"
-                    ],
-                    "correctOption": 1,
-                    "explanation": "A pacemaker contains a dedicated computer system that performs a single, specific function. This is the definition of an embedded system."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "The very fast memory inside the CPU that stores frequently used data is called ____.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "cache",
-                    "explanation": "Cache is high-speed memory located inside the CPU that provides faster data access than RAM, improving processing speed."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "Which of the following is NOT a typical characteristic of an embedded system?",
-                    "options": [
-                      "Runs a single, dedicated application.",
-                      "Has a limited or no user interface.",
-                      "Can run any software the user chooses to install.",
-                      "Uses a simple, low-power processor."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The ability to run any user-installed software is a characteristic of a general-purpose computer, not a dedicated embedded system."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "If you increase the clock speed of a CPU from 2.0GHz to 3.0GHz, what is the most likely direct effect?",
-                    "options": [
-                      "The CPU will have more cores.",
-                      "The CPU will generate less heat.",
-                      "The CPU can potentially execute more instructions per second.",
-                      "The CPU's cache size will automatically increase."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "Clock speed is the number of cycles per second. A higher clock speed means more fetch-execute cycles can be completed in the same amount of time, so more instructions can be processed."
-                  },
-                  {
-                    "type": "quiz",
-                    "question": "What is the role of the Control Unit (CU) within the CPU?",
-                    "options": [
-                      "To perform all mathematical calculations.",
-                      "To store frequently used data.",
-                      "To coordinate and control the activities of the CPU.",
-                      "To hold the address of the next instruction."
-                    ],
-                    "correctOption": 2,
-                    "explanation": "The Control Unit (CU) acts as the 'traffic controller'. It manages the flow of data and instructions and directs the operation of the other components like the ALU and registers."
-                  },
-                  {
-                    "type": "fill_blank",
-                    "question": "In the context of CPU performance, having more ____ allows a CPU to execute multiple instructions at the same time, improving multitasking.",
-                    "textBefore": "",
-                    "textAfter": "",
-                    "correctAnswer": "cores",
-                    "explanation": "Each core in a multi-core CPU can process instructions independently, enabling parallel processing and better performance for multitasking."
-                  }
-                ]
+                "type": "fill_blank",
+                "question": "The component that performs all arithmetic and logical operations, such as addition and comparison, is called the ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "ALU",
+                "explanation": "ALU stands for Arithmetic Logic Unit. It is the part of the CPU responsible for carrying out all mathematical calculations and logical comparisons."
+              },
+              {
+                "type": "quiz",
+                "question": "Why is cache memory important for CPU performance?",
+                "options": [
+                  "It permanently stores all user data.",
+                  "It provides fast access to frequently used data, reducing the need to fetch from slower RAM.",
+                  "It is the main memory where all programs are stored.",
+                  "It controls the voltage supplied to the CPU cores."
+                ],
+                "correctOption": 1,
+                "explanation": "Cache is very fast memory inside the CPU. By storing frequently used data and instructions, it allows the CPU to access them quickly without waiting for the slower main RAM, which speeds up processing."
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_l2",
+            "title": "Von Neumann Architecture and Key Registers",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**The Von Neumann Architecture**\n\nMost modern computers are based on the Von Neumann architecture, a model described by mathematician John von Neumann. Its most defining feature is the **stored program concept**:\n\n*   Both the **data** (like numbers in a spreadsheet) and the **instructions** (the program code) are stored in the **same memory space**.\n*   They are treated the same way by the CPU and are both fetched using the same mechanism.\n\nThis architecture relies on several dedicated registers to manage the flow of data and instructions between the CPU and memory.\n\n**Special-Purpose Registers:**\n\n*   **Program Counter (PC):** This register holds the **memory address** of the *next* instruction to be fetched and executed. After an instruction is fetched, the PC is updated to point to the following instruction.\n*   **Memory Address Register (MAR):** This register holds the **memory address** of the data or instruction that is currently being read from or written to. It's like the address on an envelope.\n*   **Memory Data Register (MDR):** This register holds the **actual data or instruction** that has just been fetched from the memory location pointed to by the MAR, or the data that is about to be written to that location. It's like the letter inside the envelope.\n*   **Accumulator (ACC):** This register stores the **intermediate results** of arithmetic and logical operations performed by the ALU. It's the ALU's main workspace for calculations."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the key feature of the Von Neumann architecture?",
+                "options": [
+                  "It uses separate memory for data and instructions.",
+                  "It has a dedicated processor for graphics.",
+                  "Data and instructions are stored in the same memory.",
+                  "It uses cache memory for all operations."
+                ],
+                "correctOption": 2,
+                "explanation": "The defining feature of the Von Neumann architecture is the 'stored program concept' where both data and program instructions are stored together in the same memory unit."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Which register stores the address of the next instruction to be executed?",
+                "textBefore": "The",
+                "textAfter": "holds the address of the next instruction.",
+                "correctAnswer": "Program Counter",
+                "explanation": "The Program Counter (PC) keeps track of where the CPU is in its program sequence by storing the memory address of the next instruction to be processed."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the main difference between the MAR and the MDR?",
+                "options": [
+                  "They are two names for the same register.",
+                  "The MAR stores data, and the MDR stores instructions.",
+                  "The MAR stores an address, and the MDR stores the actual data or instruction from that address.",
+                  "The MAR is in the ALU, and the MDR is in the Control Unit."
+                ],
+                "correctOption": 2,
+                "explanation": "The MAR (Memory Address Register) holds a memory address (a location). The MDR (Memory Data Register) holds the actual data or instruction that lives at that address (the content)."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the following events in the correct sequence as they happen during the fetch part of the fetch-execute cycle:",
+                "items": [
+                  "The instruction from that address is copied into the MDR.",
+                  "The PC provides an address to the MAR.",
+                  "The MAR sends the address to memory.",
+                  "The PC is updated to point to the next instruction."
+                ],
+                "correctOrder": [
+                  "The PC provides an address to the MAR.",
+                  "The MAR sends the address to memory.",
+                  "The instruction from that address is copied into the MDR.",
+                  "The PC is updated to point to the next instruction."
+                ],
+                "explanation": "First, the Program Counter gives an address to the MAR. The MAR then sends this address to memory. The data/instruction at that address is fetched into the MDR. Finally, the PC is updated for the next cycle."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The register that stores the results of calculations performed by the ALU is called the ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Accumulator",
+                "explanation": "The Accumulator (ACC) is a special-purpose register used to hold the intermediate results of arithmetic and logical operations."
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_l3",
+            "title": "Factors Affecting CPU Performance",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**Clock Speed**\n\nThe CPU's performance is influenced by three key factors that can be improved by manufacturers.\n\n**1. Clock Speed**\n*   The CPU has an internal 'clock' that sends out a pulse to synchronise its operations.\n*   **Clock speed** is measured in **Hertz (Hz)**. A CPU with a speed of 3GHz (gigahertz) can perform 3 billion clock cycles per second.\n*   One instruction often takes one or more clock cycles to complete.\n*   **Effect on Performance:** A higher clock speed means more fetch-execute cycles can be completed per second, so more instructions are executed. This generally makes the computer faster.\n\n**2. Cache Size**\n*   Cache is a small amount of very fast memory inside the CPU.\n*   It stores copies of frequently used data and instructions.\n*   **Effect on Performance:** A larger cache can hold more of this frequently used data. This means the CPU is less likely to have to wait for data to be fetched from the much slower main memory (RAM), which significantly speeds up processing.\n\n**3. Number of Cores**\n*   A **core** is an independent processing unit within the CPU that can fetch, decode, and execute its own instructions.\n*   A dual-core CPU has two cores, a quad-core has four, etc.\n*   **Effect on Performance:** A CPU with multiple cores can execute multiple instructions simultaneously (in parallel). This is excellent for **multitasking** (running several programs at once) or for running software specifically designed for multi-core processors. However, doubling the number of cores does not double the speed for all tasks, as the software must be written to take advantage of the extra cores."
+              },
+              {
+                "type": "quiz",
+                "question": "A CPU with a clock speed of 4GHz can execute approximately 4 billion instructions per second. What does 'GHz' stand for?",
+                "options": [
+                  "Gigabytes",
+                  "Gigahertz",
+                  "Gigahops",
+                  "General Hardware"
+                ],
+                "correctOption": 1,
+                "explanation": "GHz stands for Gigahertz. One Gigahertz is one billion cycles per second. A 4GHz CPU has a clock that 'ticks' 4 billion times a second."
+              },
+              {
+                "type": "theory",
+                "content": "**Combined Effect on Performance**\n\nThese three factors (clock speed, cache size, and number of cores) don't work in isolation. They combine to determine the overall performance of the CPU.\n\n*   A higher clock speed will make a single core faster.\n*   More cores allow the CPU to work on more tasks at the same time.\n*   A larger, faster cache means the cores spend less time waiting for data.\n\nThe best performance for a specific task depends on the task itself.\n*   **Video editing** might benefit from a high clock speed to process each frame quickly and multiple cores to handle rendering.\n*   **Web browsing** might not need many cores but would still feel snappier with a decent clock speed and good cache.\n*   **Running a web server** that handles many requests simultaneously would need many cores.\n\nIt's important to remember that you can't simply add more cores to a slow CPU and expect it to match a faster one, and software must be designed to use multiple cores to get the full benefit."
+              },
+              {
+                "type": "quiz",
+                "question": "Which factor would MOST improve performance for a user who runs several demanding applications simultaneously, like a game, a stream, and a web browser?",
+                "options": [
+                  "Increasing the clock speed of the single core.",
+                  "Increasing the number of CPU cores.",
+                  "Increasing the size of the hard drive.",
+                  "Increasing the size of the monitor."
+                ],
+                "correctOption": 1,
+                "explanation": "For multitasking, more cores are most beneficial. Each core can handle a different application at the same time (in parallel), preventing one task from slowing down the others."
+              },
+              {
+                "type": "fill_blank",
+                "question": "An independent processing unit within the CPU that can fetch, decode, and execute instructions is called a ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "core",
+                "explanation": "A core is an individual processor. A multi-core CPU contains two or more cores, allowing it to process multiple instructions simultaneously."
+              },
+              {
+                "type": "quiz",
+                "question": "If a CPU has a larger cache, what is the most likely outcome?",
+                "options": [
+                  "The computer will take longer to start up.",
+                  "The CPU will get hotter.",
+                  "Faster processing as the CPU can access frequently used data more quickly.",
+                  "The computer will have more storage space for files."
+                ],
+                "correctOption": 2,
+                "explanation": "A larger cache can hold more frequently used data. This means the CPU can get what it needs from the very fast cache instead of having to wait for the slower main RAM, leading to faster processing."
+              },
+              {
+                "type": "quiz",
+                "question": "A 3.2GHz dual-core CPU is compared to a 2.8GHz quad-core CPU. Which statement is most likely true?",
+                "options": [
+                  "The dual-core CPU is always faster.",
+                  "The quad-core CPU is always faster.",
+                  "The quad-core CPU may be faster for multitasking, while the dual-core may be faster for single-threaded tasks.",
+                  "They will perform exactly the same."
+                ],
+                "correctOption": 2,
+                "explanation": "The quad-core has more cores (good for multitasking) but a slower clock speed. The dual-core has a faster clock speed (good for single tasks) but fewer cores. The 'best' CPU depends on the task."
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_l4",
+            "title": "Embedded Systems",
+            "steps": [
+              {
+                "type": "theory",
+                "content": "**What is an Embedded System?**\n\nAn **embedded system** is a computer system built into another device to perform a specific, dedicated function. Unlike a general-purpose computer (like a desktop PC or laptop) that can run thousands of different applications, an embedded system is designed to do one job, or a small set of related jobs, very efficiently.\n\n**Purpose and Characteristics:**\n\n*   **Dedicated Function:** It is designed to perform a single task repeatedly. For example, a microwave's embedded system only knows how to control the microwave.\n*   **Minimal User Interface:** They often have very simple interfaces, like a few buttons and an LED display, or sometimes no interface at all.\n*   **Low Power Consumption:** They are usually designed to use very little power, which is essential for battery-powered devices.\n*   **Low Cost:** They are mass-produced using cheap, simple components.\n*   **Reliability:** They need to run reliably for long periods without crashing or needing maintenance.\n*   **Resource-Constrained:** They typically have a simple processor, very little RAM, and small amounts of permanent storage, just enough to do their job."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the main difference between an embedded system and a general-purpose computer?",
+                "options": [
+                  "Embedded systems are always more powerful.",
+                  "General-purpose computers are designed for a single task.",
+                  "Embedded systems are designed for a single, dedicated function.",
+                  "General-purpose computers use less power."
+                ],
+                "correctOption": 2,
+                "explanation": "The key difference is purpose. An embedded system is built into a larger device to perform one specific job. A general-purpose computer (like a PC) is designed to run many different programs and perform a wide variety of tasks."
+              },
+              {
+                "type": "theory",
+                "content": "**Examples of Embedded Systems**\n\nEmbedded systems are everywhere! They are far more numerous than general-purpose computers.\n\n**Consumer Electronics:**\n*   **Microwave ovens, washing machines, dishwashers:** To control the program cycles and timers.\n*   **Digital watches:** To keep time and manage the display and alarm.\n*   **TV remote controls:** To process button presses and send infrared signals.\n*   **Smart TVs:** The main processor is an embedded system dedicated to managing the TV's functions.\n*   **Games consoles:** Although powerful, they are dedicated to running games.\n\n**Transportation and Industry:**\n*   **Car engine management systems:** To control fuel injection, ignition timing, and emissions.\n*   **Anti-lock Braking Systems (ABS):** To monitor wheel speed and control braking pressure.\n*   **Traffic lights:** To run the light sequence timers.\n\n**Medical and Other Applications:**\n*   **Pacemakers:** To monitor heartbeats and deliver electrical pulses if needed.\n*   **Digital thermometers:** To read the temperature sensor and display the result.\n*   **Smart home devices:** Like smart thermostats that learn your schedule and control heating."
+              },
+              {
+                "type": "quiz",
+                "question": "Which of the following is an example of an embedded system?",
+                "options": [
+                  "A laptop computer running a web browser.",
+                  "A desktop PC used for video editing.",
+                  "The computer that controls the anti-lock braking system (ABS) in a car.",
+                  "A tablet computer used for reading e-books."
+                ],
+                "correctOption": 2,
+                "explanation": "The ABS controller in a car is a classic embedded system. It is a dedicated computer built into the braking system to perform one specific task: control braking pressure to prevent the wheels from locking."
+              },
+              {
+                "type": "fill_blank",
+                "question": "Devices like digital watches and traffic lights use a type of computer system built for a single purpose, called an ____ system.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "embedded",
+                "explanation": "An embedded system is a specialised computer system that is part of a larger device and is designed to perform a specific function."
+              },
+              {
+                "type": "quiz",
+                "question": "Which is NOT a typical characteristic of an embedded system?",
+                "options": [
+                  "Dedicated function.",
+                  "Low power consumption.",
+                  "Designed to run a wide variety of software applications.",
+                  "Often has a very simple user interface."
+                ],
+                "correctOption": 2,
+                "explanation": "Running a wide variety of software applications is the job of a general-purpose computer. An embedded system is designed for a single, dedicated function and only runs the software required for that task."
+              },
+              {
+                "type": "quiz",
+                "question": "Why are embedded systems often cheaper to manufacture than general-purpose computers?",
+                "options": [
+                  "They use more expensive, high-end components.",
+                  "They are mass-produced with just enough hardware to perform their specific task.",
+                  "They require a complex operating system like Windows.",
+                  "They are always handmade."
+                ],
+                "correctOption": 1,
+                "explanation": "Embedded systems are designed to be cost-effective. They use simple, low-cost processors and just enough memory and storage to do their dedicated job, making them cheap to produce in large quantities."
+              }
+            ]
+          },
+          {
+            "id": "cs_m1_quiz",
+            "title": "Module 1 Review Quiz: Systems Architecture",
+            "isModuleQuiz": true,
+            "steps": [
+              {
+                "type": "quiz",
+                "question": "Which component is responsible for performing arithmetic calculations and logical decisions (e.g., AND, OR)?",
+                "options": ["Control Unit", "Cache", "ALU", "MAR"],
+                "correctOption": 2,
+                "explanation": "The Arithmetic Logic Unit (ALU) handles all mathematical calculations and logical comparisons."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The register that temporarily stores the actual data or instruction fetched from memory is the Memory ____ Register.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "Data",
+                "explanation": "The MDR (Memory Data Register) holds the actual data or instruction that has been fetched from the memory address held in the MAR."
+              },
+              {
+                "type": "quiz",
+                "question": "The defining feature of the Von Neumann architecture is that:",
+                "options": [
+                  "Data and instructions are stored in separate memory units.",
+                  "It uses a single core for all processing.",
+                  "Data and instructions are stored in the same memory unit.",
+                  "It has no need for an Arithmetic Logic Unit."
+                ],
+                "correctOption": 2,
+                "explanation": "The Von Neumann architecture is characterised by the 'stored program concept' where both program instructions and data are stored in the same memory space."
+              },
+              {
+                "type": "rearrange",
+                "question": "Arrange the stages of the fetch-execute cycle in the correct order:",
+                "items": [
+                  "Execute the instruction",
+                  "Decode the instruction",
+                  "Fetch instruction from memory"
+                ],
+                "correctOrder": [
+                  "Fetch instruction from memory",
+                  "Decode the instruction",
+                  "Execute the instruction"
+                ],
+                "explanation": "The CPU always repeats this cycle: it first FETCHES an instruction, then DECODES it to understand it, and finally EXECUTES it."
+              },
+              {
+                "type": "quiz",
+                "question": "A programmer is writing software for a new medical pacemaker. Which type of system is the software being written for?",
+                "options": [
+                  "A general-purpose computer",
+                  "An embedded system",
+                  "A supercomputer",
+                  "A mainframe computer"
+                ],
+                "correctOption": 1,
+                "explanation": "A pacemaker contains a dedicated computer system that performs a single, specific function. This is the definition of an embedded system."
+              },
+              {
+                "type": "fill_blank",
+                "question": "The very fast memory inside the CPU that stores frequently used data is called ____.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "cache",
+                "explanation": "Cache is high-speed memory located inside the CPU that provides faster data access than RAM, improving processing speed."
+              },
+              {
+                "type": "quiz",
+                "question": "Which of the following is NOT a typical characteristic of an embedded system?",
+                "options": [
+                  "Runs a single, dedicated application.",
+                  "Has a limited or no user interface.",
+                  "Can run any software the user chooses to install.",
+                  "Uses a simple, low-power processor."
+                ],
+                "correctOption": 2,
+                "explanation": "The ability to run any user-installed software is a characteristic of a general-purpose computer, not a dedicated embedded system."
+              },
+              {
+                "type": "quiz",
+                "question": "If you increase the clock speed of a CPU from 2.0GHz to 3.0GHz, what is the most likely direct effect?",
+                "options": [
+                  "The CPU will have more cores.",
+                  "The CPU will generate less heat.",
+                  "The CPU can potentially execute more instructions per second.",
+                  "The CPU's cache size will automatically increase."
+                ],
+                "correctOption": 2,
+                "explanation": "Clock speed is the number of cycles per second. A higher clock speed means more fetch-execute cycles can be completed in the same amount of time, so more instructions can be processed."
+              },
+              {
+                "type": "quiz",
+                "question": "What is the role of the Control Unit (CU) within the CPU?",
+                "options": [
+                  "To perform all mathematical calculations.",
+                  "To store frequently used data.",
+                  "To coordinate and control the activities of the CPU.",
+                  "To hold the address of the next instruction."
+                ],
+                "correctOption": 2,
+                "explanation": "The Control Unit (CU) acts as the 'traffic controller'. It manages the flow of data and instructions and directs the operation of the other components like the ALU and registers."
+              },
+              {
+                "type": "fill_blank",
+                "question": "In the context of CPU performance, having more ____ allows a CPU to execute multiple instructions at the same time, improving multitasking.",
+                "textBefore": "",
+                "textAfter": "",
+                "correctAnswer": "cores",
+                "explanation": "Each core in a multi-core CPU can process instructions independently, enabling parallel processing and better performance for multitasking."
               }
             ]
           }
